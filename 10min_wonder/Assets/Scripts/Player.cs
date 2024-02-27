@@ -4,25 +4,31 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    private float playerHp;
+    private float playerSpeed;
     private Rigidbody2D playerRB;
     private Vector3 axis;
 
-    public float playerSpeed; //인스펙터에서 조정 (초기값 : 5)
-
     void Start()
     {
+        playerHp = GameManager.instance.playerHp;
+        playerSpeed = GameManager.instance.playerSpeed;
         playerRB = GetComponent<Rigidbody2D>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        if (playerRB != null) //플레이어 이동관련
+        if (playerRB != null) // 플레이어 이동관련
         {
             axis.x = Input.GetAxis("Horizontal");
             axis.y = Input.GetAxis("Vertical");
 
-            float hSpeed = axis.x * playerSpeed;
-            float vSpeed = axis.y * playerSpeed;
+            // 정규화된 벡터로 변환
+            Vector3 movementDirection = new Vector3(axis.x, axis.y).normalized;
+
+            // 각각의 축에 속도를 적용
+            float hSpeed = movementDirection.x * playerSpeed;
+            float vSpeed = movementDirection.y * playerSpeed;
 
             playerRB.velocity = new Vector3(hSpeed, vSpeed);
         }

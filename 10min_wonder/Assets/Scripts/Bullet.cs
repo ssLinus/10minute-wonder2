@@ -5,19 +5,21 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     private Rigidbody2D bulletRB;
-    private Vector3 axis;
-
-    public float bulletSpeed; // 인스펙터창에서 조정 (초기값 : 10)
-    public float bulletLifeTime; // (초기값 : 2)
-    public int pen; // 총알 관통 (초기값 : 0)
-
     private GameObject closestMonster;
 
-    private void OnEnable()
+    private float bulletSpeed; // 인스펙터창에서 조정 (초기값 : 10)
+    private float bulletLifeTime; // (초기값 : 2)
+    private float bulletPen; // 총알 관통 (초기값 : 0)
+
+    public void Start()
     {
-        closestMonster = FindClosestMonster();
+        bulletSpeed = GameManager.instance.bulletSpeed;
+        bulletLifeTime = GameManager.instance.bulletLifeTime;
+        bulletPen = GameManager.instance.bulletPen;
 
         bulletRB = GetComponent<Rigidbody2D>();
+
+        closestMonster = FindClosestMonster();
 
         if (bulletRB != null)
         {
@@ -34,12 +36,7 @@ public class Bullet : MonoBehaviour
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
         }
 
-        Invoke("BulletEnd", bulletLifeTime);
-    }
-
-    void Start()
-    {
-
+        Destroy(gameObject, bulletLifeTime);
     }
 
     // 가장 가까운 몬스터를 찾는 함수
@@ -68,16 +65,11 @@ public class Bullet : MonoBehaviour
         if (!collision.CompareTag("Monster"))
         { return; }
 
-        pen--;
+        bulletPen--;
 
-        if (pen < 0)
+        if (bulletPen < 0)
         {
-            gameObject.SetActive(false);
+            Destroy(gameObject);
         }
-    }
-
-    void BulletEnd()
-    {
-        gameObject.SetActive(false);
     }
 }

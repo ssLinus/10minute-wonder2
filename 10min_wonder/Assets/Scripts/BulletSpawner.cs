@@ -5,47 +5,28 @@ using UnityEngine;
 public class BulletSpawner : MonoBehaviour
 {
     public GameObject bulletPrefab;
-    public int initialPoolSize = 10;
-    public float attackSpeed = 1f;
 
-    private List<GameObject> bulletPool;
+    private float attackSpeed;
+    private float timeAfterSpawn;
 
-    void Awake()
+    private void Start()
     {
-        // Initialize bullet pool
-        bulletPool = new List<GameObject>();
-        for (int i = 0; i < initialPoolSize; i++)
-        {
-            GameObject bullet = Instantiate(bulletPrefab);
-            bullet.SetActive(false);
-            bulletPool.Add(bullet);
-        }
-
-        // Start bullet spawning coroutine
-        StartCoroutine(SpawnBullets());
+        attackSpeed = GameManager.instance.attackSpeed;
     }
 
-    IEnumerator SpawnBullets()
+    public void FixedUpdate()
     {
-        while (true)
+        timeAfterSpawn += Time.deltaTime;
+
+        if (timeAfterSpawn > (1f / attackSpeed))
         {
-            // Find inactive bullet in the pool
-            GameObject inactiveBullet = bulletPool.Find(bullet => !bullet.activeSelf);
-
-            // If no inactive bullets are found, expand the pool
-            if (inactiveBullet == null)
-            {
-                GameObject bullet = Instantiate(bulletPrefab);
-                bullet.SetActive(false);
-                bulletPool.Add(bullet);
-                inactiveBullet = bullet;
-            }
-
-            // Activate the inactive bullet and reset its position
-            inactiveBullet.SetActive(true);
-            inactiveBullet.transform.position = transform.position;
-
-            yield return new WaitForSeconds(1f / attackSpeed);
+            timeAfterSpawn = 0f;
+            Fire();
         }
+    }
+
+    void Fire()
+    {
+        Instantiate(bulletPrefab, transform.position, Quaternion.identity);
     }
 }

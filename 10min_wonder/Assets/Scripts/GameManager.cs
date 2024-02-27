@@ -20,6 +20,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public float playerHp;
+    public float playerSpeed;
+    public float attackDmg; // 공격력
+    public float attackSpeed; // 초당 공격속도
+    public float bulletSpeed; // 탄 속도
+    public float bulletLifeTime; // 탄 유지시간
+    public float bulletPen; // 탄 관통력
+
     // Start is called before the first frame update
     void Start()
     {
