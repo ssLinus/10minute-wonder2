@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public Player player;
+
     public float playerHp;
     public float playerSpeed;
     public float attackDmg; // °ø°Ý·Â
