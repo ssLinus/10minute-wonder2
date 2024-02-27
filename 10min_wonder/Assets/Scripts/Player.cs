@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (playerRB != null)
+        if (playerRB != null) //플레이어 이동관련
         {
             axis.x = Input.GetAxis("Horizontal");
             axis.y = Input.GetAxis("Vertical");
