@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 
     public Player player;
 
+    [Header("Initial Stat")]
     public float playerLevel; // 0
     public float playerHp; // 100
     public float playerSpeed; // 3
