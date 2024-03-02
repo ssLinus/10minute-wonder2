@@ -19,6 +19,11 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (playerHp <= 0)
+        {
+            Time.timeScale = 0;
+        }
+
         if (playerRB != null) // 플레이어 이동관련
         {
             axis.x = Input.GetAxisRaw("Horizontal");

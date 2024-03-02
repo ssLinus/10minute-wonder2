@@ -4,10 +4,22 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Singleton Pattern
     public static GameManager instance;
+
+    public Player player;
+
+    public float playerLevel; // 0
+    public float playerHp; // 100
+    public float playerSpeed; // 3
+    public float attackDmg; // 공격력 2
+    public float attackSpeed; // 초당 공격속도 1
+    public float bulletSpeed; // 탄 속도 5
+    public float bulletLifeTime; // 탄 유지시간 2
+    public float bulletPen; // 탄 관통력 0
+
     private void Awake()
     {
+        // Singleton Pattern
         if (instance == null)
         {
             instance = this;
@@ -18,26 +30,19 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
             Debug.Log("파괴");
         }
+
+        // player 변수가 비어있으면 Player 타입의 객체를 찾아서 player 변수에 할당
+        if (player == null)
+        {
+            player = FindObjectOfType<Player>();
+        }
     }
 
-    public Player player;
-
-    public float playerHp;
-    public float playerSpeed;
-    public float attackDmg; // 공격력
-    public float attackSpeed; // 초당 공격속도
-    public float bulletSpeed; // 탄 속도
-    public float bulletLifeTime; // 탄 유지시간
-    public float bulletPen; // 탄 관통력
-    public float playerLevel; // 플레이어 레벨
-
-    // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
-    // Update is called once per frame
     void Update()
     {
         

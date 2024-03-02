@@ -22,6 +22,11 @@ public class Monster : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (monsterHp <= 0)
+        {
+            Destroy(gameObject);
+        }
+
         FindTarget();
     }
 
@@ -40,6 +45,14 @@ public class Monster : MonoBehaviour
             float monVSpeed = targetDir.y * monsterSpeed;
 
             monsterRB.velocity = new Vector2(monHSpeed, monVSpeed);
+        }
+    }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Bullet"))
+        {
+            monsterHp -= GameManager.instance.attackDmg;
         }
     }
 }
