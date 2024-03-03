@@ -7,11 +7,12 @@ public class UiManager : MonoBehaviour
 {
     public Text countdownTimer;
     public Text playerLevel;
-    public Text Score;
+    public Text stage;
     public Slider expBar;
     public GameObject levelUp;
     public GameObject status;
     public GameObject setting;
+    public Slider hpBar;
 
     public float setTime; // 10분, 600초
 
@@ -26,6 +27,7 @@ public class UiManager : MonoBehaviour
 
     void Update()
     {
+        // 카운트다운
         if (setTime > 0)
         {
             setTime -= Time.deltaTime;
@@ -41,18 +43,39 @@ public class UiManager : MonoBehaviour
         else if (setTime <= 0)
             Time.timeScale = 0;
 
+        // 플레이어 레벨
+        playerLevel.text = "Lv." + GameManager.instance.player.playerLevel;
+
+        // 플레이어 경험치 바
+        expBar.maxValue = GameManager.instance.player.playerMaxExp;
+        expBar.value = GameManager.instance.player.playerExp;
+
+        // 레벨업 창
+        if (GameManager.instance.player.isLevelUp)
+        {
+            GameManager.instance.player.isLevelUp = false;
+            levelUp.SetActive(true);
+            Time.timeScale = 0;
+        }
+
+        // 스탯창
         if (isStatus)
             status.SetActive(true);
         else
             status.SetActive(false);
 
+        // 설정창
         if (isSetting)
             setting.SetActive(true);
         else
             setting.SetActive(false);
+
+        // HP Bar
+        hpBar.maxValue = GameManager.instance.player.playerMaxHp;
+        hpBar.value = GameManager.instance.player.playerHp;
     }
 
-    public void OpenInventory()
+    public void OpenInventory() // 인벤토리
     {
         if (!isStatus)
         {
@@ -67,7 +90,7 @@ public class UiManager : MonoBehaviour
         }
     }
 
-    public void OpenSetting()
+    public void OpenSetting() // 설정창
     {
         if (!isSetting)
         {
@@ -85,6 +108,7 @@ public class UiManager : MonoBehaviour
     public void OptionSelect(int index) // index : 0 ~ 2
     {
         levelUp.SetActive(false);
+        Time.timeScale = 1.0f;
     }
 
     public void OptionReset()

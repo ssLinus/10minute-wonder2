@@ -39,8 +39,8 @@ public class Monster : MonoBehaviour
         if (isPlayer && nextDamageTime > monsterAttackSpeed)
         {
             GameManager.instance.player.playerHp -= monsterDmg;
-
             nextDamageTime = 0f;
+            isPlayer = false;
         }
     }
 
@@ -48,7 +48,7 @@ public class Monster : MonoBehaviour
     {
         if (target == null)
         {
-            target = GameManager.instance.player.GetComponent<GameObject>();
+            target = GameObject.FindGameObjectWithTag("Player");
         }
 
         if (target != null)

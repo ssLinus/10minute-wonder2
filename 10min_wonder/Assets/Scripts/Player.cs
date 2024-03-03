@@ -4,17 +4,30 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float playerHp;
+    [Header("게임매니저")]
+    public float playerMaxHp;
     public float playerSpeed;
+
+    public float playerHp;
+
+    public int playerLevel; // 0
+    public float playerExp;
+    public float playerMaxExp;
+    public bool isLevelUp;
+
     public Rigidbody2D playerRB;
 
     public Vector3 axis;
 
     void Start()
     {
-        playerHp = GameManager.instance.playerHp;
+        playerMaxHp = GameManager.instance.playerMaxHp;
         playerSpeed = GameManager.instance.playerSpeed;
         playerRB = GetComponent<Rigidbody2D>();
+
+        playerHp = playerMaxHp;
+
+        isLevelUp = false;
     }
 
     void Update()
@@ -28,6 +41,14 @@ public class Player : MonoBehaviour
         {
             axis.x = Input.GetAxisRaw("Horizontal");
             axis.y = Input.GetAxisRaw("Vertical");
+        }
+
+        if(playerExp >= playerMaxExp) // 플레이어 레벨 관련
+        {
+            playerLevel++;
+            playerExp = (playerExp - playerMaxExp);
+            playerMaxExp = playerMaxExp * (1 + 0.1f * playerLevel);
+            isLevelUp = true;
         }
     }
 

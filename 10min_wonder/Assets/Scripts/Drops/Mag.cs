@@ -4,21 +4,20 @@ using UnityEngine;
 
 public class Mag : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
+        {
+            GameObject[] exps = GameObject.FindGameObjectsWithTag("Exp");
+            foreach (GameObject exp in exps)
+            {
+                Exp expComponent = exp.GetComponent<Exp>();
+                if (expComponent != null)
+                {
+                    expComponent.isMag = true;
+                }
+            }
             Destroy(gameObject);
+        }
     }
 }

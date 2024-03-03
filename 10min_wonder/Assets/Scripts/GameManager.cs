@@ -9,8 +9,7 @@ public class GameManager : MonoBehaviour
     public Player player;
 
     [Header("Initial Stat")]
-    public float playerLevel; // 0
-    public float playerHp; // 100
+    public float playerMaxHp; // 100
     public float playerSpeed; // 3
     public float attackDmg; // 공격력 2
     public float attackSpeed; // 초당 공격속도 1

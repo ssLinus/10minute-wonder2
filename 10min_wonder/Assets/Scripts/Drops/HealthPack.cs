@@ -4,21 +4,21 @@ using UnityEngine;
 
 public class HealthPack : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public float heal; // 20
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
+        {
+            if ((GameManager.instance.playerMaxHp - GameManager.instance.player.playerHp) <= heal)
+            {
+                GameManager.instance.player.playerHp += (GameManager.instance.playerMaxHp - GameManager.instance.player.playerHp);
+            }
+            else
+            {
+                GameManager.instance.player.playerHp += heal;
+            }
             Destroy(gameObject);
+        }
     }
 }

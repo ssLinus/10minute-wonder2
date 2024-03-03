@@ -115,7 +115,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -133,3 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36e1964624f6308429b2832cd3c9ed58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  exps:
+  - {fileID: 1855479896685805513, guid: cb4864eb0b9cef244ada762a9a69d44e, type: 3}
+  - {fileID: 4776191718375324749, guid: a82b63c6c558a284db1e27e8a67d40b3, type: 3}
+  - {fileID: 6491672038131559577, guid: f9f19d973b38f4f4e9d0b85f38571ed6, type: 3}

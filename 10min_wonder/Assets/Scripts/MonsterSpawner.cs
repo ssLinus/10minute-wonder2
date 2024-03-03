@@ -6,6 +6,8 @@ public class MonsterSpawner : MonoBehaviour
 {
     public GameObject[] monsters;
 
+    public int stage;
+
     void Start()
     {
         
