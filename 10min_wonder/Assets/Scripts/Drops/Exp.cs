@@ -6,13 +6,9 @@ public class Exp : MonoBehaviour
 {
     public float exp;
 
-    void Start()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        
-    }
-
-    void Update()
-    {
-        
+        if(collision.CompareTag("Player"))
+        Destroy(gameObject);
     }
 }

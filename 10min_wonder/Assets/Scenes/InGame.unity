@@ -69136,6 +69136,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19de40bba9637bb4188cef430b08bb8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerHp: 0
+  playerSpeed: 0
+  playerRB: {fileID: 0}
   axis: {x: 0, y: 0, z: 0}
 --- !u!50 &3940671827668495579
 Rigidbody2D:
@@ -69391,8 +69394,8 @@ SceneRoots:
   - {fileID: 1367163058}
   - {fileID: 1718294054}
   - {fileID: 67183690}
-  - {fileID: 296330809}
   - {fileID: 2048098255}
   - {fileID: 434204782}
   - {fileID: 109304070}
   - {fileID: 6694859875197864749}
+  - {fileID: 296330809}

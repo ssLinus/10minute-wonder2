@@ -30,10 +30,6 @@ public class Reposition : MonoBehaviour
                     transform.Translate(Vector3.up * dirY * 80);
                 }
                 break;
-
-            case "Monster":
-
-                break;
         }
     }
 }

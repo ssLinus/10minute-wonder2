@@ -5,19 +5,24 @@ using UnityEngine;
 
 public class Monster : MonoBehaviour
 {
-    private Rigidbody2D monsterRB;
-
-    public GameObject target;
-    public Vector2 targetDir;
-
     public float monsterHp;
     public float monsterDmg;
     public float monsterSpeed;
 
+    private Rigidbody2D monsterRB;
+
+    private GameObject target;
+    private Vector2 targetDir;
+
+    private float monsterAttackSpeed = 1f;
+    private float nextDamageTime = 0f;
+    private bool isPlayer;
+
     void Start()
     {
+        isPlayer = false;
+
         monsterRB = this.GetComponent<Rigidbody2D>(); //Rigidbody2D ÃÊ±âÈ­
-        FindTarget();
     }
 
     void FixedUpdate()
@@ -28,13 +33,22 @@ public class Monster : MonoBehaviour
         }
 
         FindTarget();
+
+        nextDamageTime += Time.deltaTime;
+
+        if (isPlayer && nextDamageTime > monsterAttackSpeed)
+        {
+            GameManager.instance.player.playerHp -= monsterDmg;
+
+            nextDamageTime = 0f;
+        }
     }
 
     private void FindTarget()
     {
         if (target == null)
         {
-            target = GameObject.FindGameObjectWithTag("Player");
+            target = GameManager.instance.player.GetComponent<GameObject>();
         }
 
         if (target != null)
@@ -53,6 +67,14 @@ public class Monster : MonoBehaviour
         if (collision.CompareTag("Bullet"))
         {
             monsterHp -= GameManager.instance.attackDmg;
+        }
+    }
+
+    public void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            isPlayer = true;
         }
     }
 }

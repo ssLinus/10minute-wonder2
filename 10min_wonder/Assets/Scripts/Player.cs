@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private float playerHp;
-    private float playerSpeed;
-    private Rigidbody2D playerRB;
+    public float playerHp;
+    public float playerSpeed;
+    public Rigidbody2D playerRB;
 
     public Vector3 axis;
 
