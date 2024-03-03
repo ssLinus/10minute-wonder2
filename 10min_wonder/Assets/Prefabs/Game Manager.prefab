@@ -47,7 +47,7 @@ MonoBehaviour:
   player: {fileID: 3646845612300706537, guid: f10a29f735007d840ab8e8813f76279d, type: 3}
   playerMaxHp: 100
   playerSpeed: 3
-  attackDmg: 2
+  attackDmg: 3
   attackSpeed: 1
   bulletSpeed: 5
   bulletLifeTime: 2

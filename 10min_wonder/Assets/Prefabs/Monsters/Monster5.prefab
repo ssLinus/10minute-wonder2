@@ -161,8 +161,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42e6635669e1112448c3b73d67485fba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  targetDir: {x: 0, y: 0}
   monsterHp: 30
   monsterDmg: 20
   monsterSpeed: 2
+  drops:
+  - {fileID: 1855479896685805513, guid: cb4864eb0b9cef244ada762a9a69d44e, type: 3}
+  - {fileID: 4776191718375324749, guid: a82b63c6c558a284db1e27e8a67d40b3, type: 3}
+  - {fileID: 6491672038131559577, guid: f9f19d973b38f4f4e9d0b85f38571ed6, type: 3}
+  - {fileID: 467880892335140044, guid: d1aa173f2eb69e44d9f2e3b193c38d27, type: 3}
+  - {fileID: 7157186838229120476, guid: e7ad16723cf6d3e45892bf709c7bf11c, type: 3}
+  - {fileID: 7454246026100013076, guid: 04e8fe4d52ff7084f8df67d0e8278c5d, type: 3}
+  spawner: {fileID: 0}

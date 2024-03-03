@@ -7,7 +7,7 @@ public class UiManager : MonoBehaviour
 {
     public Text countdownTimer;
     public Text playerLevel;
-    public Text stage;
+    public Text wave;
     public Slider expBar;
     public GameObject levelUp;
     public GameObject status;
@@ -49,6 +49,10 @@ public class UiManager : MonoBehaviour
         // 플레이어 경험치 바
         expBar.maxValue = GameManager.instance.player.playerMaxExp;
         expBar.value = GameManager.instance.player.playerExp;
+
+        // Wave
+        //MonsterSpawner monsterSpawner = GetComponent<MonsterSpawner>();
+        //wave.text = "Wave." + monsterSpawner.wave;
 
         // 레벨업 창
         if (GameManager.instance.player.isLevelUp)

@@ -9,6 +9,10 @@ public class Monster : MonoBehaviour
     public float monsterDmg;
     public float monsterSpeed;
 
+    public GameObject[] drops;
+
+    public MonsterSpawner spawner;
+
     private Rigidbody2D monsterRB;
 
     private GameObject target;
@@ -77,4 +81,32 @@ public class Monster : MonoBehaviour
             isPlayer = true;
         }
     }
+
+    private void OnDestroy()
+    {
+        if (spawner != null)
+        {
+            // 확률 구간을 정의합니다.
+            float[] probabilities = { 0.5f, 0.25f, 0.15f, 0.05f, 0.03f, 0.02f };
+
+            float rand = Random.Range(0f, 1f);
+            float cumulative = 0f;  // 누적 확률을 계산하는 변수
+            int selectedIndex = 0;
+
+            for (; selectedIndex < probabilities.Length; selectedIndex++)
+            {
+                cumulative += probabilities[selectedIndex];
+                if (rand < cumulative)
+                {
+                    break;
+                }
+            }
+
+            // 선택된 아이템을 생성합니다.
+            Instantiate(drops[selectedIndex], transform.position, Quaternion.identity);
+
+            spawner.RemoveMonster(this);
+        }
+    }
+
 }

@@ -16,6 +16,7 @@ public class BulletSpawner : MonoBehaviour
 
     public void FixedUpdate()
     {
+
         timeAfterSpawn += Time.deltaTime;
         GameObject closestMonster = FindClosestMonster();
 
