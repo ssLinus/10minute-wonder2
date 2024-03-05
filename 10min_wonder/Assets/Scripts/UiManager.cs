@@ -14,20 +14,27 @@ public class UiManager : MonoBehaviour
     public GameObject setting;
     public Slider hpBar;
 
-    public float setTime; // 10분, 600초
+    public float setTime;
 
     private bool isStatus;
     private bool isSetting;
 
     void Start()
     {
-        isStatus = false;
-        isSetting = false;
+        Player.onPlayerLevelUp += UpdatePlayerLevel;
+        Player.onPlayerWaveUp += UpdateWave;
+
+        setTime = GameManager.instance.setTime;
+    }
+
+    void OnDestroy()
+    {
+        Player.onPlayerLevelUp -= UpdatePlayerLevel;
+        Player.onPlayerWaveUp -= UpdateWave;
     }
 
     void Update()
     {
-        // 카운트다운
         if (setTime > 0)
         {
             setTime -= Time.deltaTime;
@@ -43,73 +50,48 @@ public class UiManager : MonoBehaviour
         else if (setTime <= 0)
             Time.timeScale = 0;
 
-        // 플레이어 레벨
-        playerLevel.text = "Lv." + GameManager.instance.player.playerLevel;
-
-        // 플레이어 경험치 바
         expBar.maxValue = GameManager.instance.player.playerMaxExp;
         expBar.value = GameManager.instance.player.playerExp;
 
-        // Wave
-        //MonsterSpawner monsterSpawner = GetComponent<MonsterSpawner>();
-        //wave.text = "Wave." + monsterSpawner.wave;
-
-        // 레벨업 창
-        if (GameManager.instance.player.isLevelUp)
-        {
-            GameManager.instance.player.isLevelUp = false;
-            levelUp.SetActive(true);
-            Time.timeScale = 0;
-        }
-
-        // 스탯창
-        if (isStatus)
-            status.SetActive(true);
-        else
-            status.SetActive(false);
-
-        // 설정창
-        if (isSetting)
-            setting.SetActive(true);
-        else
-            setting.SetActive(false);
-
-        // HP Bar
         hpBar.maxValue = GameManager.instance.player.playerMaxHp;
         hpBar.value = GameManager.instance.player.playerHp;
     }
 
-    public void OpenInventory() // 인벤토리
+    public void OpenInventory()
     {
-        if (!isStatus)
+        isStatus = !isStatus;
+        if (isStatus)
         {
-            isStatus = true;
-            isSetting = false;
+            status.SetActive(true);
             Time.timeScale = 0;
         }
         else
         {
-            isStatus = false;
+            status.SetActive(false);
             Time.timeScale = 1.0f;
         }
+        isSetting = false;
+        setting.SetActive(false);
     }
 
-    public void OpenSetting() // 설정창
+    public void OpenSetting()
     {
-        if (!isSetting)
+        isSetting = !isSetting;
+        if (isSetting)
         {
-            isStatus = false;
-            isSetting = true;
+            setting.SetActive(true);
             Time.timeScale = 0;
         }
         else
         {
-            isSetting = false;
+            setting.SetActive(false);
             Time.timeScale = 1.0f;
         }
+        isStatus = false;
+        status.SetActive(false);
     }
 
-    public void OptionSelect(int index) // index : 0 ~ 2
+    public void OptionSelect(int index)
     {
         levelUp.SetActive(false);
         Time.timeScale = 1.0f;
@@ -118,5 +100,18 @@ public class UiManager : MonoBehaviour
     public void OptionReset()
     {
 
+    }
+
+    void UpdatePlayerLevel()
+    {
+        playerLevel.text = "Lv." + GameManager.instance.player.playerLevel;
+
+        levelUp.SetActive(true);
+        Time.timeScale = 0;
+    }
+
+    void UpdateWave()
+    {
+        wave.text = "Wave." + GameManager.instance.player.currentWave;
     }
 }

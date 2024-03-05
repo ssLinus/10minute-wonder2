@@ -7,9 +7,13 @@ public class Box : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
-        { 
-            GameManager.instance.player.isLevelUp = true;
-            Destroy(gameObject);
+        {
+            Player player = collision.GetComponent<Player>();
+            if (player != null)
+            {
+                player.LevelUpOpen();
+                Destroy(gameObject);
+            }
         }
     }
 }

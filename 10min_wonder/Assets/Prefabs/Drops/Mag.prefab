@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 2569818803421070506}
   - component: {fileID: 968006490690535012}
   - component: {fileID: 5594950464557232430}
+  - component: {fileID: -8145751100034305390}
   m_Layer: 0
   m_Name: Mag
-  m_TagString: Untagged
+  m_TagString: Drops
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -133,7 +134,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36e1964624f6308429b2832cd3c9ed58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  exps:
-  - {fileID: 1855479896685805513, guid: cb4864eb0b9cef244ada762a9a69d44e, type: 3}
-  - {fileID: 4776191718375324749, guid: a82b63c6c558a284db1e27e8a67d40b3, type: 3}
-  - {fileID: 6491672038131559577, guid: f9f19d973b38f4f4e9d0b85f38571ed6, type: 3}
+--- !u!50 &-8145751100034305390
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7157186838229120476}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

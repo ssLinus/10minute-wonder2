@@ -8,14 +8,31 @@ public class GameManager : MonoBehaviour
 
     public Player player;
 
-    [Header("Initial Stat")]
+    [Header("초기 설정")]
+
+    [Header("Player")]
     public float playerMaxHp; // 100
     public float playerSpeed; // 3
-    public float attackDmg; // 공격력 2
-    public float attackSpeed; // 초당 공격속도 1
-    public float bulletSpeed; // 탄 속도 5
-    public float bulletLifeTime; // 탄 유지시간 2
-    public float bulletPen; // 탄 관통력 0
+    public int playerLevel; // 0
+
+    [Header("Looting")]
+    public float lootingRange; // 0.5
+
+    [Header("BulletSpawner")]
+    public float attackDmg; // 2
+    public float attackSpeed; // 1
+    public float attackRange; // 5
+
+    [Header("Bullet")]
+    public float bulletSpeed; // 5
+    public float bulletLifeTime; // 2
+    public float bulletPen; // 0
+
+    [Header("MonsterSpawner")]
+    public int startWave; // 0
+
+    [Header("UiManager")]
+    public float setTime; // 600
 
     private void Awake()
     {
@@ -36,15 +53,5 @@ public class GameManager : MonoBehaviour
         {
             player = FindObjectOfType<Player>();
         }
-    }
-
-    void Start()
-    {
-
-    }
-
-    void Update()
-    {
-        
     }
 }

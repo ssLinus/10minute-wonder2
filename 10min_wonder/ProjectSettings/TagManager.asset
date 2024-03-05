@@ -9,6 +9,7 @@ TagManager:
   - Ground
   - Area
   - Exp
+  - Drops
   layers:
   - Default
   - TransparentFX

@@ -5,6 +5,10 @@ using UnityEngine;
 public class BulletSpawner : MonoBehaviour
 {
     public GameObject bulletPrefab;
+    public new CircleCollider2D collider2D;
+    public float attackRange;
+
+    public bool isRange;
 
     private float attackSpeed;
     private float timeAfterSpawn;
@@ -12,18 +16,26 @@ public class BulletSpawner : MonoBehaviour
     private void Start()
     {
         attackSpeed = GameManager.instance.attackSpeed;
+        attackRange = GameManager.instance.attackRange;
+
+        collider2D = GetComponent<CircleCollider2D>();
+        collider2D.radius = attackRange;
     }
 
     public void FixedUpdate()
     {
-
         timeAfterSpawn += Time.deltaTime;
-        GameObject closestMonster = FindClosestMonster();
 
-        if (closestMonster != null && timeAfterSpawn > (1f / attackSpeed))
+        if (isRange)
         {
-            timeAfterSpawn = 0f;
-            Fire();
+            GameObject closestMonster = FindClosestMonster();
+
+            if (closestMonster != null && timeAfterSpawn > (1f / attackSpeed))
+            {
+                timeAfterSpawn = 0f;
+                Fire();
+            }
+            isRange = false;
         }
     }
 
@@ -36,7 +48,6 @@ public class BulletSpawner : MonoBehaviour
             bullet.GetComponent<Bullet>().SetTarget(closestMonster);
         }
     }
-
 
     // 가장 가까운 몬스터를 찾는 함수
     GameObject FindClosestMonster()
@@ -56,5 +67,11 @@ public class BulletSpawner : MonoBehaviour
         }
 
         return closestMonster;
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Monster"))
+            isRange = true;
     }
 }

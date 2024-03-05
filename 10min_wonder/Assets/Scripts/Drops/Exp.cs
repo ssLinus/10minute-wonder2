@@ -15,6 +15,8 @@ public class Exp : MonoBehaviour
     private void Start()
     {
         isMag = false;
+
+        target = GameObject.FindGameObjectWithTag("Player");
         expRB = this.GetComponent<Rigidbody2D>();
     }
 
@@ -22,11 +24,6 @@ public class Exp : MonoBehaviour
     {
         if (isMag)
         {
-            if (target == null)
-            {
-                target = GameObject.FindGameObjectWithTag("Player");
-            }
-
             if (target != null)
             {
                 targetDir = (target.transform.position - transform.position).normalized;
@@ -35,7 +32,7 @@ public class Exp : MonoBehaviour
                 float monVSpeed = targetDir.y * speed;
 
                 expRB.velocity = new Vector2(monHSpeed, monVSpeed);
-            } 
+            }
         }
     }
 

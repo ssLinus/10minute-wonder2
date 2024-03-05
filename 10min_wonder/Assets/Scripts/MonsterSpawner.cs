@@ -12,8 +12,6 @@ public class MonsterSpawner : MonoBehaviour
 
     private float spawnDistance;
 
-    public int wave;
-
     private List<Monster> monsters = new List<Monster>();
 
 
@@ -24,7 +22,6 @@ public class MonsterSpawner : MonoBehaviour
 
     void Update()
     {
-
         if (monsters.Count <= 0)
         {
             SpawnerWave();
@@ -33,9 +30,10 @@ public class MonsterSpawner : MonoBehaviour
 
     private void SpawnerWave()
     {
-        wave++;
+        GameManager.instance.player.currentWave++;
+        GameManager.instance.player.WaveUp();
 
-        int spawnCount = Mathf.RoundToInt(wave * 1.2f);
+        int spawnCount = Mathf.RoundToInt(GameManager.instance.player.currentWave * 1.2f);
 
         for (int i = 0; i < spawnCount; i++)
         {

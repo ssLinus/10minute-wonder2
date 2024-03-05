@@ -4,30 +4,31 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [Header("게임매니저")]
+    public delegate void OnPlayerDataChanged();
+    public static event OnPlayerDataChanged onPlayerLevelUp;
+    public static event OnPlayerDataChanged onPlayerWaveUp;
+
     public float playerMaxHp;
     public float playerSpeed;
-
     public float playerHp;
-
-    public int playerLevel; // 0
+    [Space]
+    public int playerLevel;
     public float playerExp;
     public float playerMaxExp;
-    public bool isLevelUp;
-
+    [Space]
+    public int currentWave;
+    [Space]
     public Rigidbody2D playerRB;
-
     public Vector3 axis;
 
     void Start()
     {
         playerMaxHp = GameManager.instance.playerMaxHp;
         playerSpeed = GameManager.instance.playerSpeed;
+        playerLevel = GameManager.instance.playerLevel;
+        currentWave = GameManager.instance.startWave;
         playerRB = GetComponent<Rigidbody2D>();
-
         playerHp = playerMaxHp;
-
-        isLevelUp = false;
     }
 
     void Update()
@@ -37,30 +38,36 @@ public class Player : MonoBehaviour
             Time.timeScale = 0;
         }
 
-        if (playerRB != null) // 플레이어 이동관련
+        if (playerRB != null)
         {
             axis.x = Input.GetAxisRaw("Horizontal");
             axis.y = Input.GetAxisRaw("Vertical");
         }
 
-        if(playerExp >= playerMaxExp) // 플레이어 레벨 관련
+        if (playerExp >= playerMaxExp)
         {
             playerLevel++;
             playerExp = (playerExp - playerMaxExp);
             playerMaxExp = playerMaxExp * (1 + 0.1f * playerLevel);
-            isLevelUp = true;
+            onPlayerLevelUp?.Invoke();
         }
     }
 
     void FixedUpdate()
     {
-        // 정규화된 벡터로 변환
         Vector3 movementDirection = new Vector3(axis.x, axis.y).normalized;
-
-        // 각각의 축에 속도를 적용
         float hSpeed = movementDirection.x * playerSpeed;
         float vSpeed = movementDirection.y * playerSpeed;
-
         playerRB.velocity = new Vector3(hSpeed, vSpeed);
+    }
+
+    public void LevelUpOpen()
+    {
+        onPlayerLevelUp?.Invoke();
+    }
+
+    public void WaveUp()
+    {
+        onPlayerWaveUp?.Invoke();
     }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Monster : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class Monster : MonoBehaviour
     public GameObject[] drops;
 
     public MonsterSpawner spawner;
+
+    public GameObject dmgText;
 
     private Rigidbody2D monsterRB;
 
@@ -26,6 +29,8 @@ public class Monster : MonoBehaviour
     {
         isPlayer = false;
 
+        target = GameObject.FindGameObjectWithTag("Player");
+
         monsterRB = this.GetComponent<Rigidbody2D>(); //Rigidbody2D √ ±‚»≠
     }
 
@@ -33,6 +38,8 @@ public class Monster : MonoBehaviour
     {
         if (monsterHp <= 0)
         {
+            DropItem();
+
             Destroy(gameObject);
         }
 
@@ -50,11 +57,6 @@ public class Monster : MonoBehaviour
 
     private void FindTarget()
     {
-        if (target == null)
-        {
-            target = GameObject.FindGameObjectWithTag("Player");
-        }
-
         if (target != null)
         {
             targetDir = (target.transform.position - transform.position).normalized;
@@ -66,23 +68,7 @@ public class Monster : MonoBehaviour
         }
     }
 
-    public void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Bullet"))
-        {
-            monsterHp -= GameManager.instance.attackDmg;
-        }
-    }
-
-    public void OnCollisionStay2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            isPlayer = true;
-        }
-    }
-
-    private void OnDestroy()
+    private void DropItem()
     {
         if (spawner != null)
         {
@@ -109,4 +95,21 @@ public class Monster : MonoBehaviour
         }
     }
 
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Bullet"))
+        {
+            monsterHp -= GameManager.instance.attackDmg;
+            GameObject dmgTxt = Instantiate(dmgText, transform.position, Quaternion.identity);
+            dmgTxt.GetComponent<DamageText>().damage = GameManager.instance.attackDmg;
+        }
+    }
+
+    public void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            isPlayer = true;
+        }
+    }
 }
