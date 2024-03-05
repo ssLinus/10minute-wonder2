@@ -11,6 +11,7 @@ public class Monster : MonoBehaviour
     public float monsterSpeed;
 
     public GameObject[] drops;
+    public float[] dropRate; // 드롭 확률 각 수치의 합은 1
 
     public MonsterSpawner spawner;
 
@@ -72,16 +73,13 @@ public class Monster : MonoBehaviour
     {
         if (spawner != null)
         {
-            // 확률 구간을 정의합니다.
-            float[] probabilities = { 0.5f, 0.25f, 0.15f, 0.05f, 0.03f, 0.02f };
-
             float rand = Random.Range(0f, 1f);
             float cumulative = 0f;  // 누적 확률을 계산하는 변수
             int selectedIndex = 0;
 
-            for (; selectedIndex < probabilities.Length; selectedIndex++)
+            for (; selectedIndex < dropRate.Length; selectedIndex++)
             {
-                cumulative += probabilities[selectedIndex];
+                cumulative += dropRate[selectedIndex];
                 if (rand < cumulative)
                 {
                     break;

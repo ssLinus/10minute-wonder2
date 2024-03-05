@@ -171,5 +171,12 @@ MonoBehaviour:
   - {fileID: 467880892335140044, guid: d1aa173f2eb69e44d9f2e3b193c38d27, type: 3}
   - {fileID: 7157186838229120476, guid: e7ad16723cf6d3e45892bf709c7bf11c, type: 3}
   - {fileID: 7454246026100013076, guid: 04e8fe4d52ff7084f8df67d0e8278c5d, type: 3}
+  dropRate:
+  - 0.8
+  - 0.1
+  - 0.05
+  - 0.02
+  - 0.02
+  - 0.01
   spawner: {fileID: 0}
   dmgText: {fileID: 5593461137406483596, guid: 13c62ac40e2c8d841b5c707318993e0e, type: 3}

@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (playerHp <= 0)
+        if (playerHp <= 0.1f)
         {
             Time.timeScale = 0;
         }
@@ -48,7 +48,7 @@ public class Player : MonoBehaviour
         {
             playerLevel++;
             playerExp = (playerExp - playerMaxExp);
-            playerMaxExp = playerMaxExp * (1 + 0.1f * playerLevel);
+            playerMaxExp = playerMaxExp * 1.1f;
             onPlayerLevelUp?.Invoke();
         }
     }
