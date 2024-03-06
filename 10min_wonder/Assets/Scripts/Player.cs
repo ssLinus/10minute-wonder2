@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     public delegate void OnPlayerDataChanged();
     public static event OnPlayerDataChanged onPlayerLevelUp;
     public static event OnPlayerDataChanged onPlayerWaveUp;
+    public static event OnPlayerDataChanged onGameOver;
 
     public float playerMaxHp;
     public float playerSpeed;
@@ -25,7 +26,6 @@ public class Player : MonoBehaviour
     {
         playerMaxHp = GameManager.instance.playerMaxHp;
         playerSpeed = GameManager.instance.playerSpeed;
-        playerLevel = GameManager.instance.playerLevel;
         currentWave = GameManager.instance.startWave;
         playerRB = GetComponent<Rigidbody2D>();
         playerHp = playerMaxHp;
@@ -33,9 +33,9 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (playerHp <= 0.1f)
+        if (playerHp <= 0)
         {
-            Time.timeScale = 0;
+            GameOver();
         }
 
         if (playerRB != null)
@@ -59,6 +59,11 @@ public class Player : MonoBehaviour
         float hSpeed = movementDirection.x * playerSpeed;
         float vSpeed = movementDirection.y * playerSpeed;
         playerRB.velocity = new Vector3(hSpeed, vSpeed);
+    }
+
+    public void GameOver()
+    {
+        onGameOver?.Invoke();
     }
 
     public void LevelUpOpen()

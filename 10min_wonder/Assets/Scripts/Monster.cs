@@ -9,10 +9,10 @@ public class Monster : MonoBehaviour
     public float monsterHp;
     public float monsterDmg;
     public float monsterSpeed;
-
+    [Space]
     public GameObject[] drops;
     public float[] dropRate; // 드롭 확률 각 수치의 합은 1
-
+    [Space]
     public MonsterSpawner spawner;
 
     public GameObject dmgText;

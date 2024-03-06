@@ -5,6 +5,7 @@ using UnityEngine;
 public class Exp : MonoBehaviour
 {
     public float exp; // 2, 5, 10
+    public float multipler;
 
     public bool isMag;
     private Rigidbody2D expRB;
@@ -18,6 +19,8 @@ public class Exp : MonoBehaviour
 
         target = GameObject.FindGameObjectWithTag("Player");
         expRB = this.GetComponent<Rigidbody2D>();
+
+        multipler = GameManager.instance.expMultipler;
     }
 
     private void Update()
@@ -40,7 +43,7 @@ public class Exp : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            GameManager.instance.player.playerExp += exp;
+            GameManager.instance.player.playerExp += exp * multipler;
 
             Destroy(gameObject);
         }

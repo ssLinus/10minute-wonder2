@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+class PlayerDate
+{
+
+}
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
@@ -13,7 +18,6 @@ public class GameManager : MonoBehaviour
     [Header("Player")]
     public float playerMaxHp; // 100
     public float playerSpeed; // 3
-    public int playerLevel; // 0
 
     [Header("Looting")]
     public float lootingRange; // 0.5
@@ -27,6 +31,9 @@ public class GameManager : MonoBehaviour
     public float bulletSpeed; // 5
     public float bulletLifeTime; // 2
     public float bulletPen; // 0
+
+    [Header("Exp")]
+    public float expMultipler; // 1
 
     [Header("MonsterSpawner")]
     public int startWave; // 0

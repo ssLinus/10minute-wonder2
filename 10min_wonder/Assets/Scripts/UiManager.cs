@@ -12,6 +12,8 @@ public class UiManager : MonoBehaviour
     public GameObject levelUp;
     public GameObject status;
     public GameObject setting;
+    public GameObject gameOver;
+    public GameObject gameClear;
     public Slider hpBar;
 
     public float setTime;
@@ -23,6 +25,7 @@ public class UiManager : MonoBehaviour
     {
         Player.onPlayerLevelUp += UpdatePlayerLevel;
         Player.onPlayerWaveUp += UpdateWave;
+        Player.onGameOver += GameOverUiOpen;
 
         setTime = GameManager.instance.setTime;
     }
@@ -31,6 +34,7 @@ public class UiManager : MonoBehaviour
     {
         Player.onPlayerLevelUp -= UpdatePlayerLevel;
         Player.onPlayerWaveUp -= UpdateWave;
+        Player.onGameOver -= GameOverUiOpen;
     }
 
     void Update()
@@ -42,13 +46,13 @@ public class UiManager : MonoBehaviour
             int min = (int)(setTime / 60);
             float sec = (setTime % 60);
 
-            countdownTimer.text = min.ToString("D2") + ":" + sec.ToString("N2");
-
-            if (setTime < 10)
-                countdownTimer.text = "00:0" + sec.ToString("N2");
+            countdownTimer.text = min.ToString("D2") + ":" + sec.ToString("00.00");
         }
         else if (setTime <= 0)
+        {
+            gameClear.SetActive(true);
             Time.timeScale = 0;
+        }
 
         expBar.maxValue = GameManager.instance.player.playerMaxExp;
         expBar.value = GameManager.instance.player.playerExp;
@@ -100,6 +104,12 @@ public class UiManager : MonoBehaviour
     public void OptionReset()
     {
 
+    }
+
+    void GameOverUiOpen()
+    {
+        gameOver.SetActive(true);
+        Time.timeScale = 0;
     }
 
     void UpdatePlayerLevel()
