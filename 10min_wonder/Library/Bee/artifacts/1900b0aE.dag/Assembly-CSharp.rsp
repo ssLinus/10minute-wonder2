@@ -387,6 +387,7 @@
 "Assets/Scripts/Drops/HealthPack.cs"
 "Assets/Scripts/Drops/Mag.cs"
 "Assets/Scripts/GameManager.cs"
+"Assets/Scripts/ItemSelect.cs"
 "Assets/Scripts/Joystick/Base/Joystick.cs"
 "Assets/Scripts/Joystick/Joysticks/DynamicJoystick.cs"
 "Assets/Scripts/Joystick/Joysticks/FixedJoystick.cs"

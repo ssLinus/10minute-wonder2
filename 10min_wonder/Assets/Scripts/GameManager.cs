@@ -109,8 +109,8 @@ public class GameManager : MonoBehaviour
             int tempIce_ = int.Parse(tempIce);
             int tempPoison_ = int.Parse(tempPoison);
 
-            Item tempItem 
-                = new Item(tempIndex_, tempName, tempMaxHp_, tempMoveSpeed_, 
+            Item tempItem
+                = new Item(tempIndex_, tempName, tempMaxHp_, tempMoveSpeed_,
                 tempLootingRange_, tempAttackDmg_, tempAttckSpeed_, tempAttackRange_,
                 tempBulletSpeed_, tempBulletLifeTime_, tempBulletPen_, tempExpMultipler_,
                 tempFire_, tempElectric_, tempIce_, tempPoison_, tempGrade);
@@ -123,8 +123,9 @@ public class GameManager : MonoBehaviour
         string Jsonstring;
         string filePath;
 
-        filePath = Application.streamingAssetsPath + "ItemList.json";
-        if(Application.platform == RuntimePlatform.Android)
+        filePath = Application.streamingAssetsPath + "/ItemList.json";
+
+        if (Application.platform == RuntimePlatform.Android)
         {
             UnityWebRequest reader = new UnityWebRequest(filePath);
             while (!reader.isDone) { }
@@ -138,9 +139,9 @@ public class GameManager : MonoBehaviour
         ParsingJsonItem(itemDate, itemList);
     }
 
-    PlayerDate nowPlayer = new PlayerDate();
-
     public Player player;
+    public Looting looting;
+    public BulletSpawner bulletSpawner;
 
     [Header("초기 설정")]
 
@@ -151,8 +152,10 @@ public class GameManager : MonoBehaviour
     [Header("Looting")]
     public float lootingRange; // 0.5
 
-    [Header("BulletSpawner")]
+    [Header("Monster")]
     public float attackDmg; // 2
+
+    [Header("BulletSpawner")]
     public float attackSpeed; // 1
     public float attackRange; // 5
 
@@ -160,6 +163,10 @@ public class GameManager : MonoBehaviour
     public float bulletSpeed; // 5
     public float bulletLifeTime; // 2
     public float bulletPen; // 0
+    public int fire;
+    public int electric;
+    public int ice;
+    public int poison;
 
     [Header("Exp")]
     public float expMultipler; // 1
@@ -169,12 +176,6 @@ public class GameManager : MonoBehaviour
 
     [Header("UiManager")]
     public float setTime; // 600
-
-
-    public void Start()
-    {
-        
-    }
 
     private void Awake()
     {
@@ -190,10 +191,10 @@ public class GameManager : MonoBehaviour
             Debug.Log("파괴");
         }
 
-        // player 변수가 비어있으면 Player 타입의 객체를 찾아서 player 변수에 할당
-        if (player == null)
-        {
-            player = FindObjectOfType<Player>();
-        }
+        LoadBase();
+
+        player = FindObjectOfType<Player>();
+        looting = FindObjectOfType<Looting>();
+        bulletSpawner = FindObjectOfType<BulletSpawner>();
     }
 }

@@ -95,17 +95,6 @@ public class UiManager : MonoBehaviour
         status.SetActive(false);
     }
 
-    public void OptionSelect(int index)
-    {
-        levelUp.SetActive(false);
-        Time.timeScale = 1.0f;
-    }
-
-    public void OptionReset()
-    {
-
-    }
-
     void GameOverUiOpen()
     {
         gameOver.SetActive(true);
@@ -115,9 +104,6 @@ public class UiManager : MonoBehaviour
     void UpdatePlayerLevel()
     {
         playerLevel.text = "Lv." + GameManager.instance.player.playerLevel;
-
-        levelUp.SetActive(true);
-        Time.timeScale = 0;
     }
 
     void UpdateWave()

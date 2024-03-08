@@ -798,7 +798,7 @@ GameObject:
   - component: {fileID: 291007991}
   - component: {fileID: 291007990}
   m_Layer: 5
-  m_Name: Icon (1)
+  m_Name: Icon (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -958,7 +958,7 @@ GameObject:
   - component: {fileID: 360691249}
   - component: {fileID: 360691248}
   m_Layer: 5
-  m_Name: Description (1)
+  m_Name: Description (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1089,7 +1089,7 @@ GameObject:
   - component: {fileID: 473593216}
   - component: {fileID: 473593215}
   m_Layer: 5
-  m_Name: Description (1)
+  m_Name: Description (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17873,7 +17873,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 633546512}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -18364,7 +18364,7 @@ GameObject:
   - component: {fileID: 943162002}
   - component: {fileID: 943162001}
   m_Layer: 5
-  m_Name: Icon (1)
+  m_Name: Icon (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18757,14 +18757,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 434204781}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UiManager, Assembly-CSharp
-        m_MethodName: OptionSelect
+        m_MethodName: 
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -35730,7 +35730,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000061035156, y: 0.000061035156}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1380840327
@@ -35998,7 +35998,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uC124\uBA85 \uC640\uB77C\uB77C\uB77C\uB77C\uB77C\uB77C\uB784\uB77C\uB77C\uB77C\uB77C\uB77C\uB77C\uB77C\uB784\u3139\u3139\u3139"
+  m_Text: 
 --- !u!222 &1462561882
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -36165,14 +36165,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 434204781}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UiManager, Assembly-CSharp
-        m_MethodName: OptionSelect
+        m_MethodName: 
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -52594,7 +52594,7 @@ GameObject:
   - component: {fileID: 1520546205}
   - component: {fileID: 1520546204}
   m_Layer: 5
-  m_Name: Description Txt (1)
+  m_Name: Description Txt (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -52770,7 +52770,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000061035156, y: 0.000061035156}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1585664642
@@ -53188,9 +53188,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 434204781}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UiManager, Assembly-CSharp
-        m_MethodName: OptionSelect
+        m_MethodName: 
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -53250,7 +53250,7 @@ GameObject:
   - component: {fileID: 1739267440}
   - component: {fileID: 1739267439}
   m_Layer: 5
-  m_Name: Description Txt (1)
+  m_Name: Description Txt (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -53317,6 +53317,59 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1739267437}
   m_CullTransparentMesh: 1
+--- !u!1 &1815457209
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1815457211}
+  - component: {fileID: 1815457210}
+  m_Layer: 0
+  m_Name: Item Select
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1815457210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1815457209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3698b072a281c24ba69a4fddc6287de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelUpUi: {fileID: 1044908070}
+  optionsTxt:
+  - {fileID: 1462561881}
+  - {fileID: 1520546204}
+  - {fileID: 1739267439}
+  optionBtns:
+  - {fileID: 1733475303}
+  - {fileID: 1045150019}
+  - {fileID: 1471934977}
+--- !u!4 &1815457211
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1815457209}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1844380546
 GameObject:
   m_ObjectHideFlags: 0
@@ -70353,6 +70406,8 @@ MonoBehaviour:
   collider2D: {fileID: 0}
   attackRange: 5
   isRange: 0
+  attackSpeed: 0
+  timeAfterSpawn: 0
 --- !u!4 &6691421527798078662
 Transform:
   m_ObjectHideFlags: 0
@@ -70541,3 +70596,4 @@ SceneRoots:
   - {fileID: 6694859875197864749}
   - {fileID: 109304070}
   - {fileID: 296330809}
+  - {fileID: 1815457211}

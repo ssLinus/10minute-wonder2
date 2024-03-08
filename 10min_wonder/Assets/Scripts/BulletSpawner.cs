@@ -10,8 +10,8 @@ public class BulletSpawner : MonoBehaviour
 
     public bool isRange;
 
-    private float attackSpeed;
-    private float timeAfterSpawn;
+    public float attackSpeed;
+    public float timeAfterSpawn;
 
     private void Start()
     {

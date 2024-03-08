@@ -11,6 +11,11 @@ public class Bullet : MonoBehaviour
     private float bulletLifeTime; // (초기값 : 2)
     private float bulletPen; // 총알 관통 (초기값 : 0)
 
+    public int fire;
+    public int electric;
+    public int ice;
+    public int poison;
+
     public void SetTarget(GameObject target)
     {
         targetMonster = target;
