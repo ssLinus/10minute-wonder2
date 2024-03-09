@@ -76,7 +76,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 172626504, guid: c4d2ccab0c2ad7e47853b6e31a7ac7c2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -164,7 +164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monsterHp: 1
   monsterDmg: 5
-  monsterSpeed: 6
+  monsterSpeed: 5
   drops:
   - {fileID: 1855479896685805513, guid: cb4864eb0b9cef244ada762a9a69d44e, type: 3}
   - {fileID: 4776191718375324749, guid: a82b63c6c558a284db1e27e8a67d40b3, type: 3}
@@ -180,6 +180,8 @@ MonoBehaviour:
   - 0.02
   - 0.01
   spawner: {fileID: 0}
+  ice: 0
+  poison: 0
   dmgText: {fileID: 5593461137406483596, guid: 13c62ac40e2c8d841b5c707318993e0e, type: 3}
 --- !u!95 &-4017226047720042971
 Animator:

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Bullet : MonoBehaviour
 {
@@ -13,8 +14,10 @@ public class Bullet : MonoBehaviour
 
     public int fire;
     public int electric;
-    public int ice;
-    public int poison;
+
+    public int bounce;
+
+    public GameObject fireBoom;
 
     public void SetTarget(GameObject target)
     {
@@ -26,19 +29,16 @@ public class Bullet : MonoBehaviour
         bulletSpeed = GameManager.instance.bulletSpeed;
         bulletLifeTime = GameManager.instance.bulletLifeTime;
         bulletPen = GameManager.instance.bulletPen;
+        fire = GameManager.instance.fire;
+        electric = GameManager.instance.electric;
+
+        bounce = electric < 3 ? 0 : electric < 5 ? 1 : electric < 7 ? 2 : 3;
 
         bulletRB = GetComponent<Rigidbody2D>();
 
         if (bulletRB != null && targetMonster != null)
         {
-            // 총알 초기 속도 설정
-            Vector2 direction = (targetMonster.transform.position - transform.position).normalized;
-            bulletRB.velocity = direction * bulletSpeed;
-
-            // 몬스터를 향하도록 총알 회전
-            Vector3 directionToMonster = targetMonster.transform.position - transform.position;
-            float angle = Mathf.Atan2(directionToMonster.y, directionToMonster.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
+            DirectionToTarget(targetMonster);
         }
 
         Destroy(gameObject, bulletLifeTime);
@@ -51,9 +51,37 @@ public class Bullet : MonoBehaviour
 
         bulletPen--;
 
+        if (fire >= 3)
+        {
+            Instantiate(fireBoom, transform.position, Quaternion.identity);
+        }
+
+        if (bounce > 0 && bulletPen > 0)
+        {
+            GameObject closestMonster = MonsterUtils.FindClosestMonster(transform, 1);
+            if (closestMonster != null && closestMonster != collision.gameObject)
+            {
+                DirectionToTarget(closestMonster);
+            }
+            bounce--;
+        }
+
         if (bulletPen < 0)
         {
             Destroy(gameObject);
         }
+    }
+
+    public void DirectionToTarget(GameObject target)
+    {
+        Vector3 direction = (target.transform.position - transform.position).normalized;
+        float hSpeed = direction.x * bulletSpeed;
+        float vSpeed = direction.y * bulletSpeed;
+        bulletRB.velocity = new Vector3(hSpeed, vSpeed);
+
+        // 몬스터를 향하도록 총알 회전
+        Vector3 directionToMonster = target.transform.position - transform.position;
+        float angle = Mathf.Atan2(directionToMonster.y, directionToMonster.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
     }
 }

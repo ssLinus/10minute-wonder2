@@ -1,24 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Monster : MonoBehaviour
 {
     public float monsterHp;
     public float monsterDmg;
     public float monsterSpeed;
-    [Space]
+
     public GameObject[] drops;
     public float[] dropRate; // 드롭 확률 각 수치의 합은 1
-    [Space]
+
     public MonsterSpawner spawner;
+
+    public int ice;
+    public int poison;
 
     public GameObject dmgText;
 
     private Rigidbody2D monsterRB;
-
     private GameObject target;
     private Vector2 targetDir;
 

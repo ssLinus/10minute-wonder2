@@ -76,7 +76,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 613658156, guid: 1bc6097228993f045852159e71f81d5b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -180,6 +180,8 @@ MonoBehaviour:
   - 0.02
   - 0.01
   spawner: {fileID: 0}
+  ice: 0
+  poison: 0
   dmgText: {fileID: 5593461137406483596, guid: 13c62ac40e2c8d841b5c707318993e0e, type: 3}
 --- !u!95 &-1575778860923728507
 Animator:

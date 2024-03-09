@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using static Cinemachine.DocumentationSortingAttribute;
 
 public class ItemSelect : MonoBehaviour
 {
     public GameObject levelUpUi;
     public Text[] optionsTxt;
     public Button[] optionBtns;
-    private string itemName;
+
+    List<int> tempItemList;
 
     public void Start()
     {
@@ -25,16 +25,25 @@ public class ItemSelect : MonoBehaviour
     {
         levelUpUi.SetActive(true);
 
-        for (int i = 0; i < 3; i++)
+        tempItemList = new List<int>(); // 임시 아이템 리스트 초기화
+
+        if (GameManager.itemList.Count >= 3)
         {
-            int rand = Random.Range(0, GameManager.itemList.Count);
-            optionBtns[i].onClick.RemoveAllListeners(); // 초기화
-            optionBtns[i].onClick.AddListener(() => OptionSelect(rand));
+            for (int i = 0; i < 3; i++)
+            {
+                int rand;
+                do rand = Random.Range(0, GameManager.itemList.Count);
+                while (tempItemList.Contains(rand)); // 이미 사용된 인덱스가 나올 경우, 다시 랜덤값 생성
 
-            itemName = GameManager.itemList[rand].name;
-            optionsTxt[i].text = itemName;
+                tempItemList.Add(rand); // 사용된 인덱스 리스트에 추가
+
+                optionBtns[i].onClick.RemoveAllListeners(); // 초기화
+                optionBtns[i].onClick.AddListener(() => OptionSelect(rand));
+
+                string itemName = GameManager.itemList[rand].name;
+                optionsTxt[i].text = itemName;
+            }
         }
-
         Time.timeScale = 0;
     }
 

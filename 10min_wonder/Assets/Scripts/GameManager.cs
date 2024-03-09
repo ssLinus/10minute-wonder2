@@ -154,6 +154,8 @@ public class GameManager : MonoBehaviour
 
     [Header("Monster")]
     public float attackDmg; // 2
+    public int ice;
+    public int poison;
 
     [Header("BulletSpawner")]
     public float attackSpeed; // 1
@@ -165,8 +167,6 @@ public class GameManager : MonoBehaviour
     public float bulletPen; // 0
     public int fire;
     public int electric;
-    public int ice;
-    public int poison;
 
     [Header("Exp")]
     public float expMultipler; // 1
