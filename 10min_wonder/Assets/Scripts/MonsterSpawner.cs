@@ -7,6 +7,9 @@ public class MonsterSpawner : MonoBehaviour
     public Monster[] monsterPrefabs;
     public Transform playerTransform;
 
+    public int spawnCount;
+    public int wave;
+
     public float spawnMinDistance;
     public float spawnMaxDistance;
 
@@ -33,7 +36,9 @@ public class MonsterSpawner : MonoBehaviour
         GameManager.instance.player.currentWave++;
         GameManager.instance.player.WaveUp();
 
-        int spawnCount = Mathf.RoundToInt(GameManager.instance.player.currentWave * 1.2f);
+        wave++;
+
+        spawnCount = Mathf.RoundToInt(wave * 1.3f);
 
         for (int i = 0; i < spawnCount; i++)
         {
@@ -47,11 +52,11 @@ public class MonsterSpawner : MonoBehaviour
     // 각 시간대에 생성할 몬스터의 인덱스들을 저장하는 배열
     int[][] monsterIndices = {
     new int[] {0},
-    new int[] {0, 1},
-    new int[] {0, 1, 2},
-    new int[] {0, 2, 3},
-    new int[] {1, 3, 4},
-    new int[] {3, 4}
+    new int[] {0, 0, 0, 1},
+    new int[] {0, 0, 1, 1, 2},
+    new int[] {1, 1, 1, 2, 3},
+    new int[] {2, 3, 3, 4},
+    new int[] {3, 4, 4}
     };
 
     private void CreateMonster()
@@ -65,6 +70,7 @@ public class MonsterSpawner : MonoBehaviour
 
         // 현재 시간대를 찾습니다.
         int timeIndex = 0;
+
         for (; timeIndex < timeThresholds.Length; timeIndex++)
         {
             if (minutes < timeThresholds[timeIndex])

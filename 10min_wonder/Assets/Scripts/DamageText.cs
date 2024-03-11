@@ -7,6 +7,7 @@ public class DamageText : MonoBehaviour
     public float moveSpeed;
     public float destroyTime;
     public float damage;
+    public int index = 0;
 
     TextMesh text;
 
@@ -15,6 +16,17 @@ public class DamageText : MonoBehaviour
         text = GetComponent<TextMesh>();
         text.text = damage.ToString();
         Invoke("DestroyObject", destroyTime);
+
+        if (index == 1)
+        {
+            text.color = Color.red;
+            moveSpeed /= 3f;
+        }
+        if (index == 2)
+        {
+            text.color = Color.magenta;
+            moveSpeed /= 4f;
+        }
     }
 
     void Update()

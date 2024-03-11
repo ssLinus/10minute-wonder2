@@ -13,8 +13,9 @@ public class Monster : MonoBehaviour
 
     public MonsterSpawner spawner;
 
-    public int ice;
-    public int poison;
+    public bool isIce;
+    public bool isPoison;
+    private bool isIceCooldown = false;
 
     public GameObject dmgText;
 
@@ -40,7 +41,6 @@ public class Monster : MonoBehaviour
         if (monsterHp <= 0)
         {
             DropItem();
-
             Destroy(gameObject);
         }
 
@@ -56,6 +56,50 @@ public class Monster : MonoBehaviour
         }
     }
 
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        float damage = 0; // 기본 데미지는 0으로 설정
+
+        if (collision.CompareTag("Bullet"))
+        {
+            damage = GameManager.instance.attackDmg;
+            TextOutput(damage, 0);
+
+            if (GameManager.instance.poison >= 3)
+            {
+                isPoison = true;
+            }
+            if (GameManager.instance.ice >= 3)
+            {
+                isIce = true;
+                StartCoroutine(IceCooldown(1f)); // 얼음 효과 쿨다운 시작
+            }
+        }
+        else if (collision.CompareTag("FireBoom"))
+        {
+            damage = Mathf.Round(GameManager.instance.attackDmg / 2f); // 반올림해서 계산
+            TextOutput(damage, 1);
+        }
+
+    }
+
+    public void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            isPlayer = true;
+        }
+    }
+
+    private IEnumerator IceCooldown(float duration)
+    {
+        isIceCooldown = true; // 쿨다운 활성화
+
+        yield return new WaitForSeconds(duration); // 지정된 시간 동안 대기
+
+        isIceCooldown = false; // 쿨다운 비활성화
+    }
+
     private void FindTarget()
     {
         if (target != null)
@@ -65,7 +109,11 @@ public class Monster : MonoBehaviour
             float monHSpeed = targetDir.x * monsterSpeed;
             float monVSpeed = targetDir.y * monsterSpeed;
 
-            monsterRB.velocity = new Vector2(monHSpeed, monVSpeed);
+            // 얼음 효과가 활성화되어 있고 쿨다운 중이 아닌 경우에만 이동
+            if (!isIceCooldown)
+                monsterRB.velocity = new Vector2(monHSpeed, monVSpeed);
+            else
+                monsterRB.velocity = new Vector2(0, 0);
         }
     }
 
@@ -93,21 +141,12 @@ public class Monster : MonoBehaviour
         }
     }
 
-    public void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Bullet"))
-        {
-            monsterHp -= GameManager.instance.attackDmg;
-            GameObject dmgTxt = Instantiate(dmgText, transform.position, Quaternion.identity);
-            dmgTxt.GetComponent<DamageText>().damage = GameManager.instance.attackDmg;
-        }
-    }
 
-    public void OnCollisionStay2D(Collision2D collision)
+    public void TextOutput(float damage, int index)
     {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            isPlayer = true;
-        }
+        monsterHp -= damage;
+        GameObject dmgTxt = Instantiate(dmgText, transform.position, Quaternion.identity);
+        dmgTxt.GetComponent<DamageText>().damage = damage;
+        dmgTxt.GetComponent<DamageText>().index = index;
     }
 }

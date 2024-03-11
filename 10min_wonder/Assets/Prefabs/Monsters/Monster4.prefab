@@ -76,7 +76,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: -1
   m_Sprite: {fileID: -2092964637, guid: 4104ee12b4d54f54b91b3ba875787837, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -162,9 +162,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42e6635669e1112448c3b73d67485fba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterHp: 50
+  monsterHp: 300
   monsterDmg: 50
-  monsterSpeed: 3
+  monsterSpeed: 1.5
   drops:
   - {fileID: 1855479896685805513, guid: cb4864eb0b9cef244ada762a9a69d44e, type: 3}
   - {fileID: 4776191718375324749, guid: a82b63c6c558a284db1e27e8a67d40b3, type: 3}
@@ -173,15 +173,15 @@ MonoBehaviour:
   - {fileID: 7157186838229120476, guid: e7ad16723cf6d3e45892bf709c7bf11c, type: 3}
   - {fileID: 7454246026100013076, guid: 04e8fe4d52ff7084f8df67d0e8278c5d, type: 3}
   dropRate:
-  - 0
-  - 0.8
-  - 0.15
-  - 0.02
-  - 0.02
-  - 0.01
+  - 0.2
+  - 0.6
+  - 0.19
+  - 0.005
+  - 0.004
+  - 0.001
   spawner: {fileID: 0}
-  ice: 0
-  poison: 0
+  isIce: 0
+  isPoison: 0
   dmgText: {fileID: 5593461137406483596, guid: 13c62ac40e2c8d841b5c707318993e0e, type: 3}
 --- !u!95 &2378123661484090660
 Animator:

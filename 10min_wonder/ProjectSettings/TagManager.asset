@@ -10,6 +10,7 @@ TagManager:
   - Area
   - Exp
   - Drops
+  - FireBoom
   layers:
   - Default
   - TransparentFX

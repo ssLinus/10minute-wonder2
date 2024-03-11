@@ -101,6 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fire: 0
   electric: 0
+  bounce: 0
   fireBoom: {fileID: 6134186180681308283, guid: b36eca0ea3ee26a409e8e9a854b49a48, type: 3}
 --- !u!70 &6991109286858098248
 CapsuleCollider2D:

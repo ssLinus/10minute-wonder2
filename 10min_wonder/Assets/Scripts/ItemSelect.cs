@@ -6,8 +6,9 @@ using UnityEngine.UI;
 public class ItemSelect : MonoBehaviour
 {
     public GameObject levelUpUi;
-    public Text[] optionsTxt;
-    public Button[] optionBtns;
+    public Text[] optionsName;
+    public Text[] descriptionTxt;
+    public Button[] selectBtns;
 
     List<int> tempItemList;
 
@@ -37,14 +38,37 @@ public class ItemSelect : MonoBehaviour
 
                 tempItemList.Add(rand); // 사용된 인덱스 리스트에 추가
 
-                optionBtns[i].onClick.RemoveAllListeners(); // 초기화
-                optionBtns[i].onClick.AddListener(() => OptionSelect(rand));
+                selectBtns[i].onClick.RemoveAllListeners(); // 초기화
+                selectBtns[i].onClick.AddListener(() => OptionSelect(rand));
 
                 string itemName = GameManager.itemList[rand].name;
-                optionsTxt[i].text = itemName;
+                optionsName[i].text = itemName;
+                switch (GameManager.itemList[rand].Grade)
+                {
+                    case "레어":
+                        optionsName[i].color = Color.green;
+                        break;
+                    case "유니크":
+                        optionsName[i].color = Color.red;
+                        break;
+                    case "에픽":
+                        optionsName[i].color = Color.magenta;
+                        break;
+                    default:
+                        optionsName[i].color = Color.black;
+                        break;
+                }
+
+                descriptionTxt[i].text = "";
             }
         }
         Time.timeScale = 0;
+    }
+
+    public void OptionReset()
+    {
+        levelUpUi.SetActive(false);
+        OpenSelectUi();
     }
 
     private void OptionSelect(int rand)

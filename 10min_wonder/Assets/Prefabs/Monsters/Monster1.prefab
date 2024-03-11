@@ -76,7 +76,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: -1
   m_Sprite: {fileID: 613658156, guid: 1bc6097228993f045852159e71f81d5b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -174,14 +174,14 @@ MonoBehaviour:
   - {fileID: 7454246026100013076, guid: 04e8fe4d52ff7084f8df67d0e8278c5d, type: 3}
   dropRate:
   - 0.8
-  - 0.1
-  - 0.05
-  - 0.02
-  - 0.02
-  - 0.01
+  - 0.15
+  - 0.04
+  - 0.005
+  - 0.004
+  - 0.001
   spawner: {fileID: 0}
-  ice: 0
-  poison: 0
+  isIce: 0
+  isPoison: 0
   dmgText: {fileID: 5593461137406483596, guid: 13c62ac40e2c8d841b5c707318993e0e, type: 3}
 --- !u!95 &-1575778860923728507
 Animator:

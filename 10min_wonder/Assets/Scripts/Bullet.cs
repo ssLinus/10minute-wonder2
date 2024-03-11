@@ -49,8 +49,6 @@ public class Bullet : MonoBehaviour
         if (!collision.CompareTag("Monster"))
         { return; }
 
-        bulletPen--;
-
         if (fire >= 3)
         {
             Instantiate(fireBoom, transform.position, Quaternion.identity);
@@ -65,6 +63,8 @@ public class Bullet : MonoBehaviour
             }
             bounce--;
         }
+
+        bulletPen--;
 
         if (bulletPen < 0)
         {
