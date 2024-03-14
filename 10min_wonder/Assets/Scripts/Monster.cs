@@ -16,6 +16,7 @@ public class Monster : MonoBehaviour
     public bool isIce;
     public bool isPoison;
     private bool isIceCooldown = false;
+    private bool isPoisonCooldown = false;
 
     public GameObject dmgText;
 
@@ -46,6 +47,13 @@ public class Monster : MonoBehaviour
 
         FindTarget();
 
+        if (isPoison && !isPoisonCooldown)
+        {
+            isPoisonCooldown = true;
+            StartCoroutine(PoisonEffect());
+            isPoison = false;
+        }
+
         nextDamageTime += Time.deltaTime;
 
         if (isPlayer && nextDamageTime > monsterAttackSpeed)
@@ -72,12 +80,16 @@ public class Monster : MonoBehaviour
             if (GameManager.instance.ice >= 3)
             {
                 isIce = true;
-                StartCoroutine(IceCooldown(1f)); // 얼음 효과 쿨다운 시작
+
+                float iceCoolTime;
+                iceCoolTime = GameManager.instance.ice > 5 ? 2 : GameManager.instance.ice > 3 ? 1.5f : 1;
+
+                StartCoroutine(IceCooldown(iceCoolTime)); // 얼음 효과 쿨다운 시작
             }
         }
         else if (collision.CompareTag("FireBoom"))
         {
-            damage = Mathf.Round(GameManager.instance.attackDmg / 2f); // 반올림해서 계산
+            damage = (int)Mathf.Round(GameManager.instance.attackDmg / 2f); // 반올림해서 계산
             TextOutput(damage, 1);
         }
 
@@ -89,6 +101,22 @@ public class Monster : MonoBehaviour
         {
             isPlayer = true;
         }
+    }
+
+    private IEnumerator PoisonEffect()
+    {
+        int duration = 5; // 독 효과 지속 시간 (초)
+
+        float poisonInterval;
+        poisonInterval = GameManager.instance.poison > 5 ? 0.5f : GameManager.instance.poison > 3 ? 0.75f : 1;
+
+        for (int i = 0; i < duration; i++)
+        {
+            int poisonDmg = (int)Mathf.Round(GameManager.instance.attackDmg / 3f);
+            TextOutput(poisonDmg, 2);
+            yield return new WaitForSeconds(poisonInterval);
+        }
+        isPoisonCooldown = false;
     }
 
     private IEnumerator IceCooldown(float duration)

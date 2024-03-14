@@ -10,7 +10,7 @@ public class HealthPack : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            float recovery = GameManager.instance.player.playerMaxHp * (100 / heal);
+            float recovery = GameManager.instance.player.playerMaxHp * (heal / 100);
 
             if ((GameManager.instance.player.playerMaxHp - GameManager.instance.player.playerHp) <= recovery)
             {

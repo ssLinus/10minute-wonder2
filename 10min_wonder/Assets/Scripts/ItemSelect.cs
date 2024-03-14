@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,12 +10,17 @@ public class ItemSelect : MonoBehaviour
     public Text[] optionsName;
     public Text[] descriptionTxt;
     public Button[] selectBtns;
+    public Text resetText;
+    public int resetPoint;
+    public int initialResetPoint;
 
     List<int> tempItemList;
 
     public void Start()
     {
         Player.onPlayerLevelUp += OpenSelectUi;
+
+        resetPoint = initialResetPoint;
     }
 
     public void OnDestroy()
@@ -25,6 +31,8 @@ public class ItemSelect : MonoBehaviour
     public void OpenSelectUi()
     {
         levelUpUi.SetActive(true);
+
+        resetText.text = "Reset(" + resetPoint + ")";
 
         tempItemList = new List<int>(); // 임시 아이템 리스트 초기화
 
@@ -37,7 +45,6 @@ public class ItemSelect : MonoBehaviour
                 while (tempItemList.Contains(rand)); // 이미 사용된 인덱스가 나올 경우, 다시 랜덤값 생성
 
                 tempItemList.Add(rand); // 사용된 인덱스 리스트에 추가
-
                 selectBtns[i].onClick.RemoveAllListeners(); // 초기화
                 selectBtns[i].onClick.AddListener(() => OptionSelect(rand));
 
@@ -60,6 +67,23 @@ public class ItemSelect : MonoBehaviour
                 }
 
                 descriptionTxt[i].text = "";
+
+                var item = GameManager.itemList[rand];
+
+                if (item.MaxHp != 0) descriptionTxt[i].text += "최대체력 : " + item.MaxHp + "\n";
+                if (item.MoveSpeed != 0) descriptionTxt[i].text += "이동속도 : " + item.MoveSpeed + "\n";
+                if (item.LootingRange != 0) descriptionTxt[i].text += "획득범위 : " + item.LootingRange + "\n";
+                if (item.AttackDmg != 0) descriptionTxt[i].text += "공격력 : " + item.AttackDmg + "\n";
+                if (item.AttackSpeed != 0) descriptionTxt[i].text += "공격속도 : " + item.AttackSpeed + "\n";
+                if (item.AttackRange != 0) descriptionTxt[i].text += "공격범위 : " + item.AttackRange + "\n";
+                if (item.BulletSpeed != 0) descriptionTxt[i].text += "탄환속도 : " + item.BulletSpeed + "\n";
+                if (item.BulletLifeTime != 0) descriptionTxt[i].text += "유지시간 : " + item.BulletLifeTime + "\n";
+                if (item.BulletPen != 0) descriptionTxt[i].text += "관통 : " + item.BulletPen + "\n";
+                if (item.ExpMultipler != 0) descriptionTxt[i].text += "Exp.* : " + item.ExpMultipler + "\n";
+                if (item.Fire != 0) descriptionTxt[i].text += "Fire : " + item.Fire + "\n";
+                if (item.Electric != 0) descriptionTxt[i].text += "Electric : " + item.Electric + "\n";
+                if (item.Ice != 0) descriptionTxt[i].text += "Ice : " + item.Ice + "\n";
+                if (item.Poison != 0) descriptionTxt[i].text += "Poison : " + item.Poison + "\n";
             }
         }
         Time.timeScale = 0;
@@ -67,8 +91,12 @@ public class ItemSelect : MonoBehaviour
 
     public void OptionReset()
     {
-        levelUpUi.SetActive(false);
-        OpenSelectUi();
+        if (resetPoint > 0)
+        {
+            resetPoint--;
+            levelUpUi.SetActive(false);
+            OpenSelectUi();
+        }
     }
 
     private void OptionSelect(int rand)
@@ -97,5 +125,12 @@ public class ItemSelect : MonoBehaviour
         levelUpUi.SetActive(false);
 
         Time.timeScale = 1.0f;
+
+        resetPoint = initialResetPoint;
+    }
+
+    public void ItemDescription(int rand)
+    {
+
     }
 }

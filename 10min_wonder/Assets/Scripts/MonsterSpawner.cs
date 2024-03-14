@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 
 public class MonsterSpawner : MonoBehaviour
@@ -25,6 +26,10 @@ public class MonsterSpawner : MonoBehaviour
 
     void Update()
     {
+        // 시간에 따라 몬스터가 리스폰되는 최대범위 증가
+        float timeRatio = Mathf.Clamp01(Time.timeSinceLevelLoad / GameManager.instance.setTime);
+        spawnMaxDistance = Mathf.Lerp(spawnMinDistance, spawnMaxDistance, timeRatio);
+
         if (monsters.Count <= 0)
         {
             SpawnerWave();
