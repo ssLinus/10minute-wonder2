@@ -21,6 +21,10 @@ public class Player : MonoBehaviour
     [Space]
     public Rigidbody2D playerRB;
     public Vector3 axis;
+    [Space]
+    public VariableJoystick joystick;
+    public Vector2 joyAxis;
+    public bool isJoy = false;
 
     void Start()
     {
@@ -38,12 +42,6 @@ public class Player : MonoBehaviour
             GameOver();
         }
 
-        if (playerRB != null)
-        {
-            axis.x = Input.GetAxisRaw("Horizontal");
-            axis.y = Input.GetAxisRaw("Vertical");
-        }
-
         if (playerExp >= playerMaxExp)
         {
             playerLevel++;
@@ -55,10 +53,25 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (playerRB != null)
+        {
+            axis.x = Input.GetAxisRaw("Horizontal");
+            axis.y = Input.GetAxisRaw("Vertical");
+        }
+
         Vector3 movementDirection = new Vector3(axis.x, axis.y).normalized;
         float hSpeed = movementDirection.x * playerSpeed;
         float vSpeed = movementDirection.y * playerSpeed;
         playerRB.velocity = new Vector3(hSpeed, vSpeed);
+
+        if (isJoy)
+        {
+            float x = joystick.Horizontal;
+            float y = joystick.Vertical;
+
+            joyAxis = new Vector2(x, y) * playerSpeed * Time.deltaTime;
+            playerRB.MovePosition(playerRB.position + joyAxis);
+        }
     }
 
     public void GameOver()

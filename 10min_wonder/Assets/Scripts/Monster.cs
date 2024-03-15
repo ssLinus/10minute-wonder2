@@ -82,7 +82,7 @@ public class Monster : MonoBehaviour
                 isIce = true;
 
                 float iceCoolTime;
-                iceCoolTime = GameManager.instance.ice > 5 ? 2 : GameManager.instance.ice > 3 ? 1.5f : 1;
+                iceCoolTime = GameManager.instance.ice > 5 ? 1 : GameManager.instance.ice > 3 ? 0.5f : 0.25f;
 
                 StartCoroutine(IceCooldown(iceCoolTime)); // 얼음 효과 쿨다운 시작
             }

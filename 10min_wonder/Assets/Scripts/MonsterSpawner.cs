@@ -13,6 +13,7 @@ public class MonsterSpawner : MonoBehaviour
 
     public float spawnMinDistance;
     public float spawnMaxDistance;
+    public float spawnLimitDistance;
 
     private float spawnDistance;
 
@@ -28,7 +29,7 @@ public class MonsterSpawner : MonoBehaviour
     {
         // 시간에 따라 몬스터가 리스폰되는 최대범위 증가
         float timeRatio = Mathf.Clamp01(Time.timeSinceLevelLoad / GameManager.instance.setTime);
-        spawnMaxDistance = Mathf.Lerp(spawnMinDistance, spawnMaxDistance, timeRatio);
+        spawnMaxDistance = Mathf.Lerp(spawnMinDistance, spawnLimitDistance, timeRatio);
 
         if (monsters.Count <= 0)
         {
@@ -59,7 +60,7 @@ public class MonsterSpawner : MonoBehaviour
     new int[] {0},
     new int[] {0, 0, 0, 1},
     new int[] {0, 0, 1, 1, 2},
-    new int[] {1, 1, 1, 2, 3},
+    new int[] {1, 1, 2, 3, 3},
     new int[] {2, 3, 3, 4},
     new int[] {3, 4, 4}
     };

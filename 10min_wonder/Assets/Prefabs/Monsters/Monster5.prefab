@@ -162,9 +162,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42e6635669e1112448c3b73d67485fba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterHp: 400
+  monsterHp: 200
   monsterDmg: 60
-  monsterSpeed: 2
+  monsterSpeed: 3
   drops:
   - {fileID: 1855479896685805513, guid: cb4864eb0b9cef244ada762a9a69d44e, type: 3}
   - {fileID: 4776191718375324749, guid: a82b63c6c558a284db1e27e8a67d40b3, type: 3}
