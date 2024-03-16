@@ -5,37 +5,51 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public delegate void OnPlayerDataChanged();
+
     public static event OnPlayerDataChanged onPlayerLevelUp;
+
     public static event OnPlayerDataChanged onPlayerWaveUp;
+
     public static event OnPlayerDataChanged onGameOver;
 
     public float playerMaxHp;
     public float playerSpeed;
     public float playerHp;
+
     [Space]
     public int playerLevel;
+
     public float playerExp;
     public float playerMaxExp;
+
     [Space]
     public int currentWave;
+
     [Space]
     public Rigidbody2D playerRB;
+
     public Vector3 axis;
+
     [Space]
     public VariableJoystick joystick;
+    public GameObject joy;
+
     public Vector2 joyAxis;
     public bool isJoy = false;
 
-    void Start()
+    private void Start()
     {
         playerMaxHp = GameManager.instance.playerMaxHp;
         playerSpeed = GameManager.instance.playerSpeed;
         currentWave = GameManager.instance.startWave;
         playerRB = GetComponent<Rigidbody2D>();
         playerHp = playerMaxHp;
+
+        if (isJoy) joy.SetActive(true);
+        else joy.SetActive(false);
     }
 
-    void Update()
+    private void Update()
     {
         if (playerHp <= 0)
         {
@@ -51,7 +65,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if (playerRB != null)
         {

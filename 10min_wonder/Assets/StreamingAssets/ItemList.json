@@ -1317,7 +1317,7 @@
         "MoveSpeed": -1,
         "LootingRange": 3,
         "AttackDmg": -2,
-        "AttackSpeed": -1,
+        "AttackSpeed": -0.5,
         "AttackRange": -2,
         "BulletSpeed": -2,
         "BulletLifeTime": -0.3,

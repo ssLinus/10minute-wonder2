@@ -7,36 +7,32 @@ public class Setting : MonoBehaviour
 {
     public Slider masterVolume;
     public Text masterValue;
-    public Toggle masterMute;
+
     [Space]
     public Slider bgmVolume;
     public Text bgmValue;
-    public Toggle bgmMute;
+
     [Space]
     public Slider effectVolume;
     public Text effectValue;
-    public Toggle effectMute;
+
     [Space]
-    public Toggle vibration;
     public GameObject vibrationOn;
     public GameObject vibrationOff;
+
     [Space]
     public VariableJoystick variableJoystick;
     public GameObject joystick;
-    public Toggle joystickOnOff;
     public GameObject joystickOn;
     public GameObject joystickOff;
     public GameObject joystickGroup;
-    public Toggle fixedJoystick;
-    public Toggle floatingJoystick;
-    public Toggle dynamicJoystick;
 
-    void Start()
+    private void Start()
     {
-        
+
     }
 
-    void Update()
+    private void Update()
     {
         masterValue.text = masterVolume.value.ToString();
         bgmValue.text = bgmVolume.value.ToString();
@@ -45,13 +41,11 @@ public class Setting : MonoBehaviour
 
     public void MasterMute(bool isOn)
     {
-        if(isOn)
+        if (isOn)
         {
-
         }
         else
         {
-
         }
     }
 
@@ -59,11 +53,9 @@ public class Setting : MonoBehaviour
     {
         if (isOn)
         {
-
         }
         else
         {
-
         }
     }
 
@@ -71,11 +63,9 @@ public class Setting : MonoBehaviour
     {
         if (isOn)
         {
-
         }
         else
         {
-
         }
     }
 
@@ -83,11 +73,9 @@ public class Setting : MonoBehaviour
     {
         if (isOn)
         {
-
         }
         else
         {
-
         }
     }
 
@@ -97,16 +85,20 @@ public class Setting : MonoBehaviour
         {
             joystickOn.SetActive(true);
             joystickOff.SetActive(false);
+
             joystick.SetActive(true);
             joystickGroup.SetActive(true);
+
             GameManager.instance.player.isJoy = true;
         }
         else
         {
             joystickOn.SetActive(false);
             joystickOff.SetActive(true);
+
             joystick.SetActive(false);
             joystickGroup.SetActive(false);
+
             GameManager.instance.player.isJoy = false;
         }
     }
@@ -114,36 +106,18 @@ public class Setting : MonoBehaviour
     public void FixedJoystick(bool isOn)
     {
         if (isOn)
-        {
-
-        }
-        else
-        {
-
-        }
+            variableJoystick.SetMode(JoystickType.Fixed);
     }
 
     public void FloatingJoystick(bool isOn)
     {
         if (isOn)
-        {
-
-        }
-        else
-        {
-
-        }
+            variableJoystick.SetMode(JoystickType.Floating);
     }
 
     public void DynamicJoystick(bool isOn)
     {
         if (isOn)
-        {
-
-        }
-        else
-        {
-
-        }
+            variableJoystick.SetMode(JoystickType.Dynamic);
     }
 }
