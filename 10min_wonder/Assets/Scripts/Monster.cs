@@ -26,7 +26,11 @@ public class Monster : MonoBehaviour
 
     private float monsterAttackSpeed = 1f;
     private float nextDamageTime = 0f;
+    private bool isDrop = false;
     private bool isPlayer;
+
+    SpriteRenderer spriter;
+    Animator anim;
 
     void Start()
     {
@@ -35,19 +39,22 @@ public class Monster : MonoBehaviour
         target = GameObject.FindGameObjectWithTag("Player");
 
         monsterRB = this.GetComponent<Rigidbody2D>(); //Rigidbody2D 초기화
+        spriter = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
     }
 
     void FixedUpdate()
     {
-        if (monsterHp <= 0)
+        if (monsterHp >= 0)
         {
-            AudioManager.instance.PlaySfx(AudioManager.Sfx.Dead);
-
-            DropItem();
-            Destroy(gameObject);
+            FindTarget();
         }
-
-        FindTarget();
+        else if (!isDrop)
+        { 
+            monsterRB.velocity = new Vector2(0, 0);
+            DeadAndDrop();
+            isDrop = true;
+        }
 
         if (isPoison && !isPoisonCooldown)
         {
@@ -66,6 +73,12 @@ public class Monster : MonoBehaviour
 
             AudioManager.instance.PlaySfx(AudioManager.Sfx.Melee);
         }
+    }
+
+    private void LateUpdate()
+    {
+        if (targetDir.x != 0)
+            spriter.flipX = targetDir.x < 0;
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
@@ -88,10 +101,11 @@ public class Monster : MonoBehaviour
                 isIce = true;
 
                 float iceCoolTime;
-                iceCoolTime = GameManager.instance.ice > 5 ? 1 : GameManager.instance.ice > 3 ? 0.5f : 0.25f;
+                iceCoolTime = GameManager.instance.ice < 5 ? 0.5f : GameManager.instance.ice < 7 ? 0.75f : 1;
 
                 StartCoroutine(IceCooldown(iceCoolTime)); // 얼음 효과 쿨다운 시작
             }
+            anim.SetTrigger("Hit");
         }
         else if (collision.CompareTag("FireBoom"))
         {
@@ -99,41 +113,14 @@ public class Monster : MonoBehaviour
             TextOutput(damage, 1);
 
             AudioManager.instance.PlaySfx(AudioManager.Sfx.Hit);
+            anim.SetTrigger("Hit");
         }
     }
 
     public void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
-        {
             isPlayer = true;
-        }
-    }
-
-    private IEnumerator PoisonEffect()
-    {
-        int duration = 5; // 독 효과 지속 시간 (초)
-
-        float poisonInterval;
-        poisonInterval = GameManager.instance.poison > 5 ? 0.5f : GameManager.instance.poison > 3 ? 0.75f : 1;
-
-        for (int i = 0; i < duration; i++)
-        {
-            int poisonDmg = (int)Mathf.Round(GameManager.instance.attackDmg / 3f);
-            TextOutput(poisonDmg, 2);
-            AudioManager.instance.PlaySfx(AudioManager.Sfx.Hit);
-            yield return new WaitForSeconds(poisonInterval);
-        }
-        isPoisonCooldown = false;
-    }
-
-    private IEnumerator IceCooldown(float duration)
-    {
-        isIceCooldown = true; // 쿨다운 활성화
-
-        yield return new WaitForSeconds(duration); // 지정된 시간 동안 대기
-
-        isIceCooldown = false; // 쿨다운 비활성화
     }
 
     private void FindTarget()
@@ -153,7 +140,7 @@ public class Monster : MonoBehaviour
         }
     }
 
-    private void DropItem()
+    private void DeadAndDrop()
     {
         if (spawner != null)
         {
@@ -169,14 +156,46 @@ public class Monster : MonoBehaviour
                     break;
                 }
             }
-
             // 선택된 아이템을 생성합니다.
             Instantiate(drops[selectedIndex], transform.position, Quaternion.identity);
-
             spawner.RemoveMonster(this);
+            Destroy(gameObject, 0.5f);
         }
+        anim.SetBool("Dead", true);
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Dead);
+        Destroy(gameObject, 0.5f);
     }
 
+    private IEnumerator PoisonEffect()
+    {
+        int duration = 3; // 독 횟수
+
+        float poisonInterval;
+        poisonInterval = GameManager.instance.poison < 5 ? 1f : GameManager.instance.poison < 7 ? 0.75f : 0.5f;
+
+        for (int i = 0; i < duration; i++)
+        {
+            int poisonDmg = (int)Mathf.Round(GameManager.instance.attackDmg / 3f);
+            TextOutput(poisonDmg, 2);
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.Hit);
+            anim.SetTrigger("Hit");
+            spriter.color = Color.magenta;
+            yield return new WaitForSeconds(poisonInterval);
+        }
+        spriter.color = Color.white;
+        isPoisonCooldown = false;
+    }
+
+    private IEnumerator IceCooldown(float duration)
+    {
+        isIceCooldown = true; // 쿨다운 활성화
+
+        spriter.color = Color.cyan;
+        yield return new WaitForSeconds(duration); // 지정된 시간 동안 대기
+
+        isIceCooldown = false; // 쿨다운 비활성화
+        spriter.color = Color.white;
+    }
 
     public void TextOutput(float damage, int index)
     {

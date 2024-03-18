@@ -10,6 +10,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip bgmClip;
     public float bgmVolume;
     AudioSource bgmPlayer;
+    AudioHighPassFilter bgmFilter;
 
     [Header("SFX")]
     public AudioClip[] sfxClips;
@@ -35,6 +36,7 @@ public class AudioManager : MonoBehaviour
         bgmPlayer.loop = true;
         bgmPlayer.volume = bgmVolume;
         bgmPlayer.clip = bgmClip;
+        bgmFilter = Camera.main.GetComponent<AudioHighPassFilter>();
 
         GameObject sfxObject = new GameObject("SfxPlayer");
         sfxObject.transform.parent = transform;
@@ -44,6 +46,7 @@ public class AudioManager : MonoBehaviour
         {
             sfxPlayers[i] = sfxObject.AddComponent<AudioSource>();
             sfxPlayers[i].playOnAwake = false;
+            sfxPlayers[i].bypassListenerEffects = true;
             sfxPlayers[i].volume = bgmVolume;
         }
     }
@@ -52,12 +55,17 @@ public class AudioManager : MonoBehaviour
     {
         if (isPlay)
         {
-            
+            bgmPlayer.Play();
         }
         else
         {
-
+            bgmPlayer.Stop();
         }
+    }
+
+    public void EffectBgm(bool isPlay)
+    {
+        bgmFilter.enabled = isPlay;
     }
 
     public void PlaySfx(Sfx sfx)

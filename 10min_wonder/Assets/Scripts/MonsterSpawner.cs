@@ -44,7 +44,7 @@ public class MonsterSpawner : MonoBehaviour
 
         wave++;
 
-        spawnCount = Mathf.RoundToInt(wave * 1.3f);
+        spawnCount = Mathf.RoundToInt(wave * 1.5f);
 
         for (int i = 0; i < spawnCount; i++)
         {

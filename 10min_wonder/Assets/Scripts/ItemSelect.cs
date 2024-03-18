@@ -90,6 +90,7 @@ public class ItemSelect : MonoBehaviour
         Time.timeScale = 0;
 
         AudioManager.instance.PlaySfx(AudioManager.Sfx.LevelUp);
+        AudioManager.instance.EffectBgm(true);
     }
 
     public void OptionReset()
@@ -104,8 +105,6 @@ public class ItemSelect : MonoBehaviour
 
     private void OptionSelect(int rand)
     {
-        AudioManager.instance.PlaySfx(AudioManager.Sfx.Select);
-
         GameManager.instance.player.playerMaxHp += GameManager.itemList[rand].MaxHp;
         GameManager.instance.player.playerHp += GameManager.itemList[rand].MaxHp;
         GameManager.instance.player.playerSpeed += GameManager.itemList[rand].MoveSpeed;
@@ -130,5 +129,8 @@ public class ItemSelect : MonoBehaviour
         Time.timeScale = 1.0f;
 
         resetPoint = initialResetPoint;
+
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Select);
+        AudioManager.instance.EffectBgm(false);
     }
 }
