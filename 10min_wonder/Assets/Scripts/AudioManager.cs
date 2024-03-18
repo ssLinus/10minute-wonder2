@@ -48,6 +48,18 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public void PlayBgm(bool isPlay)
+    {
+        if (isPlay)
+        {
+            
+        }
+        else
+        {
+
+        }
+    }
+
     public void PlaySfx(Sfx sfx)
     {
         for (int i = 0; i < sfxPlayers.Length; i++)
@@ -56,6 +68,12 @@ public class AudioManager : MonoBehaviour
 
             if (sfxPlayers[loopIndex].isPlaying)
                 continue;
+
+            int randomIndex = 0;
+            if (sfx == Sfx.Hit || sfx == Sfx.Melee)
+            {
+                randomIndex = Random.Range(0, 2);
+            }
 
             channelIndex = loopIndex;
             sfxPlayers[loopIndex].clip = sfxClips[(int)sfx];

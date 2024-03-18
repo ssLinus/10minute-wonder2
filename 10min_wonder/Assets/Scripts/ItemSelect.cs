@@ -86,7 +86,10 @@ public class ItemSelect : MonoBehaviour
                 if (item.Poison != 0) descriptionTxt[i].text += "Poison : " + item.Poison + "\n";
             }
         }
+
         Time.timeScale = 0;
+
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.LevelUp);
     }
 
     public void OptionReset()
@@ -101,7 +104,7 @@ public class ItemSelect : MonoBehaviour
 
     private void OptionSelect(int rand)
     {
-        print(GameManager.itemList[rand].name);
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Select);
 
         GameManager.instance.player.playerMaxHp += GameManager.itemList[rand].MaxHp;
         GameManager.instance.player.playerHp += GameManager.itemList[rand].MaxHp;
@@ -127,10 +130,5 @@ public class ItemSelect : MonoBehaviour
         Time.timeScale = 1.0f;
 
         resetPoint = initialResetPoint;
-    }
-
-    public void ItemDescription(int rand)
-    {
-
     }
 }

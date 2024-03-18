@@ -41,6 +41,8 @@ public class Monster : MonoBehaviour
     {
         if (monsterHp <= 0)
         {
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.Dead);
+
             DropItem();
             Destroy(gameObject);
         }
@@ -61,6 +63,8 @@ public class Monster : MonoBehaviour
             GameManager.instance.player.playerHp -= monsterDmg;
             nextDamageTime = 0f;
             isPlayer = false;
+
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.Melee);
         }
     }
 
@@ -72,6 +76,8 @@ public class Monster : MonoBehaviour
         {
             damage = GameManager.instance.attackDmg;
             TextOutput(damage, 0);
+
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.Hit);
 
             if (GameManager.instance.poison >= 3)
             {
@@ -91,8 +97,9 @@ public class Monster : MonoBehaviour
         {
             damage = (int)Mathf.Round(GameManager.instance.attackDmg / 2f); // 반올림해서 계산
             TextOutput(damage, 1);
-        }
 
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.Hit);
+        }
     }
 
     public void OnCollisionStay2D(Collision2D collision)
@@ -114,6 +121,7 @@ public class Monster : MonoBehaviour
         {
             int poisonDmg = (int)Mathf.Round(GameManager.instance.attackDmg / 3f);
             TextOutput(poisonDmg, 2);
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.Hit);
             yield return new WaitForSeconds(poisonInterval);
         }
         isPoisonCooldown = false;

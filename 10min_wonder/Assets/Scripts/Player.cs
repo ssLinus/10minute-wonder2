@@ -56,6 +56,7 @@ public class Player : MonoBehaviour
             GameOver();
         }
 
+        // ·¹º§¾÷
         if (playerExp >= playerMaxExp)
         {
             playerLevel++;
@@ -91,6 +92,8 @@ public class Player : MonoBehaviour
     public void GameOver()
     {
         onGameOver?.Invoke();
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Lose);
+
     }
 
     public void LevelUpOpen()

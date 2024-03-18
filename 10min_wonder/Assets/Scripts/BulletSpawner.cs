@@ -46,6 +46,8 @@ public class BulletSpawner : MonoBehaviour
         {
             bullet.GetComponent<Bullet>().SetTarget(closestMonster);
         }
+
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Range);
     }
 
     private void OnTriggerStay2D(Collider2D collision)

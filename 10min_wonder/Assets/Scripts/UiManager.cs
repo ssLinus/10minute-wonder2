@@ -52,6 +52,7 @@ public class UiManager : MonoBehaviour
         {
             gameClear.SetActive(true);
             Time.timeScale = 0;
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.Win);
         }
 
         expBar.maxValue = GameManager.instance.player.playerMaxExp;
