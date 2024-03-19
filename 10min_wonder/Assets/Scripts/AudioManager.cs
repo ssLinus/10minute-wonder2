@@ -9,15 +9,16 @@ public class AudioManager : MonoBehaviour
     [Header("BGM")]
     public AudioClip bgmClip;
     public float bgmVolume;
-    AudioSource bgmPlayer;
-    AudioHighPassFilter bgmFilter;
+    public AudioSource bgmPlayer;
+    public AudioHighPassFilter bgmFilter;
 
     [Header("SFX")]
     public AudioClip[] sfxClips;
     public float sfxVolume;
     public int channels;
-    AudioSource[] sfxPlayers;
+    public AudioSource[] sfxPlayers;
     int channelIndex;
+    public bool sfxMute = false;
 
     public enum Sfx { Dead, Hit, LevelUp=3, Lose, Melee, Range=7, Select, Win }
 
@@ -47,7 +48,7 @@ public class AudioManager : MonoBehaviour
             sfxPlayers[i] = sfxObject.AddComponent<AudioSource>();
             sfxPlayers[i].playOnAwake = false;
             sfxPlayers[i].bypassListenerEffects = true;
-            sfxPlayers[i].volume = bgmVolume;
+            sfxPlayers[i].volume = sfxVolume;
         }
     }
 
@@ -70,23 +71,26 @@ public class AudioManager : MonoBehaviour
 
     public void PlaySfx(Sfx sfx)
     {
-        for (int i = 0; i < sfxPlayers.Length; i++)
+        if (!sfxMute)
         {
-            int loopIndex = (i + channelIndex) % sfxPlayers.Length;
-
-            if (sfxPlayers[loopIndex].isPlaying)
-                continue;
-
-            int randomIndex = 0;
-            if (sfx == Sfx.Hit || sfx == Sfx.Melee)
+            for (int i = 0; i < sfxPlayers.Length; i++)
             {
-                randomIndex = Random.Range(0, 2);
-            }
+                int loopIndex = (i + channelIndex) % sfxPlayers.Length;
 
-            channelIndex = loopIndex;
-            sfxPlayers[loopIndex].clip = sfxClips[(int)sfx];
-            sfxPlayers[loopIndex].Play();
-            break;
+                if (sfxPlayers[loopIndex].isPlaying)
+                    continue;
+
+                int randomIndex = 0;
+                if (sfx == Sfx.Hit || sfx == Sfx.Melee)
+                {
+                    randomIndex = Random.Range(0, 2);
+                }
+
+                channelIndex = loopIndex;
+                sfxPlayers[loopIndex].clip = sfxClips[(int)sfx];
+                sfxPlayers[loopIndex].Play();
+                break;
+            }
         }
     }
 }

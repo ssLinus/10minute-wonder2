@@ -68,12 +68,18 @@ public class UiManager : MonoBehaviour
         if (isStatus)
         {
             status.SetActive(true);
+            AudioManager.instance.EffectBgm(true);
             Time.timeScale = 0;
         }
         else
         {
             status.SetActive(false);
-            Time.timeScale = 1.0f;
+
+            if (!levelUp.activeSelf)
+            {
+                AudioManager.instance.EffectBgm(false);
+                Time.timeScale = 1.0f;
+            }
         }
         isSetting = false;
         setting.SetActive(false);
@@ -85,12 +91,18 @@ public class UiManager : MonoBehaviour
         if (isSetting)
         {
             setting.SetActive(true);
+            AudioManager.instance.EffectBgm(true);
             Time.timeScale = 0;
         }
         else
         {
             setting.SetActive(false);
-            Time.timeScale = 1.0f;
+
+            if (!levelUp.activeSelf)
+            {
+                AudioManager.instance.EffectBgm(false);
+                Time.timeScale = 1.0f;
+            }
         }
         isStatus = false;
         status.SetActive(false);

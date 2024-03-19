@@ -177,6 +177,9 @@ public class GameManager : MonoBehaviour
     [Header("UiManager")]
     public float setTime; // 600
 
+    [Space]
+    public int monsterKill;
+
     private void Awake()
     {
         // Singleton Pattern

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,7 +28,7 @@ public class Setting : MonoBehaviour
     public GameObject joystickOff;
     public GameObject joystickGroup;
 
-    private void Start()
+    private void Awake()
     {
 
     }
@@ -37,15 +38,31 @@ public class Setting : MonoBehaviour
         masterValue.text = masterVolume.value.ToString();
         bgmValue.text = bgmVolume.value.ToString();
         effectValue.text = effectVolume.value.ToString();
+
+        // Master
+        AudioManager.instance.bgmPlayer.volume = 0.2f * (masterVolume.value / 100);
+        for (int i = 0; i < AudioManager.instance.sfxPlayers.Length; i++)
+        { AudioManager.instance.sfxPlayers[i].volume = 0.5f * (masterVolume.value / 100); }
+
+        // Bgm
+        AudioManager.instance.bgmPlayer.volume = 0.2f * (bgmVolume.value / 100) * (masterVolume.value / 100);
+
+        // Sfx
+        for (int i = 0; i < AudioManager.instance.sfxPlayers.Length; i++)
+        { AudioManager.instance.sfxPlayers[i].volume = 0.5f * (effectVolume.value / 100) * (masterVolume.value / 100); }
     }
 
     public void MasterMute(bool isOn)
     {
         if (isOn)
         {
+            BgmMute(true);
+            EffectMute(true);
         }
         else
         {
+            BgmMute(false);
+            EffectMute(false);
         }
     }
 
@@ -53,9 +70,11 @@ public class Setting : MonoBehaviour
     {
         if (isOn)
         {
+            AudioManager.instance.PlayBgm(false);
         }
         else
         {
+            AudioManager.instance.PlayBgm(true);
         }
     }
 
@@ -63,9 +82,11 @@ public class Setting : MonoBehaviour
     {
         if (isOn)
         {
+            AudioManager.instance.sfxMute = true;
         }
         else
         {
+            AudioManager.instance.sfxMute = false;
         }
     }
 

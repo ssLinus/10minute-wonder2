@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
     public int currentWave;
 
     public Rigidbody2D playerRB;
-    public Vector3 axis;
+    public Vector2 axis;
 
     public VariableJoystick joystick;
     public GameObject joy;
@@ -69,26 +69,26 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (playerRB != null)
-        {
-            axis.x = Input.GetAxisRaw("Horizontal");
-            axis.y = Input.GetAxisRaw("Vertical");
-        }
-
-        Vector3 movementDirection = new Vector3(axis.x, axis.y).normalized;
-        float hSpeed = movementDirection.x * playerSpeed;
-        float vSpeed = movementDirection.y * playerSpeed;
-        playerRB.velocity = new Vector3(hSpeed, vSpeed);
-
         if (isJoy)
         {
             float x = joystick.Horizontal;
             float y = joystick.Vertical;
 
-            joyAxis = new Vector2(x, y) * playerSpeed * Time.deltaTime;
-            playerRB.MovePosition(playerRB.position + joyAxis);
+            axis = new Vector2(x, y) * playerSpeed * Time.deltaTime;
+            playerRB.MovePosition(playerRB.position + axis);
+        }
+        else
+        {
+            axis.x = Input.GetAxisRaw("Horizontal");
+            axis.y = Input.GetAxisRaw("Vertical");
+
+            Vector3 movementDirection = new Vector3(axis.x, axis.y).normalized;
+            float hSpeed = movementDirection.x * playerSpeed;
+            float vSpeed = movementDirection.y * playerSpeed;
+            playerRB.velocity = new Vector3(hSpeed, vSpeed);
         }
     }
+
     private void LateUpdate()
     {
         anim.SetFloat("Speed", axis.magnitude);

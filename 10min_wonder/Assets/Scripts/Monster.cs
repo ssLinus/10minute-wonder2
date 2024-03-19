@@ -20,40 +20,48 @@ public class Monster : MonoBehaviour
 
     public GameObject dmgText;
 
-    private Rigidbody2D monsterRB;
     private GameObject target;
     private Vector2 targetDir;
 
     private float monsterAttackSpeed = 1f;
     private float nextDamageTime = 0f;
-    private bool isDrop = false;
+    private bool isLive = true;
     private bool isPlayer;
 
+    Rigidbody2D monsterRB;
+    new CircleCollider2D collider;
     SpriteRenderer spriter;
     Animator anim;
+
+    void Awake()
+    {
+        monsterRB = this.GetComponent<Rigidbody2D>(); //Rigidbody2D 초기화
+        collider = GetComponent<CircleCollider2D>();
+        spriter = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
+    }
 
     void Start()
     {
         isPlayer = false;
 
         target = GameObject.FindGameObjectWithTag("Player");
-
-        monsterRB = this.GetComponent<Rigidbody2D>(); //Rigidbody2D 초기화
-        spriter = GetComponent<SpriteRenderer>();
-        anim = GetComponent<Animator>();
     }
 
     void FixedUpdate()
     {
-        if (monsterHp >= 0)
+        if (monsterHp > 0)
         {
             FindTarget();
         }
-        else if (!isDrop)
-        { 
-            monsterRB.velocity = new Vector2(0, 0);
+        else if (isLive)
+        {
+            isLive = false;
+            monsterRB.simulated = false;
+            collider.enabled = false;
+            spriter.sortingOrder = -2;
+            GameManager.instance.monsterKill++;
             DeadAndDrop();
-            isDrop = true;
         }
 
         if (isPoison && !isPoisonCooldown)
@@ -163,7 +171,7 @@ public class Monster : MonoBehaviour
         }
         anim.SetBool("Dead", true);
         AudioManager.instance.PlaySfx(AudioManager.Sfx.Dead);
-        Destroy(gameObject, 0.5f);
+        Destroy(gameObject, 1f);
     }
 
     private IEnumerator PoisonEffect()
@@ -175,12 +183,16 @@ public class Monster : MonoBehaviour
 
         for (int i = 0; i < duration; i++)
         {
-            int poisonDmg = (int)Mathf.Round(GameManager.instance.attackDmg / 3f);
-            TextOutput(poisonDmg, 2);
-            AudioManager.instance.PlaySfx(AudioManager.Sfx.Hit);
-            anim.SetTrigger("Hit");
-            spriter.color = Color.magenta;
-            yield return new WaitForSeconds(poisonInterval);
+            if (isLive)
+            {
+                int poisonDmg = (int)Mathf.Round(GameManager.instance.attackDmg / 3f);
+                TextOutput(poisonDmg, 2);
+                AudioManager.instance.PlaySfx(AudioManager.Sfx.Hit);
+                anim.SetTrigger("Hit");
+                spriter.color = Color.magenta;
+                yield return new WaitForSeconds(poisonInterval);
+            }
+
         }
         spriter.color = Color.white;
         isPoisonCooldown = false;
