@@ -404,6 +404,7 @@
 "Assets/Scripts/Player.cs"
 "Assets/Scripts/Reposition.cs"
 "Assets/Scripts/Setting.cs"
+"Assets/Scripts/SlotSelect.cs"
 "Assets/Scripts/UiManager.cs"
 -langversion:9.0
 

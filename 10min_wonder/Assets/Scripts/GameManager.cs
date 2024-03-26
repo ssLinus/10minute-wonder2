@@ -4,20 +4,22 @@ using UnityEngine;
 using LitJson;
 using System.IO;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
-public class PlayerDate
+public class PlayerData
 {
+    public string playerName;
     public float playerMaxHp;
     public float playerSpeed;
-    public float lootingRange;
     public float attackDmg;
     public float attackSpeed;
     public float attackRange;
     public float bulletSpeed;
     public float bulletLifeTime;
     public float bulletPen;
+    public float lootingRange;
     public float expMultipler;
-    public int coin;
+    public float coin;
 }
 
 public class Item
@@ -26,13 +28,13 @@ public class Item
     public string name;
     public float MaxHp;
     public float MoveSpeed;
-    public float LootingRange;
     public float AttackDmg;
     public float AttackSpeed;
     public float AttackRange;
     public float BulletSpeed;
     public float BulletLifeTime;
     public float BulletPen;
+    public float LootingRange;
     public float ExpMultipler;
     public int Fire;
     public int Electric;
@@ -40,19 +42,19 @@ public class Item
     public int Poison;
     public string Grade;
 
-    public Item(int index, string name, float maxHp, float moveSpeed, float lootingRange, float attackDmg, float attackSpeed, float attackRange, float bulletSpeed, float bulletLifeTime, float bulletPen, float expMultipler, int fire, int electric, int ice, int poison, string grade)
+    public Item(int index, string name, float maxHp, float moveSpeed, float attackDmg, float attackSpeed, float attackRange, float bulletSpeed, float bulletLifeTime, float bulletPen, float lootingRange, float expMultipler, int fire, int electric, int ice, int poison, string grade)
     {
         this.index = index;
         this.name = name;
         MaxHp = maxHp;
         MoveSpeed = moveSpeed;
-        LootingRange = lootingRange;
         AttackDmg = attackDmg;
         AttackSpeed = attackSpeed;
         AttackRange = attackRange;
         BulletSpeed = bulletSpeed;
         BulletLifeTime = bulletLifeTime;
         BulletPen = bulletPen;
+        LootingRange = lootingRange;
         ExpMultipler = expMultipler;
         Fire = fire;
         Electric = electric;
@@ -64,7 +66,31 @@ public class Item
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
+    private static GameManager instance;
+
+    public static GameManager Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = FindObjectOfType<GameManager>();
+
+                if (instance == null)
+                {
+                    GameObject singletonObject = new GameObject(typeof(GameManager).Name);
+                    instance = singletonObject.AddComponent<GameManager>();
+                }
+            }
+            return instance;
+        }
+    }
+
+    public PlayerData nowPlayer = new PlayerData();
+
+    public string path;
+    public string filename = "save";
+    public int nowSlot;
 
     public static List<Item> itemList = new List<Item>();
     public static List<Item> MyItem = new List<Item>();
@@ -118,7 +144,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void LoadBase()
+    public void LoadItemBase()
     {
         string Jsonstring;
         string filePath;
@@ -182,22 +208,44 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        // Singleton Pattern
-        if (instance == null)
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        if (currentSceneName == "InGame")
         {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
+            looting = FindObjectOfType<Looting>();
+            bulletSpawner = FindObjectOfType<BulletSpawner>();
         }
-        else
+
+        // Singleton Pattern
+        if (instance != null && instance != this)
         {
             Destroy(gameObject);
             Debug.Log("ÆÄ±«");
         }
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
 
-        LoadBase();
+        path = Application.persistentDataPath + "/save";
+        print(path);
+    }
 
-        player = FindObjectOfType<Player>();
-        looting = FindObjectOfType<Looting>();
-        bulletSpawner = FindObjectOfType<BulletSpawner>();
+    public void SavePlayerData()
+    {
+        string data = JsonUtility.ToJson(nowPlayer);
+        File.WriteAllText(path + nowSlot.ToString(), data);
+    }
+
+    public void LoadPlayerData()
+    {
+        string data = File.ReadAllText(path + nowSlot.ToString());
+        nowPlayer = JsonUtility.FromJson<PlayerData>(data);
+    }
+
+    public void DataClear()
+    {
+        nowSlot = -1;
+        nowPlayer = new PlayerData();
     }
 }

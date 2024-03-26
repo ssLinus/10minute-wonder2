@@ -20,7 +20,7 @@ public class Exp : MonoBehaviour
         target = GameObject.FindGameObjectWithTag("Player");
         expRB = this.GetComponent<Rigidbody2D>();
 
-        multipler = GameManager.instance.expMultipler;
+        multipler = GameManager.Instance.expMultipler;
     }
 
     private void Update()
@@ -43,7 +43,7 @@ public class Exp : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            GameManager.instance.player.playerExp += exp * multipler;
+            GameManager.Instance.player.playerExp += exp * multipler;
 
             Destroy(gameObject);
         }

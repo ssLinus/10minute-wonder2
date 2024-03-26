@@ -10,15 +10,15 @@ public class HealthPack : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            float recovery = GameManager.instance.player.playerMaxHp * (heal / 100);
+            float recovery = GameManager.Instance.player.playerMaxHp * (heal / 100);
 
-            if ((GameManager.instance.player.playerMaxHp - GameManager.instance.player.playerHp) <= recovery)
+            if ((GameManager.Instance.player.playerMaxHp - GameManager.Instance.player.playerHp) <= recovery)
             {
-                GameManager.instance.player.playerHp += (GameManager.instance.player.playerMaxHp - GameManager.instance.player.playerHp);
+                GameManager.Instance.player.playerHp += (GameManager.Instance.player.playerMaxHp - GameManager.Instance.player.playerHp);
             }
             else
             {
-                GameManager.instance.player.playerHp += recovery;
+                GameManager.Instance.player.playerHp += recovery;
             }
             Destroy(gameObject);
         }

@@ -19,7 +19,7 @@ public class Reposition : MonoBehaviour
     private void Update()
     {
         // 10분 동안 빨간색으로 변하도록 함.
-        float timeRatio = Mathf.Clamp01(Time.timeSinceLevelLoad / GameManager.instance.setTime);
+        float timeRatio = Mathf.Clamp01(Time.timeSinceLevelLoad / GameManager.Instance.setTime);
 
         // 색상 변화 (흰색에서 빨간색으로)
         color = Color.Lerp(Color.white, Color.red, timeRatio);
@@ -40,12 +40,12 @@ public class Reposition : MonoBehaviour
         if (!collision.CompareTag("Area"))
             return;
 
-        Vector3 playerPos = GameManager.instance.player.transform.position;
+        Vector3 playerPos = GameManager.Instance.player.transform.position;
         Vector3 myPos = transform.position;
         float diffX = Mathf.Abs(playerPos.x - myPos.x);
         float diffY = Mathf.Abs(playerPos.y - myPos.y);
 
-        Vector3 playerDir = GameManager.instance.player.axis;
+        Vector3 playerDir = GameManager.Instance.player.axis;
         float dirX = playerDir.x < 0 ? -1 : 1;
         float dirY = playerDir.y < 0 ? -1 : 1;
 

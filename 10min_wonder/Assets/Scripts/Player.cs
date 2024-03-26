@@ -34,9 +34,9 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        playerMaxHp = GameManager.instance.playerMaxHp;
-        playerSpeed = GameManager.instance.playerSpeed;
-        currentWave = GameManager.instance.startWave;
+        playerMaxHp = GameManager.Instance.playerMaxHp;
+        playerSpeed = GameManager.Instance.playerSpeed;
+        currentWave = GameManager.Instance.startWave;
 
         playerRB = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -44,7 +44,7 @@ public class Player : MonoBehaviour
 
         playerHp = playerMaxHp;
 
-        AudioManager.instance.PlayBgm(true);
+        AudioManager.Instance.PlayBgm(true);
 
         if (isJoy) joy.SetActive(true);
         else joy.SetActive(false);
@@ -101,8 +101,8 @@ public class Player : MonoBehaviour
 
     public void GameOver()
     {
-        AudioManager.instance.PlayBgm(false);
-        AudioManager.instance.PlaySfx(AudioManager.Sfx.Lose);
+        AudioManager.Instance.PlayBgm(false);
+        AudioManager.Instance.PlaySfx(AudioManager.Sfx.Lose);
         onGameOver?.Invoke();
     }
 

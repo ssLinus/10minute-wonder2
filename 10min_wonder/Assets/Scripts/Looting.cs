@@ -12,7 +12,7 @@ public class Looting : MonoBehaviour
 
     void Start()
     {
-        lootingRange = GameManager.instance.lootingRange;
+        lootingRange = GameManager.Instance.lootingRange;
 
         collider2D = GetComponent<CircleCollider2D>();
         collider2D.radius = lootingRange;

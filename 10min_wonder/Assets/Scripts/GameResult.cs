@@ -20,11 +20,11 @@ public class GameResult : MonoBehaviour
 
     private void OnEnable()
     {
-        level = GameManager.instance.player.playerLevel;
-        wave = GameManager.instance.player.currentWave;
-        monsterKill = GameManager.instance.monsterKill;
+        level = GameManager.Instance.player.playerLevel;
+        wave = GameManager.Instance.player.currentWave;
+        monsterKill = GameManager.Instance.monsterKill;
         time = Time.timeSinceLevelLoad;
-        score = (int)(level * 10000 + wave * 10000 + monsterKill * 1000 + (time / GameManager.instance.setTime) * 1000000);
+        score = (int)(level * 10000 + wave * 10000 + monsterKill * 1000 + (time / GameManager.Instance.setTime) * 1000000);
 
         int min = (int)(time / 60);
         float sec = (time % 60);

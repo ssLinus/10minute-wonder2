@@ -26,11 +26,11 @@ public class Bullet : MonoBehaviour
 
     public void Start()
     {
-        bulletSpeed = GameManager.instance.bulletSpeed;
-        bulletLifeTime = GameManager.instance.bulletLifeTime;
-        bulletPen = GameManager.instance.bulletPen;
-        fire = GameManager.instance.fire;
-        electric = GameManager.instance.electric;
+        bulletSpeed = GameManager.Instance.bulletSpeed;
+        bulletLifeTime = GameManager.Instance.bulletLifeTime;
+        bulletPen = GameManager.Instance.bulletPen;
+        fire = GameManager.Instance.fire;
+        electric = GameManager.Instance.electric;
 
         bounce = electric < 3 ? 0 : electric < 5 ? 1 : electric < 7 ? 2 : 3;
 
