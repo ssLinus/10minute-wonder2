@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
     public float playerExp;
     public float playerMaxExp = 10;
 
-    public int currentWave;
+    public int currentWave = 0;
 
     public Rigidbody2D playerRB;
     public Vector2 axis;
@@ -35,18 +35,22 @@ public class Player : MonoBehaviour
     SpriteRenderer spriteRenderer;
     Animator anim;
 
-    private void Start()
+    public void Awake()
+    {
+        GameManager.instance.player = this;
+    }
+
+    public void Start()
     {
         playerMaxHp = GameManager.instance.playerMaxHp;
+        playerHp = GameManager.instance.playerMaxHp;
         playerSpeed = GameManager.instance.playerSpeed;
-        currentWave = GameManager.instance.startWave;
 
         playerRB = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
 
         playerExp = 0;
-        playerHp = playerMaxHp;
 
         if (isJoy) joy.SetActive(true);
         else joy.SetActive(false);
@@ -55,7 +59,7 @@ public class Player : MonoBehaviour
         bulletSpawner = GetComponentInChildren<BulletSpawner>();
     }
 
-    private void Update()
+    public void Update()
     {
         if (playerHp <= 0)
         {
@@ -72,7 +76,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    public void FixedUpdate()
     {
         if (isJoy)
         {
@@ -94,7 +98,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void LateUpdate()
+    public void LateUpdate()
     {
         anim.SetFloat("Speed", axis.magnitude);
 

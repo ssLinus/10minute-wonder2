@@ -54,12 +54,14 @@ public class UiManager : MonoBehaviour
             Time.timeScale = 0;
             AudioManager.instance.PlaySfx(AudioManager.Sfx.Win);
         }
+        if (GameManager.instance.player != null)
+        {
+            expBar.maxValue = GameManager.instance.player.playerMaxExp;
+            expBar.value = GameManager.instance.player.playerExp;
 
-        expBar.maxValue = GameManager.instance.player.playerMaxExp;
-        expBar.value = GameManager.instance.player.playerExp;
-
-        hpBar.maxValue = GameManager.instance.player.playerMaxHp;
-        hpBar.value = GameManager.instance.player.playerHp;
+            hpBar.maxValue = GameManager.instance.player.playerMaxHp;
+            hpBar.value = GameManager.instance.player.playerHp;
+        }
     }
 
     public void OpenInventory()

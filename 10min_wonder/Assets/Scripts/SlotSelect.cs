@@ -56,7 +56,7 @@ public class SlotSelect : MonoBehaviour
 
     public void GoLobby()
     {
-        if (!savefile[GameManager.instance.nowSlot])
+        if (!savefile[GameManager.instance.nowSlot]) // √ ±‚Ω∫≈»
         {
             GameManager.instance.nowPlayer.playerName = newPlayerName.text;
             GameManager.instance.nowPlayer.playerMaxHp = 100;

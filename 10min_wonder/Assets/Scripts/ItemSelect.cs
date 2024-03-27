@@ -123,6 +123,11 @@ public class ItemSelect : MonoBehaviour
 
         GameManager.MyItem.Add(GameManager.itemList[rand]);
         GameManager.itemList.RemoveAt(rand);
+        if (GameManager.instance.nowPlayer.artifactUnlock[rand] == 0)
+        {
+            GameManager.instance.nowPlayer.artifactUnlock[rand]++;
+            GameManager.instance.SavePlayerData();
+        }
 
         levelUpUi.SetActive(false);
 

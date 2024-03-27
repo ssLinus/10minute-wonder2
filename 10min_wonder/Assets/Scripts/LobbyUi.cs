@@ -12,14 +12,25 @@ public class LobbyUi : MonoBehaviour
     public GameObject settingUi;
     public GameObject descriptionUi;
     public GameObject closeToUi;
+    public Text nickName;
 
     public bool isSetting = false;
+
+    public Text[] requiredCoin;
+    public Text playerStatText;
+    public Text coin;
 
     public Button artifactPrefab;
     public Button[] artifactBtns;
     public GameObject Content;
 
     public Text[] descriptions;
+
+
+    public void Start()
+    {
+        nickName.text = GameManager.instance.nowPlayer.playerName;
+    }
 
     public void GameStart()
     {
@@ -31,7 +42,90 @@ public class LobbyUi : MonoBehaviour
         upgradeUi.SetActive(true);
         menuUi.SetActive(false);
         closeToUi = upgradeUi.gameObject;
+
+        PlayerStatUpdate();
     }
+
+
+    public void StatUpgrade(int index)
+    {
+        int cost = 100 * (GameManager.instance.nowPlayer.upgradeSteps[index] + 1);
+
+        if (GameManager.instance.nowPlayer.upgradeSteps[index] < 2 && GameManager.instance.nowPlayer.coin >= cost)
+        {
+            switch (index)
+            {
+                case 0: // 최대체력
+                    GameManager.instance.nowPlayer.playerMaxHp += 50;
+                    break;
+                case 1: // 이동속도
+                    GameManager.instance.nowPlayer.playerSpeed += 1;
+                    break;
+                case 2: // 공격력
+                    GameManager.instance.nowPlayer.attackDmg += 2;
+                    break;
+                case 3: // 공격속도
+                    GameManager.instance.nowPlayer.attackSpeed += 0.5f;
+                    break;
+                case 4: // 공격범위
+                    GameManager.instance.nowPlayer.attackRange += 0.5f;
+                    break;
+                case 5: // 투사체속도
+                    GameManager.instance.nowPlayer.bulletSpeed += 0.5f;
+                    break;
+                case 6: // 유지시간
+                    GameManager.instance.nowPlayer.bulletLifeTime += 0.5f;
+                    break;
+                case 7: // 관통력
+                    GameManager.instance.nowPlayer.bulletPen += 1;
+                    break;
+                case 8: // 획득범위
+                    GameManager.instance.nowPlayer.lootingRange += 0.5f;
+                    break;
+                case 9: // 경험치 배율
+                    GameManager.instance.nowPlayer.expMultipler += 0.2f;
+                    break;
+            }
+
+            GameManager.instance.nowPlayer.upgradeSteps[index]++;
+            GameManager.instance.nowPlayer.coin -= cost;
+            PlayerStatUpdate();
+        }
+        else if (GameManager.instance.nowPlayer.upgradeSteps[index] == 2)
+        {
+            Debug.Log("최대단계");
+        }
+        else if (GameManager.instance.nowPlayer.coin < cost)
+        {
+            Debug.Log("비용부족");
+        }
+    }
+
+    public void PlayerStatUpdate()
+    {
+        playerStatText.text = string.Format(
+            "{0}\n{1}\n{2}\n{3}\n{4}\n{5}\n{6}\n{7}\n{8}\n{9}",
+            GameManager.instance.nowPlayer.playerMaxHp,
+            GameManager.instance.nowPlayer.playerSpeed,
+            GameManager.instance.nowPlayer.attackDmg,
+            GameManager.instance.nowPlayer.attackSpeed,
+            GameManager.instance.nowPlayer.attackRange,
+            GameManager.instance.nowPlayer.bulletSpeed,
+            GameManager.instance.nowPlayer.bulletLifeTime,
+            GameManager.instance.nowPlayer.bulletPen,
+            GameManager.instance.nowPlayer.lootingRange,
+            GameManager.instance.nowPlayer.expMultipler);
+
+        coin.text = GameManager.instance.nowPlayer.coin.ToString();
+
+        for (int i = 0; i < GameManager.instance.nowPlayer.upgradeSteps.Length; i++)
+        {
+            requiredCoin[i].text = (100 + 100 * GameManager.instance.nowPlayer.upgradeSteps[i]).ToString();
+        }
+
+        GameManager.instance.SavePlayerData();
+    }
+
 
     public void ArtifactUiOpen()
     {

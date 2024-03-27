@@ -20,6 +20,9 @@ public class PlayerData
     public float lootingRange;
     public float expMultipler;
     public float coin;
+
+    public int[] upgradeSteps;
+    public int[] artifactUnlock;
 }
 
 public class Item
@@ -99,8 +102,6 @@ public class GameManager : MonoBehaviour
 
     public Player player;
 
-    public GameObject playerPrefab;
-
     public bool isGameStart = false;
 
     public float playerMaxHp;
@@ -118,13 +119,14 @@ public class GameManager : MonoBehaviour
     public int ice;
     public int poison;
 
-    public int startWave;
+    public int[] upgradeSteps;
+    public int[] artifactUnlock;
 
     public float setTime;
 
     public int monsterKill;
 
-    private void Awake()
+    public void Awake()
     {
         // Singleton Pattern
         if (instance != null && instance != this)
@@ -151,8 +153,8 @@ public class GameManager : MonoBehaviour
     {
         string data = File.ReadAllText(path + nowSlot.ToString());
         nowPlayer = JsonUtility.FromJson<PlayerData>(data);
+        SetPlayerStat();
     }
-
 
     public void DataClear()
     {
@@ -163,10 +165,6 @@ public class GameManager : MonoBehaviour
     public void GameStart()
     {
         SceneManager.LoadScene("InGame");
-
-        SetPlayerStat();
-
-        player = playerPrefab.GetComponent<Player>();
 
         AudioManager.instance.PlayBgm(true);
     }
@@ -183,7 +181,9 @@ public class GameManager : MonoBehaviour
         bulletPen = nowPlayer.bulletPen;
         lootingRange = nowPlayer.lootingRange;
         expMultipler = nowPlayer.expMultipler;
-    }
+        upgradeSteps = nowPlayer.upgradeSteps;
+        artifactUnlock = nowPlayer.artifactUnlock;
+}
 
     void ParsingJsonItem(JsonData name, List<Item> listItem)
     {
