@@ -60,7 +60,7 @@ public class Monster : MonoBehaviour
             monsterRB.simulated = false;
             collider.enabled = false;
             spriter.sortingOrder = -2;
-            GameManager.Instance.monsterKill++;
+            GameManager.instance.monsterKill++;
             DeadAndDrop();
         }
 
@@ -75,11 +75,11 @@ public class Monster : MonoBehaviour
 
         if (isPlayer && nextDamageTime > monsterAttackSpeed)
         {
-            GameManager.Instance.player.playerHp -= monsterDmg;
+            GameManager.instance.player.playerHp -= monsterDmg;
             nextDamageTime = 0f;
             isPlayer = false;
 
-            AudioManager.Instance.PlaySfx(AudioManager.Sfx.Melee);
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.Melee);
         }
     }
 
@@ -95,21 +95,21 @@ public class Monster : MonoBehaviour
 
         if (collision.CompareTag("Bullet"))
         {
-            damage = GameManager.Instance.attackDmg;
+            damage = GameManager.instance.attackDmg;
             TextOutput(damage, 0);
 
-            AudioManager.Instance.PlaySfx(AudioManager.Sfx.Hit);
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.Hit);
 
-            if (GameManager.Instance.poison >= 3)
+            if (GameManager.instance.poison >= 3)
             {
                 isPoison = true;
             }
-            if (GameManager.Instance.ice >= 3)
+            if (GameManager.instance.ice >= 3)
             {
                 isIce = true;
 
                 float iceCoolTime;
-                iceCoolTime = GameManager.Instance.ice < 5 ? 0.5f : GameManager.Instance.ice < 7 ? 0.75f : 1;
+                iceCoolTime = GameManager.instance.ice < 5 ? 0.5f : GameManager.instance.ice < 7 ? 0.75f : 1;
 
                 StartCoroutine(IceCooldown(iceCoolTime)); // 얼음 효과 쿨다운 시작
             }
@@ -117,10 +117,10 @@ public class Monster : MonoBehaviour
         }
         else if (collision.CompareTag("FireBoom"))
         {
-            damage = (int)Mathf.Round(GameManager.Instance.attackDmg / 2f); // 반올림해서 계산
+            damage = (int)Mathf.Round(GameManager.instance.attackDmg / 2f); // 반올림해서 계산
             TextOutput(damage, 1);
 
-            AudioManager.Instance.PlaySfx(AudioManager.Sfx.Hit);
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.Hit);
             anim.SetTrigger("Hit");
         }
     }
@@ -170,7 +170,7 @@ public class Monster : MonoBehaviour
             Destroy(gameObject, 0.5f);
         }
         anim.SetBool("Dead", true);
-        AudioManager.Instance.PlaySfx(AudioManager.Sfx.Dead);
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Dead);
         Destroy(gameObject, 1f);
     }
 
@@ -179,15 +179,15 @@ public class Monster : MonoBehaviour
         int duration = 3; // 독 횟수
 
         float poisonInterval;
-        poisonInterval = GameManager.Instance.poison < 5 ? 1f : GameManager.Instance.poison < 7 ? 0.75f : 0.5f;
+        poisonInterval = GameManager.instance.poison < 5 ? 1f : GameManager.instance.poison < 7 ? 0.75f : 0.5f;
 
         for (int i = 0; i < duration; i++)
         {
             if (isLive)
             {
-                int poisonDmg = (int)Mathf.Round(GameManager.Instance.attackDmg / 3f);
+                int poisonDmg = (int)Mathf.Round(GameManager.instance.attackDmg / 3f);
                 TextOutput(poisonDmg, 2);
-                AudioManager.Instance.PlaySfx(AudioManager.Sfx.Hit);
+                AudioManager.instance.PlaySfx(AudioManager.Sfx.Hit);
                 anim.SetTrigger("Hit");
                 spriter.color = Color.magenta;
                 yield return new WaitForSeconds(poisonInterval);

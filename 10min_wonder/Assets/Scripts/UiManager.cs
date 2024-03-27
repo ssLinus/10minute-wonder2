@@ -27,7 +27,7 @@ public class UiManager : MonoBehaviour
         Player.onPlayerWaveUp += UpdateWave;
         Player.onGameOver += GameOverUiOpen;
 
-        setTime = GameManager.Instance.setTime;
+        setTime = GameManager.instance.setTime;
     }
 
     void OnDestroy()
@@ -52,14 +52,14 @@ public class UiManager : MonoBehaviour
         {
             gameClear.SetActive(true);
             Time.timeScale = 0;
-            AudioManager.Instance.PlaySfx(AudioManager.Sfx.Win);
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.Win);
         }
 
-        expBar.maxValue = GameManager.Instance.player.playerMaxExp;
-        expBar.value = GameManager.Instance.player.playerExp;
+        expBar.maxValue = GameManager.instance.player.playerMaxExp;
+        expBar.value = GameManager.instance.player.playerExp;
 
-        hpBar.maxValue = GameManager.Instance.player.playerMaxHp;
-        hpBar.value = GameManager.Instance.player.playerHp;
+        hpBar.maxValue = GameManager.instance.player.playerMaxHp;
+        hpBar.value = GameManager.instance.player.playerHp;
     }
 
     public void OpenInventory()
@@ -68,7 +68,7 @@ public class UiManager : MonoBehaviour
         if (isStatus)
         {
             status.SetActive(true);
-            AudioManager.Instance.EffectBgm(true);
+            AudioManager.instance.EffectBgm(true);
             Time.timeScale = 0;
         }
         else
@@ -77,7 +77,7 @@ public class UiManager : MonoBehaviour
 
             if (!levelUp.activeSelf)
             {
-                AudioManager.Instance.EffectBgm(false);
+                AudioManager.instance.EffectBgm(false);
                 Time.timeScale = 1.0f;
             }
         }
@@ -91,7 +91,7 @@ public class UiManager : MonoBehaviour
         if (isSetting)
         {
             setting.SetActive(true);
-            AudioManager.Instance.EffectBgm(true);
+            AudioManager.instance.EffectBgm(true);
             Time.timeScale = 0;
         }
         else
@@ -100,7 +100,7 @@ public class UiManager : MonoBehaviour
 
             if (!levelUp.activeSelf)
             {
-                AudioManager.Instance.EffectBgm(false);
+                AudioManager.instance.EffectBgm(false);
                 Time.timeScale = 1.0f;
             }
         }
@@ -116,11 +116,11 @@ public class UiManager : MonoBehaviour
 
     void UpdatePlayerLevel()
     {
-        playerLevel.text = "Lv." + GameManager.Instance.player.playerLevel;
+        playerLevel.text = "Lv." + GameManager.instance.player.playerLevel;
     }
 
     void UpdateWave()
     {
-        wave.text = "Wave." + GameManager.Instance.player.currentWave;
+        wave.text = "Wave." + GameManager.instance.player.currentWave;
     }
 }

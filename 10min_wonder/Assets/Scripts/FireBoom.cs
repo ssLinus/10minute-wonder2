@@ -13,7 +13,7 @@ public class FireBoom : MonoBehaviour
 
     void Start()
     {
-        int fire = GameManager.Instance.fire;
+        int fire = GameManager.instance.fire;
         targetSize = fire < 5 ? 10 : fire < 7 ? 15 : 20;
         boomSize = new Vector3(targetSize, targetSize, targetSize);
         startTime = Time.time;

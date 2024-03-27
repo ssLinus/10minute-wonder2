@@ -17,13 +17,13 @@ public class SlotSelect : MonoBehaviour
     {
         for (int i = 0; i < 3; i++)
         {
-            if (File.Exists(GameManager.Instance.path + $"{i}"))
+            if (File.Exists(GameManager.instance.path + $"{i}"))
             {
                 savefile[i] = true;
 
-                GameManager.Instance.nowSlot = i;
-                GameManager.Instance.LoadPlayerData();
-                slotText[i].text = GameManager.Instance.nowPlayer.playerName;
+                GameManager.instance.nowSlot = i;
+                GameManager.instance.LoadPlayerData();
+                slotText[i].text = GameManager.instance.nowPlayer.playerName;
             }
             else
             {
@@ -31,16 +31,16 @@ public class SlotSelect : MonoBehaviour
             }
         }
 
-        GameManager.Instance.DataClear();
+        GameManager.instance.DataClear();
     }
 
     public void Slot(int number)
     {
-        GameManager.Instance.nowSlot = number;
+        GameManager.instance.nowSlot = number;
 
         if (savefile[number])
         {
-            GameManager.Instance.LoadPlayerData();
+            GameManager.instance.LoadPlayerData();
             GoLobby();
         }
         else
@@ -56,24 +56,24 @@ public class SlotSelect : MonoBehaviour
 
     public void GoLobby()
     {
-        if (!savefile[GameManager.Instance.nowSlot])
+        if (!savefile[GameManager.instance.nowSlot])
         {
-            GameManager.Instance.nowPlayer.playerName = newPlayerName.text;
-            GameManager.Instance.nowPlayer.playerMaxHp = 100;
-            GameManager.Instance.nowPlayer.playerSpeed = 3;
-            GameManager.Instance.nowPlayer.lootingRange = 0.5f;
-            GameManager.Instance.nowPlayer.attackDmg = 3;
-            GameManager.Instance.nowPlayer.attackSpeed = 1;
-            GameManager.Instance.nowPlayer.attackRange = 5;
-            GameManager.Instance.nowPlayer.bulletSpeed = 5;
-            GameManager.Instance.nowPlayer.bulletLifeTime = 2;
-            GameManager.Instance.nowPlayer.bulletPen = 0;
-            GameManager.Instance.nowPlayer.expMultipler = 1;
-            GameManager.Instance.nowPlayer.coin = 100;
+            GameManager.instance.nowPlayer.playerName = newPlayerName.text;
+            GameManager.instance.nowPlayer.playerMaxHp = 100;
+            GameManager.instance.nowPlayer.playerSpeed = 3;
+            GameManager.instance.nowPlayer.lootingRange = 0.5f;
+            GameManager.instance.nowPlayer.attackDmg = 3;
+            GameManager.instance.nowPlayer.attackSpeed = 1;
+            GameManager.instance.nowPlayer.attackRange = 5;
+            GameManager.instance.nowPlayer.bulletSpeed = 5;
+            GameManager.instance.nowPlayer.bulletLifeTime = 2;
+            GameManager.instance.nowPlayer.bulletPen = 0;
+            GameManager.instance.nowPlayer.expMultipler = 1;
+            GameManager.instance.nowPlayer.coin = 100;
 
-            GameManager.Instance.SavePlayerData();
-            GameManager.Instance.LoadItemBase();
+            GameManager.instance.SavePlayerData();
         }
+        GameManager.instance.LoadItemBase();
         SceneManager.LoadScene(1);
     }
 }

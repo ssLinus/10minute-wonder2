@@ -333,9 +333,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19de40bba9637bb4188cef430b08bb8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerMaxHp: 0
-  playerSpeed: 0
-  playerHp: 0
+  playerMaxHp: 100
+  playerSpeed: 3
+  playerHp: 10
   playerLevel: 0
   playerExp: 0
   playerMaxExp: 10
@@ -346,6 +346,8 @@ MonoBehaviour:
   joy: {fileID: 3881087803549984437, guid: ec536a7718376554185e4a856d5ae230, type: 3}
   joyAxis: {x: 0, y: 0}
   isJoy: 0
+  looting: {fileID: 0}
+  bulletSpawner: {fileID: 0}
 --- !u!95 &8102421929593489078
 Animator:
   serializedVersion: 5

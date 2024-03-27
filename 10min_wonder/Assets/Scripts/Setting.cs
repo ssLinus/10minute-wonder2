@@ -40,16 +40,16 @@ public class Setting : MonoBehaviour
         effectValue.text = effectVolume.value.ToString();
 
         // Master
-        AudioManager.Instance.bgmPlayer.volume = 0.2f * (masterVolume.value / 100);
-        for (int i = 0; i < AudioManager.Instance.sfxPlayers.Length; i++)
-        { AudioManager.Instance.sfxPlayers[i].volume = 0.5f * (masterVolume.value / 100); }
+        AudioManager.instance.bgmPlayer.volume = 0.2f * (masterVolume.value / 100);
+        for (int i = 0; i < AudioManager.instance.sfxPlayers.Length; i++)
+        { AudioManager.instance.sfxPlayers[i].volume = 0.5f * (masterVolume.value / 100); }
 
         // Bgm
-        AudioManager.Instance.bgmPlayer.volume = 0.2f * (bgmVolume.value / 100) * (masterVolume.value / 100);
+        AudioManager.instance.bgmPlayer.volume = 0.2f * (bgmVolume.value / 100) * (masterVolume.value / 100);
 
         // Sfx
-        for (int i = 0; i < AudioManager.Instance.sfxPlayers.Length; i++)
-        { AudioManager.Instance.sfxPlayers[i].volume = 0.5f * (effectVolume.value / 100) * (masterVolume.value / 100); }
+        for (int i = 0; i < AudioManager.instance.sfxPlayers.Length; i++)
+        { AudioManager.instance.sfxPlayers[i].volume = 0.5f * (effectVolume.value / 100) * (masterVolume.value / 100); }
     }
 
     public void MasterMute(bool isOn)
@@ -70,11 +70,11 @@ public class Setting : MonoBehaviour
     {
         if (isOn)
         {
-            AudioManager.Instance.PlayBgm(false);
+            AudioManager.instance.PlayBgm(false);
         }
         else
         {
-            AudioManager.Instance.PlayBgm(true);
+            AudioManager.instance.PlayBgm(true);
         }
     }
 
@@ -82,11 +82,11 @@ public class Setting : MonoBehaviour
     {
         if (isOn)
         {
-            AudioManager.Instance.sfxMute = true;
+            AudioManager.instance.sfxMute = true;
         }
         else
         {
-            AudioManager.Instance.sfxMute = false;
+            AudioManager.instance.sfxMute = false;
         }
     }
 
@@ -110,7 +110,7 @@ public class Setting : MonoBehaviour
             joystick.SetActive(true);
             joystickGroup.SetActive(true);
 
-            GameManager.Instance.player.isJoy = true;
+            GameManager.instance.player.isJoy = true;
         }
         else
         {
@@ -120,7 +120,7 @@ public class Setting : MonoBehaviour
             joystick.SetActive(false);
             joystickGroup.SetActive(false);
 
-            GameManager.Instance.player.isJoy = false;
+            GameManager.instance.player.isJoy = false;
         }
     }
 

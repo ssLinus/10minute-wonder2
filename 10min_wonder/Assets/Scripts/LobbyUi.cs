@@ -23,7 +23,7 @@ public class LobbyUi : MonoBehaviour
 
     public void GameStart()
     {
-        SceneManager.LoadScene("InGame");
+        GameManager.instance.GameStart();
     }
 
     public void UpgradeOpen()

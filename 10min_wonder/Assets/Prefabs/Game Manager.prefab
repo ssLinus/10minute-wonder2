@@ -44,23 +44,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d370d3b2cc0e37e46a886767d3edb22c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  path: 
+  filename: save
+  nowSlot: 0
   player: {fileID: 7029123008697054181, guid: 35c3d0fb372654e419fa9649cd93190e, type: 3}
-  looting: {fileID: 0}
-  bulletSpawner: {fileID: 0}
-  playerMaxHp: 100
-  playerSpeed: 3
-  lootingRange: 0.5
-  attackDmg: 3
-  ice: 0
-  poison: 0
-  attackSpeed: 1
-  attackRange: 5
-  bulletSpeed: 5
-  bulletLifeTime: 2
+  playerPrefab: {fileID: 2208074918492462348, guid: 35c3d0fb372654e419fa9649cd93190e, type: 3}
+  isGameStart: 0
+  playerMaxHp: 0
+  playerSpeed: 0
+  attackDmg: 0
+  attackSpeed: 0
+  attackRange: 0
+  bulletSpeed: 0
+  bulletLifeTime: 0
   bulletPen: 0
+  lootingRange: 0
+  expMultipler: 0
   fire: 0
   electric: 0
-  expMultipler: 1
+  ice: 0
+  poison: 0
   startWave: 0
   setTime: 600
   monsterKill: 0

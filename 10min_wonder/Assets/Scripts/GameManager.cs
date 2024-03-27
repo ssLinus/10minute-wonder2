@@ -66,23 +66,23 @@ public class Item
 
 public class GameManager : MonoBehaviour
 {
-    private static GameManager instance;
+    private static GameManager _instance;
 
-    public static GameManager Instance
+    public static GameManager instance
     {
         get
         {
-            if (instance == null)
+            if (_instance == null)
             {
-                instance = FindObjectOfType<GameManager>();
+                _instance = FindObjectOfType<GameManager>();
 
-                if (instance == null)
+                if (_instance == null)
                 {
                     GameObject singletonObject = new GameObject(typeof(GameManager).Name);
-                    instance = singletonObject.AddComponent<GameManager>();
+                    _instance = singletonObject.AddComponent<GameManager>();
                 }
             }
-            return instance;
+            return _instance;
         }
     }
 
@@ -96,6 +96,94 @@ public class GameManager : MonoBehaviour
     public static List<Item> MyItem = new List<Item>();
 
     JsonData itemDate; // 아이템 데이터 파싱용
+
+    public Player player;
+
+    public GameObject playerPrefab;
+
+    public bool isGameStart = false;
+
+    public float playerMaxHp;
+    public float playerSpeed;
+    public float attackDmg;
+    public float attackSpeed;
+    public float attackRange;
+    public float bulletSpeed;
+    public float bulletLifeTime;
+    public float bulletPen;
+    public float lootingRange;
+    public float expMultipler;
+    public int fire;
+    public int electric;
+    public int ice;
+    public int poison;
+
+    public int startWave;
+
+    public float setTime;
+
+    public int monsterKill;
+
+    private void Awake()
+    {
+        // Singleton Pattern
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            Debug.Log("파괴");
+        }
+        else
+        {
+            _instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+
+        path = Application.persistentDataPath + "/save";
+    }
+
+    public void SavePlayerData()
+    {
+        string data = JsonUtility.ToJson(nowPlayer);
+        File.WriteAllText(path + nowSlot.ToString(), data);
+    }
+
+    public void LoadPlayerData()
+    {
+        string data = File.ReadAllText(path + nowSlot.ToString());
+        nowPlayer = JsonUtility.FromJson<PlayerData>(data);
+    }
+
+
+    public void DataClear()
+    {
+        nowSlot = -1;
+        nowPlayer = new PlayerData();
+    }
+
+    public void GameStart()
+    {
+        SceneManager.LoadScene("InGame");
+
+        SetPlayerStat();
+
+        player = playerPrefab.GetComponent<Player>();
+
+        AudioManager.instance.PlayBgm(true);
+    }
+
+    public void SetPlayerStat()
+    {
+        playerMaxHp = nowPlayer.playerMaxHp;
+        playerSpeed = nowPlayer.playerSpeed;
+        attackDmg = nowPlayer.attackDmg;
+        attackSpeed = nowPlayer.attackSpeed;
+        attackRange = nowPlayer.attackRange;
+        bulletSpeed = nowPlayer.bulletSpeed;
+        bulletLifeTime = nowPlayer.bulletLifeTime;
+        bulletPen = nowPlayer.bulletPen;
+        lootingRange = nowPlayer.lootingRange;
+        expMultipler = nowPlayer.expMultipler;
+    }
 
     void ParsingJsonItem(JsonData name, List<Item> listItem)
     {
@@ -163,89 +251,5 @@ public class GameManager : MonoBehaviour
         }
         itemDate = JsonMapper.ToObject(Jsonstring);
         ParsingJsonItem(itemDate, itemList);
-    }
-
-    public Player player;
-    public Looting looting;
-    public BulletSpawner bulletSpawner;
-
-    [Header("초기 설정")]
-
-    [Header("Player")]
-    public float playerMaxHp; // 100
-    public float playerSpeed; // 3
-
-    [Header("Looting")]
-    public float lootingRange; // 0.5
-
-    [Header("Monster")]
-    public float attackDmg; // 2
-    public int ice;
-    public int poison;
-
-    [Header("BulletSpawner")]
-    public float attackSpeed; // 1
-    public float attackRange; // 5
-
-    [Header("Bullet")]
-    public float bulletSpeed; // 5
-    public float bulletLifeTime; // 2
-    public float bulletPen; // 0
-    public int fire;
-    public int electric;
-
-    [Header("Exp")]
-    public float expMultipler; // 1
-
-    [Header("MonsterSpawner")]
-    public int startWave; // 0
-
-    [Header("UiManager")]
-    public float setTime; // 600
-
-    [Space]
-    public int monsterKill;
-
-    private void Awake()
-    {
-        string currentSceneName = SceneManager.GetActiveScene().name;
-        if (currentSceneName == "InGame")
-        {
-            looting = FindObjectOfType<Looting>();
-            bulletSpawner = FindObjectOfType<BulletSpawner>();
-        }
-
-        // Singleton Pattern
-        if (instance != null && instance != this)
-        {
-            Destroy(gameObject);
-            Debug.Log("파괴");
-        }
-        else
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-
-        path = Application.persistentDataPath + "/save";
-        print(path);
-    }
-
-    public void SavePlayerData()
-    {
-        string data = JsonUtility.ToJson(nowPlayer);
-        File.WriteAllText(path + nowSlot.ToString(), data);
-    }
-
-    public void LoadPlayerData()
-    {
-        string data = File.ReadAllText(path + nowSlot.ToString());
-        nowPlayer = JsonUtility.FromJson<PlayerData>(data);
-    }
-
-    public void DataClear()
-    {
-        nowSlot = -1;
-        nowPlayer = new PlayerData();
     }
 }

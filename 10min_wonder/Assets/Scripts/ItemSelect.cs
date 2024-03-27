@@ -89,8 +89,8 @@ public class ItemSelect : MonoBehaviour
 
         Time.timeScale = 0;
 
-        AudioManager.Instance.PlaySfx(AudioManager.Sfx.LevelUp);
-        AudioManager.Instance.EffectBgm(true);
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.LevelUp);
+        AudioManager.instance.EffectBgm(true);
     }
 
     public void OptionReset()
@@ -105,21 +105,21 @@ public class ItemSelect : MonoBehaviour
 
     private void OptionSelect(int rand)
     {
-        GameManager.Instance.player.playerMaxHp += GameManager.itemList[rand].MaxHp;
-        GameManager.Instance.player.playerHp += GameManager.itemList[rand].MaxHp;
-        GameManager.Instance.player.playerSpeed += GameManager.itemList[rand].MoveSpeed;
-        GameManager.Instance.looting.collider2D.radius += GameManager.itemList[rand].LootingRange;
-        GameManager.Instance.attackDmg += GameManager.itemList[rand].AttackDmg;
-        GameManager.Instance.bulletSpawner.attackSpeed += GameManager.itemList[rand].AttackSpeed;
-        GameManager.Instance.bulletSpawner.collider2D.radius += GameManager.itemList[rand].AttackRange;
-        GameManager.Instance.bulletSpeed += GameManager.itemList[rand].BulletSpeed;
-        GameManager.Instance.bulletLifeTime += GameManager.itemList[rand].BulletLifeTime;
-        GameManager.Instance.bulletPen += GameManager.itemList[rand].BulletPen;
-        GameManager.Instance.expMultipler += GameManager.itemList[rand].ExpMultipler;
-        GameManager.Instance.fire += GameManager.itemList[rand].Fire;
-        GameManager.Instance.electric += GameManager.itemList[rand].Electric;
-        GameManager.Instance.ice += GameManager.itemList[rand].Ice;
-        GameManager.Instance.poison += GameManager.itemList[rand].Poison;
+        GameManager.instance.player.playerMaxHp += GameManager.itemList[rand].MaxHp;
+        GameManager.instance.player.playerHp += GameManager.itemList[rand].MaxHp;
+        GameManager.instance.player.playerSpeed += GameManager.itemList[rand].MoveSpeed;
+        GameManager.instance.player.looting.collider2D.radius += GameManager.itemList[rand].LootingRange;
+        GameManager.instance.attackDmg += GameManager.itemList[rand].AttackDmg;
+        GameManager.instance.player.bulletSpawner.attackSpeed += GameManager.itemList[rand].AttackSpeed;
+        GameManager.instance.player.bulletSpawner.collider2D.radius += GameManager.itemList[rand].AttackRange;
+        GameManager.instance.bulletSpeed += GameManager.itemList[rand].BulletSpeed;
+        GameManager.instance.bulletLifeTime += GameManager.itemList[rand].BulletLifeTime;
+        GameManager.instance.bulletPen += GameManager.itemList[rand].BulletPen;
+        GameManager.instance.expMultipler += GameManager.itemList[rand].ExpMultipler;
+        GameManager.instance.fire += GameManager.itemList[rand].Fire;
+        GameManager.instance.electric += GameManager.itemList[rand].Electric;
+        GameManager.instance.ice += GameManager.itemList[rand].Ice;
+        GameManager.instance.poison += GameManager.itemList[rand].Poison;
 
         GameManager.MyItem.Add(GameManager.itemList[rand]);
         GameManager.itemList.RemoveAt(rand);
@@ -130,7 +130,7 @@ public class ItemSelect : MonoBehaviour
 
         resetPoint = initialResetPoint;
 
-        AudioManager.Instance.PlaySfx(AudioManager.Sfx.Select);
-        AudioManager.Instance.EffectBgm(false);
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Select);
+        AudioManager.instance.EffectBgm(false);
     }
 }

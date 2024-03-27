@@ -15,8 +15,8 @@ public class BulletSpawner : MonoBehaviour
 
     private void Start()
     {
-        attackSpeed = GameManager.Instance.attackSpeed;
-        attackRange = GameManager.Instance.attackRange;
+        attackSpeed = GameManager.instance.attackSpeed;
+        attackRange = GameManager.instance.attackRange;
 
         collider2D = GetComponent<CircleCollider2D>();
         collider2D.radius = attackRange;
@@ -47,7 +47,7 @@ public class BulletSpawner : MonoBehaviour
             bullet.GetComponent<Bullet>().SetTarget(closestMonster);
         }
 
-        AudioManager.Instance.PlaySfx(AudioManager.Sfx.Range);
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Range);
     }
 
     private void OnTriggerStay2D(Collider2D collision)

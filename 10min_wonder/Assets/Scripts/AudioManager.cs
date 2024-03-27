@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    public static AudioManager Instance;
+    public static AudioManager instance;
 
     [Header("BGM")]
     public AudioClip bgmClip;
@@ -25,9 +25,9 @@ public class AudioManager : MonoBehaviour
     void Awake()
     {
         // Singleton Pattern
-        if (Instance == null)
+        if (instance == null)
         {
-            Instance = this;
+            instance = this;
             DontDestroyOnLoad(gameObject);
         }
         else

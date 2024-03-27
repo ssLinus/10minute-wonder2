@@ -215,8 +215,8 @@ MonoBehaviour:
     y: 0
     width: 1208
     height: 672
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 16}
@@ -294,8 +294,8 @@ MonoBehaviour:
     y: 0
     width: 500
     height: 315
-  m_MinSize: {x: 102, y: 121}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -320,8 +320,8 @@ MonoBehaviour:
     y: 0
     width: 419
     height: 987
-  m_MinSize: {x: 276, y: 71}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 20}
   m_Panes:
   - {fileID: 20}
@@ -467,7 +467,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 7081ffff10b7ffff6ebdfffffafafffff4ffffffe2620000f6620000326300004c630000
+      m_ExpandedIDs: 8cc0feff74c5feff9cc5feffa4c5fefffec7feff42c9fefffecdfeffeacffeff6cdbfeff04defeff24f6feff88f9fefff604ffffec06ffff5a0affff820affff840affff7a0dffffa20dffffa40dfffff411ffffac2cffff0043ffff0a60ffffc063ffff1269ffff0a6bffff2c74ffff4677ffff507affff5a7cffff0682ffff6682ffff8a87ffff4290ffff1092ffffa2adffffc8aeffffd0aeffff44b0ffffe6b3ffffe2ccfffffcddfffff0e8fffffaeaffff80edffff62efffff50f3ffff52f9fffffafafffff4ffffff665201005e430200f0470200
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1050,9 +1050,9 @@ MonoBehaviour:
       e32: 0
       e33: 1
   m_PreviewAnimator: {fileID: 0}
-  m_AnimatorController: {fileID: 9100000, guid: f2855d618fc8d9c499189d3f39b9cbbc, type: 2}
+  m_AnimatorController: {fileID: 9100000, guid: 6be967d090851f24589e081130492d59, type: 2}
   m_BreadCrumbs:
-  - m_Target: {fileID: 1250722460328533898, guid: f2855d618fc8d9c499189d3f39b9cbbc, type: 2}
+  - m_Target: {fileID: 812866493370665738, guid: 6be967d090851f24589e081130492d59, type: 2}
     m_ScrollPosition: {x: 0, y: 0}
   stateMachineGraph: {fileID: 0}
   stateMachineGraphGUI: {fileID: 0}
@@ -1125,9 +1125,9 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: e8640000
-    m_LastClickedID: 25832
-    m_ExpandedIDs: 00000000b0640000
+    m_SelectedIDs: ea640000
+    m_LastClickedID: 25834
+    m_ExpandedIDs: 00000000b8640000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1155,7 +1155,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000b0640000b2640000b4640000
+    m_ExpandedIDs: 00000000b8640000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

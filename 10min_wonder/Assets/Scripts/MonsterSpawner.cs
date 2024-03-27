@@ -19,16 +19,15 @@ public class MonsterSpawner : MonoBehaviour
 
     private List<Monster> monsters = new List<Monster>();
 
-
     void Start()
     {
-        playerTransform = GameManager.Instance.player.transform;
+        playerTransform = GameManager.instance.player.transform;
     }
 
     void Update()
     {
         // 시간에 따라 몬스터가 리스폰되는 최대범위 증가
-        float timeRatio = Mathf.Clamp01(Time.timeSinceLevelLoad / GameManager.Instance.setTime);
+        float timeRatio = Mathf.Clamp01(Time.timeSinceLevelLoad / GameManager.instance.setTime);
         spawnMaxDistance = Mathf.Lerp(spawnMinDistance, spawnLimitDistance, timeRatio);
 
         if (monsters.Count <= 0)
@@ -39,8 +38,8 @@ public class MonsterSpawner : MonoBehaviour
 
     private void SpawnerWave()
     {
-        GameManager.Instance.player.currentWave++;
-        GameManager.Instance.player.WaveUp();
+        GameManager.instance.player.currentWave++;
+        GameManager.instance.player.WaveUp();
 
         wave++;
 

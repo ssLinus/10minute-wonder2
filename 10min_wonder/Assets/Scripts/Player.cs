@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
     public int playerLevel;
 
     public float playerExp;
-    public float playerMaxExp;
+    public float playerMaxExp = 10;
 
     public int currentWave;
 
@@ -29,25 +29,30 @@ public class Player : MonoBehaviour
     public Vector2 joyAxis;
     public bool isJoy = false;
 
+    public Looting looting;
+    public BulletSpawner bulletSpawner;
+
     SpriteRenderer spriteRenderer;
     Animator anim;
 
     private void Start()
     {
-        playerMaxHp = GameManager.Instance.playerMaxHp;
-        playerSpeed = GameManager.Instance.playerSpeed;
-        currentWave = GameManager.Instance.startWave;
+        playerMaxHp = GameManager.instance.playerMaxHp;
+        playerSpeed = GameManager.instance.playerSpeed;
+        currentWave = GameManager.instance.startWave;
 
         playerRB = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
 
+        playerExp = 0;
         playerHp = playerMaxHp;
-
-        AudioManager.Instance.PlayBgm(true);
 
         if (isJoy) joy.SetActive(true);
         else joy.SetActive(false);
+
+        looting = GetComponentInChildren<Looting>();
+        bulletSpawner = GetComponentInChildren<BulletSpawner>();
     }
 
     private void Update()
@@ -101,8 +106,8 @@ public class Player : MonoBehaviour
 
     public void GameOver()
     {
-        AudioManager.Instance.PlayBgm(false);
-        AudioManager.Instance.PlaySfx(AudioManager.Sfx.Lose);
+        AudioManager.instance.PlayBgm(false);
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Lose);
         onGameOver?.Invoke();
     }
 
