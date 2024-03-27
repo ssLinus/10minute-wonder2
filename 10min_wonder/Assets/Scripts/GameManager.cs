@@ -21,8 +21,8 @@ public class PlayerData
     public float expMultipler;
     public float coin;
 
-    public int[] upgradeSteps;
-    public int[] artifactUnlock;
+    public int[] upgradeSteps = new int[10];
+    public int[] artifactUnlock = new int[77];
 }
 
 public class Item

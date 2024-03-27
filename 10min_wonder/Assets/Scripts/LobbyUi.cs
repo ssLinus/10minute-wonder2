@@ -143,7 +143,18 @@ public class LobbyUi : MonoBehaviour
             index.text = (i + 1).ToString("00");
 
             int indexCopy = i;
-            buttonComponent.onClick.AddListener(() => DescriptionsOpen(indexCopy));
+
+            GameObject unlock = newButton.transform.Find("Unlock").gameObject;
+
+            if (GameManager.instance.artifactUnlock[indexCopy] != 0)
+            {
+                unlock.SetActive(false);
+                buttonComponent.onClick.AddListener(() => DescriptionsOpen(indexCopy));
+            }
+            else
+            {
+
+            }
         }
     }
 
