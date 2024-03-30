@@ -21,8 +21,15 @@ public class PlayerData
     public float expMultipler;
     public float coin;
 
+    public int highScore;
+
     public int[] upgradeSteps = new int[10];
     public int[] artifactUnlock = new int[77];
+
+    public bool isJoy;
+    public bool fixedJoy;
+    public bool floatingJoy;
+    public bool dynamicJoy;
 }
 
 public class Item
@@ -69,25 +76,7 @@ public class Item
 
 public class GameManager : MonoBehaviour
 {
-    private static GameManager _instance;
-
-    public static GameManager instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = FindObjectOfType<GameManager>();
-
-                if (_instance == null)
-                {
-                    GameObject singletonObject = new GameObject(typeof(GameManager).Name);
-                    _instance = singletonObject.AddComponent<GameManager>();
-                }
-            }
-            return _instance;
-        }
-    }
+    public static GameManager instance;
 
     public PlayerData nowPlayer = new PlayerData();
 
@@ -119,8 +108,15 @@ public class GameManager : MonoBehaviour
     public int ice;
     public int poison;
 
+    public int highScore;
+
     public int[] upgradeSteps;
     public int[] artifactUnlock;
+
+    public bool isJoy;
+    public bool fixedJoy;
+    public bool floatingJoy;
+    public bool dynamicJoy;
 
     public float setTime;
 
@@ -129,18 +125,25 @@ public class GameManager : MonoBehaviour
     public void Awake()
     {
         // Singleton Pattern
-        if (instance != null && instance != this)
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
         {
             Destroy(gameObject);
             Debug.Log("ÆÄ±«");
         }
-        else
-        {
-            _instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
+
+        Application.targetFrameRate = 60;
 
         path = Application.persistentDataPath + "/save";
+    }
+
+    public void Start()
+    {
+        AudioManager.instance.PlayBgm(true);
     }
 
     public void SavePlayerData()
@@ -154,6 +157,7 @@ public class GameManager : MonoBehaviour
         string data = File.ReadAllText(path + nowSlot.ToString());
         nowPlayer = JsonUtility.FromJson<PlayerData>(data);
         SetPlayerStat();
+        SetJoystick();
     }
 
     public void DataClear()
@@ -165,8 +169,6 @@ public class GameManager : MonoBehaviour
     public void GameStart()
     {
         SceneManager.LoadScene("InGame");
-
-        AudioManager.instance.PlayBgm(true);
     }
 
     public void SetPlayerStat()
@@ -181,9 +183,18 @@ public class GameManager : MonoBehaviour
         bulletPen = nowPlayer.bulletPen;
         lootingRange = nowPlayer.lootingRange;
         expMultipler = nowPlayer.expMultipler;
+        highScore = nowPlayer.highScore;
         upgradeSteps = nowPlayer.upgradeSteps;
         artifactUnlock = nowPlayer.artifactUnlock;
-}
+    }
+
+    public void SetJoystick()
+    {
+        isJoy = nowPlayer.isJoy;
+        fixedJoy = nowPlayer.fixedJoy;
+        floatingJoy = nowPlayer.floatingJoy;
+        dynamicJoy = nowPlayer.dynamicJoy;
+    }
 
     void ParsingJsonItem(JsonData name, List<Item> listItem)
     {
@@ -234,22 +245,37 @@ public class GameManager : MonoBehaviour
 
     public void LoadItemBase()
     {
-        string Jsonstring;
         string filePath;
+#if UNITY_ANDROID && !UNITY_EDITOR
+    filePath = Path.Combine(Application.streamingAssetsPath, "ItemList.json");
+#else
+        filePath = Path.Combine("file://", Application.streamingAssetsPath, "ItemList.json");
+#endif
 
-        filePath = Application.streamingAssetsPath + "/ItemList.json";
+        StartCoroutine(LoadJsonFromPath(filePath));
+    }
 
-        if (Application.platform == RuntimePlatform.Android)
+    IEnumerator LoadJsonFromPath(string path)
+    {
+        UnityWebRequest www = UnityWebRequest.Get(path);
+
+        yield return www.SendWebRequest();
+
+        if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError)
         {
-            UnityWebRequest reader = new UnityWebRequest(filePath);
-            while (!reader.isDone) { }
-            Jsonstring = reader.downloadHandler.text;
+            Debug.LogError("Error: " + www.error);
         }
         else
         {
-            Jsonstring = File.ReadAllText(filePath);
+            string jsonText = www.downloadHandler.text;
+            itemDate = JsonMapper.ToObject(jsonText);
+            ItemListClear();
         }
-        itemDate = JsonMapper.ToObject(Jsonstring);
+    }
+
+    public void ItemListClear()
+    {
+        itemList.Clear();
         ParsingJsonItem(itemDate, itemList);
     }
 }

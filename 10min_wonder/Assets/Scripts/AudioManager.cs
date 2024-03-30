@@ -20,7 +20,9 @@ public class AudioManager : MonoBehaviour
     int channelIndex;
     public bool sfxMute = false;
 
-    public enum Sfx { Dead, Hit, LevelUp=3, Lose, Melee, Range=7, Select, Win }
+    // PlayerPrefs keys for volume settings
+    public float BGM_VOLUME_KEY;
+    public float SFX_VOLUME_KEY;
 
     void Awake()
     {
@@ -35,18 +37,24 @@ public class AudioManager : MonoBehaviour
             Destroy(gameObject);
             Debug.Log("ÆÄ±«");
         }
-
         Init();
     }
 
     void Init()
     {
+        // Load volume settings from PlayerPrefs
+        if (!PlayerPrefs.HasKey("BGM_VOLUME") && !PlayerPrefs.HasKey("SFX_VOLUME"))
+        {
+            PlayerPrefs.SetFloat("BGM_VOLUME", BGM_VOLUME_KEY);
+            PlayerPrefs.SetFloat("SFX_VOLUME", SFX_VOLUME_KEY);
+        }
+
         GameObject bgmObject = new GameObject("BgmPlayer");
         bgmObject.transform.parent = transform;
         bgmPlayer = bgmObject.AddComponent<AudioSource>();
         bgmPlayer.playOnAwake = false;
         bgmPlayer.loop = true;
-        bgmPlayer.volume = bgmVolume;
+        bgmPlayer.volume = bgmVolume * (PlayerPrefs.GetFloat("BGM_VOLUME") / 100f);
         bgmPlayer.clip = bgmClip;
         bgmFilter = Camera.main.GetComponent<AudioHighPassFilter>();
 
@@ -59,8 +67,25 @@ public class AudioManager : MonoBehaviour
             sfxPlayers[i] = sfxObject.AddComponent<AudioSource>();
             sfxPlayers[i].playOnAwake = false;
             sfxPlayers[i].bypassListenerEffects = true;
-            sfxPlayers[i].volume = sfxVolume;
+            sfxPlayers[i].volume = sfxVolume * (PlayerPrefs.GetFloat("SFX_VOLUME") / 100f);
         }
+    }
+
+    public void SetBgmVolume(float volume)
+    {
+        bgmPlayer.volume = (volume / 100f) * bgmVolume;
+        PlayerPrefs.SetFloat("BGM_VOLUME", volume);
+        PlayerPrefs.Save();
+    }
+
+    public void SetSfxVolume(float volume)
+    {
+        for (int i = 0; i < sfxPlayers.Length; i++)
+        {
+            sfxPlayers[i].volume = (volume / 100f) * sfxVolume;
+        }
+        PlayerPrefs.SetFloat("SFX_VOLUME", volume);
+        PlayerPrefs.Save();
     }
 
     public void PlayBgm(bool isPlay)
@@ -104,4 +129,6 @@ public class AudioManager : MonoBehaviour
             }
         }
     }
+
+    public enum Sfx { Dead, Hit, LevelUp = 3, Lose, Melee, Range = 7, Select, Win }
 }

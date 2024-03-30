@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,15 +17,24 @@ public class LobbyUi : MonoBehaviour
 
     public bool isSetting = false;
 
+    [Header("Upgrade")]
+    public GameObject upgradePrefab;
+    public GameObject upgradeContent;
+    public Sprite[] icons;
     public Text[] requiredCoin;
+    public GameObject upgradePoint;
+
     public Text playerStatText;
     public Text coin;
+    public GameObject costIssueUi;
+    public GameObject upgradeStepIssueUi;
 
+    [Header("Artifact")]
     public Button artifactPrefab;
     public Button[] artifactBtns;
-    public GameObject Content;
-
+    public GameObject content;
     public Text[] descriptions;
+    public GameObject unlockIssueUi;
 
 
     public void Start()
@@ -35,17 +45,65 @@ public class LobbyUi : MonoBehaviour
     public void GameStart()
     {
         GameManager.instance.GameStart();
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Select);
     }
 
     public void UpgradeOpen()
     {
+        foreach (Transform child in upgradeContent.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
         upgradeUi.SetActive(true);
         menuUi.SetActive(false);
         closeToUi = upgradeUi.gameObject;
 
-        PlayerStatUpdate();
-    }
+        for (int i = 0; i < 10; i++)
+        {
+            GameObject upgrade = Instantiate(upgradePrefab, upgradeContent.transform);
 
+            // 아이콘
+            Transform iconTransform = upgrade.transform.Find("Icon");
+            GameObject icon = iconTransform.gameObject;
+            Image spriteImage = icon.GetComponent<Image>();
+            spriteImage.sprite = icons[i];
+
+            // 비용
+            Transform costTextTransform = upgrade.transform.Find("Cost");
+            Text costText = costTextTransform.GetComponentInChildren<Text>();
+            requiredCoin[i] = costText;
+
+            // 증가량
+            Transform increaseTextTransform = upgrade.transform.Find("Increase");
+            Text increaseText = increaseTextTransform.GetComponent<Text>();
+            string[] increaseTexts = { "+50", "+1", "+2", "+0.5", "+0.5", "+0.5", "+0.5", "+1", "+0.5", "+0.2" };
+            increaseText.text = increaseTexts[i];
+
+            // 업그레이드 단계
+            Transform[] upgradePoints = new Transform[3];
+            for (int j = 0; j < 3; j++)
+            {
+                upgradePoints[j] = upgrade.transform.Find($"Upgrade ({j + 1})");
+            }
+            for (int index = 0; index < GameManager.instance.nowPlayer.upgradeSteps[i] && index < 3; index++)
+            {
+                Transform targetTransform = upgradePoints[index];
+                if (targetTransform != null)
+                {
+                    Instantiate(upgradePoint, targetTransform);
+                }
+            }
+
+            // 업그레이드 버튼
+            Button upgradeBtn = upgrade.GetComponentInChildren<Button>();
+            int number = i;
+            upgradeBtn.onClick.AddListener(() => StatUpgrade(number));
+        }
+
+        PlayerStatUpdate();
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Select);
+    }
 
     public void StatUpgrade(int index)
     {
@@ -89,16 +147,19 @@ public class LobbyUi : MonoBehaviour
 
             GameManager.instance.nowPlayer.upgradeSteps[index]++;
             GameManager.instance.nowPlayer.coin -= cost;
-            PlayerStatUpdate();
+            UpgradeOpen();
         }
         else if (GameManager.instance.nowPlayer.upgradeSteps[index] == 2)
         {
-            Debug.Log("최대단계");
+            // 최대단계
+            upgradeStepIssueUi.SetActive(true);
         }
         else if (GameManager.instance.nowPlayer.coin < cost)
         {
-            Debug.Log("비용부족");
+            // 비용부족
+            costIssueUi.SetActive(true);
         }
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Select);
     }
 
     public void PlayerStatUpdate()
@@ -129,13 +190,18 @@ public class LobbyUi : MonoBehaviour
 
     public void ArtifactUiOpen()
     {
+        foreach (Transform child in content.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
         artifactUi.SetActive(true);
         menuUi.SetActive(false);
         closeToUi = artifactUi.gameObject;
 
         for (int i = 0; i < GameManager.itemList.Count; i++)
         {
-            GameObject newButton = Instantiate(artifactPrefab.gameObject, Content.transform);
+            GameObject newButton = Instantiate(artifactPrefab.gameObject, content.transform);
             Button buttonComponent = newButton.GetComponent<Button>();
             artifactBtns[i] = buttonComponent;
 
@@ -153,9 +219,11 @@ public class LobbyUi : MonoBehaviour
             }
             else
             {
-
+                // 미해금
+                buttonComponent.onClick.AddListener(() => UnlockUiOpen());
             }
         }
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Select);
     }
 
     private void DescriptionsOpen(int itemIndex)
@@ -193,6 +261,7 @@ public class LobbyUi : MonoBehaviour
 
         descriptionUi.SetActive(true);
         closeToUi = descriptionUi;
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Select);
     }
 
     void AddStatText(string statName, float statValue, ref string text1, ref string text2)
@@ -210,9 +279,16 @@ public class LobbyUi : MonoBehaviour
         }
     }
 
+    public void UnlockUiOpen()
+    {
+        unlockIssueUi.SetActive(true);
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Select);
+    }
+
     public void GoToTitle()
     {
         SceneManager.LoadScene("Title");
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Select);
     }
 
     public void CloseUi()
@@ -227,7 +303,7 @@ public class LobbyUi : MonoBehaviour
             closeToUi.SetActive(false);
             closeToUi = null;
         }
-
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Select);
         menuUi.SetActive(true);
     }
 
@@ -242,6 +318,9 @@ public class LobbyUi : MonoBehaviour
         {
             settingUi.SetActive(false);
             isSetting = false;
+            GameManager.instance.SetJoystick();
+            GameManager.instance.SavePlayerData();
         }
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Select);
     }
 }

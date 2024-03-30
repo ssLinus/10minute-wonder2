@@ -1,14 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Xml.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Setting : MonoBehaviour
 {
-    public Slider masterVolume;
-    public Text masterValue;
-
     [Space]
     public Slider bgmVolume;
     public Text bgmValue;
@@ -18,52 +14,45 @@ public class Setting : MonoBehaviour
     public Text effectValue;
 
     [Space]
-    public GameObject vibrationOn;
-    public GameObject vibrationOff;
+    public GameObject joystickGroup;
+    public Toggle[] joyTypes;
 
     [Space]
-    public VariableJoystick variableJoystick;
-    public GameObject joystick;
-    public GameObject joystickOn;
-    public GameObject joystickOff;
-    public GameObject joystickGroup;
+    public GameObject checkQuit;
+    public GameObject checkLobby;
 
-    private void Awake()
+    public void OnEnable()
     {
+        // Load volume settings from PlayerPrefs and update UI
+        bgmVolume.value = PlayerPrefs.GetFloat("BGM_VOLUME");
+        effectVolume.value = PlayerPrefs.GetFloat("SFX_VOLUME");
+        UpdateVolume();
 
+        JoystickCheck();
+        if (GameManager.instance.fixedJoy)
+        { joyTypes[0].isOn = true; }
+        else if (GameManager.instance.floatingJoy)
+        { joyTypes[1].isOn = true; }
+        else if (GameManager.instance.dynamicJoy)
+        { joyTypes[2].isOn = true; }
     }
 
-    private void Update()
+    private void UpdateVolume()
     {
-        masterValue.text = masterVolume.value.ToString();
         bgmValue.text = bgmVolume.value.ToString();
         effectValue.text = effectVolume.value.ToString();
-
-        // Master
-        AudioManager.instance.bgmPlayer.volume = 0.2f * (masterVolume.value / 100);
-        for (int i = 0; i < AudioManager.instance.sfxPlayers.Length; i++)
-        { AudioManager.instance.sfxPlayers[i].volume = 0.5f * (masterVolume.value / 100); }
-
-        // Bgm
-        AudioManager.instance.bgmPlayer.volume = 0.2f * (bgmVolume.value / 100) * (masterVolume.value / 100);
-
-        // Sfx
-        for (int i = 0; i < AudioManager.instance.sfxPlayers.Length; i++)
-        { AudioManager.instance.sfxPlayers[i].volume = 0.5f * (effectVolume.value / 100) * (masterVolume.value / 100); }
     }
 
-    public void MasterMute(bool isOn)
+    public void BgmVolumeChanged()
     {
-        if (isOn)
-        {
-            BgmMute(true);
-            EffectMute(true);
-        }
-        else
-        {
-            BgmMute(false);
-            EffectMute(false);
-        }
+        AudioManager.instance.SetBgmVolume(bgmVolume.value);
+        UpdateVolume();
+    }
+
+    public void EffectVolumeChanged()
+    {
+        AudioManager.instance.SetSfxVolume(effectVolume.value);
+        UpdateVolume();
     }
 
     public void BgmMute(bool isOn)
@@ -76,6 +65,7 @@ public class Setting : MonoBehaviour
         {
             AudioManager.instance.PlayBgm(true);
         }
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Select);
     }
 
     public void EffectMute(bool isOn)
@@ -88,57 +78,100 @@ public class Setting : MonoBehaviour
         {
             AudioManager.instance.sfxMute = false;
         }
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Select);
     }
 
-    public void Vibration(bool isOn)
+    public void JoystickCheck()
     {
-        if (isOn)
+        if (!GameManager.instance.fixedJoy && !GameManager.instance.floatingJoy && !GameManager.instance.dynamicJoy)
         {
+            GameManager.instance.nowPlayer.isJoy = false;
         }
         else
         {
-        }
-    }
-
-    public void JoystickOnOff(bool isOn)
-    {
-        if (isOn)
-        {
-            joystickOn.SetActive(true);
-            joystickOff.SetActive(false);
-
-            joystick.SetActive(true);
-            joystickGroup.SetActive(true);
-
-            GameManager.instance.player.isJoy = true;
-        }
-        else
-        {
-            joystickOn.SetActive(false);
-            joystickOff.SetActive(true);
-
-            joystick.SetActive(false);
-            joystickGroup.SetActive(false);
-
-            GameManager.instance.player.isJoy = false;
+            GameManager.instance.nowPlayer.isJoy = true;
         }
     }
 
     public void FixedJoystick(bool isOn)
     {
         if (isOn)
-            variableJoystick.SetMode(JoystickType.Fixed);
+        {
+            GameManager.instance.nowPlayer.fixedJoy = true;
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.Select);
+        }
+        else
+        {
+            GameManager.instance.nowPlayer.fixedJoy = false;
+        }
+        JoystickCheck();
     }
 
     public void FloatingJoystick(bool isOn)
     {
         if (isOn)
-            variableJoystick.SetMode(JoystickType.Floating);
+        {
+            GameManager.instance.nowPlayer.floatingJoy = true;
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.Select);
+        }
+        else
+        {
+            GameManager.instance.nowPlayer.floatingJoy = false;
+        }
+        JoystickCheck();
     }
 
     public void DynamicJoystick(bool isOn)
     {
         if (isOn)
-            variableJoystick.SetMode(JoystickType.Dynamic);
+        {
+            GameManager.instance.nowPlayer.dynamicJoy = true;
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.Select);
+        }
+        else
+        {
+            GameManager.instance.nowPlayer.dynamicJoy = false;
+        }
+        JoystickCheck();
+    }
+
+    public void CheckQuit()
+    {
+        checkQuit.SetActive(true);
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Select);
+    }
+
+    public void GameQuit()
+    {
+        checkQuit.SetActive(false);
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Select);
+        Application.Quit();
+    }
+
+    public void CloseQuit()
+    {
+        checkQuit.SetActive(false);
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Select);
+    }    
+
+    public void CheckLobby()
+    {
+        checkLobby.SetActive(true);
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Select);
+    }
+
+    public void GameGiveUp()
+    {
+        checkLobby.SetActive(false);
+        gameObject.SetActive(false);
+        if (GameManager.instance.player.isLive)
+            GameManager.instance.player.playerHp = 0;
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Select);
+    }
+
+    public void CloseLobby()
+    {
+        checkLobby.SetActive(false);
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Select);
     }
 }
