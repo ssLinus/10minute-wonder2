@@ -76,7 +76,7 @@ public class Player : MonoBehaviour
         {
             playerLevel++;
             playerExp = (playerExp - playerMaxExp);
-            playerMaxExp = playerMaxExp * 1.2f;
+            playerMaxExp = playerMaxExp * 1.3f;
             onPlayerLevelUp?.Invoke();
         }
     }

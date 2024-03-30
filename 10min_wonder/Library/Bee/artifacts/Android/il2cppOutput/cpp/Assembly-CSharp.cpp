@@ -10725,7 +10725,7 @@ IL_0041:
 		float L_9 = __this->___playerMaxExp;
 		__this->___playerExp = ((float)il2cpp_codegen_subtract(L_8, L_9));
 		float L_10 = __this->___playerMaxExp;
-		__this->___playerMaxExp = ((float)il2cpp_codegen_multiply(L_10, (1.20000005f)));
+		__this->___playerMaxExp = ((float)il2cpp_codegen_multiply(L_10, (1.29999995f)));
 		OnPlayerDataChanged_t7D839ADF842EBD38DF3EFD1028F76646D4B4EA65* L_11 = ((Player_tF98BD09D3495D2FF1922E5D34866AEAC6AE2DF74_StaticFields*)il2cpp_codegen_static_fields_for(Player_tF98BD09D3495D2FF1922E5D34866AEAC6AE2DF74_il2cpp_TypeInfo_var))->___onPlayerLevelUp;
 		OnPlayerDataChanged_t7D839ADF842EBD38DF3EFD1028F76646D4B4EA65* L_12 = L_11;
 		if (L_12)
