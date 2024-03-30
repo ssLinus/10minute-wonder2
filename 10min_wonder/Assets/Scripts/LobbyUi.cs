@@ -185,6 +185,7 @@ public class LobbyUi : MonoBehaviour
         }
 
         GameManager.instance.SavePlayerData();
+        GameManager.instance.LoadPlayerData();
     }
 
 

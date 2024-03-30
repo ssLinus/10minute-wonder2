@@ -167,7 +167,7 @@ ScriptsOnlyBuild:
     methodName: GoToTitle
   - assembly: Assembly-CSharp
     fullTypeName: Setting
-    methodName: CheckQuit
+    methodName: CloseQuit
   - assembly: Assembly-CSharp
     fullTypeName: Setting
     methodName: EffectVolumeChanged

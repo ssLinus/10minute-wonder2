@@ -8343,7 +8343,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6288910004931324447}
         m_TargetAssemblyTypeName: Setting, Assembly-CSharp
-        m_MethodName: CheckQuit
+        m_MethodName: CloseQuit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
