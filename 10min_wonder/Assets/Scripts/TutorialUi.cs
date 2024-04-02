@@ -54,6 +54,7 @@ public class TutorialUi : MonoBehaviour
     public void Select(int i)
     {
         imageSet = null;
+        imageIndex = 0;
 
         if (i != 1 && i != 2 && i != 3)
         {
@@ -141,14 +142,7 @@ public class TutorialUi : MonoBehaviour
                 imageIndex++;
                 if (imageIndex == imageSet.Length)
                 {
-                    image.sprite = imageSet[0];
-                    description.text = descriptions[0];
                     imageIndex = 0;
-                }
-                else
-                {
-                    image.sprite = imageSet[imageIndex];
-                    description.text = descriptions[imageIndex];
                 }
             }
             else if (!isRight)
@@ -156,16 +150,11 @@ public class TutorialUi : MonoBehaviour
                 imageIndex--;
                 if (imageIndex < 0)
                 {
-                    image.sprite = imageSet[imageSet.Length - 1];
-                    description.text = descriptions[imageIndex];
                     imageIndex = imageSet.Length - 1;
                 }
-                else
-                {
-                    image.sprite = imageSet[imageIndex];
-                    description.text = descriptions[imageIndex];
-                }
             }
+            image.sprite = imageSet[imageIndex];
+            description.text = descriptions[imageIndex];
         }
     }
 
@@ -193,7 +182,7 @@ public class TutorialUi : MonoBehaviour
         titleTexts[2] = "세이브가 생성된 후 플레이어의 닉네임과 최고 기록을 확인할 수 있습니다";
         titleTexts[3] = "묘비 아이콘을 눌러 플레이어의 세이브를 삭제할 수 있습니다";
 
-        lobbyTexts[0] = "로비 화면에선 게임 시작, 업그레이드, 아티팩트 도감의 기능을 이용할 수 있으며 다시 타이틀로 돌아갈 수도 있습니다\r\n";
+        lobbyTexts[0] = "로비 화면에선 게임 시작, 업그레이드, 아티팩트 도감의 기능을 이용할 수 있으며 다시 타이틀로 돌아갈 수도 있습니다";
 
         upgradeTexts[0] = "업그레이드에선 코인을 사용해 플레이어의 능력치를 올릴 수 있습니다";
         upgradeTexts[1] = "플레이어의 능력치가 이곳에 표시됩니다";

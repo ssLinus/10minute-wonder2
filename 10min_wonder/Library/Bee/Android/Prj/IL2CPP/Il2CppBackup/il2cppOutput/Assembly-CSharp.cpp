@@ -297,7 +297,6 @@ IL2CPP_EXTERN_C String_t* _stringLiteral09159898CBF32E83625BC498FB35081E5AA22821
 IL2CPP_EXTERN_C String_t* _stringLiteral09E2390D1AB4E99A8257E8355874EA2CCBD18C02;
 IL2CPP_EXTERN_C String_t* _stringLiteral0A0993805770B78636ECCCECD2B59DBBD0A5EFB6;
 IL2CPP_EXTERN_C String_t* _stringLiteral0C01813C5C816328A13E98BF8A95A117570CEA14;
-IL2CPP_EXTERN_C String_t* _stringLiteral0C45A73BECD6F7D925D7409F0DC2819685BC0AE1;
 IL2CPP_EXTERN_C String_t* _stringLiteral0C7CA13BCCFE2B622E8C7A5180C8473A50F08C4D;
 IL2CPP_EXTERN_C String_t* _stringLiteral0DC39B3C35855FB87BC0F0535D62CD3058F2298E;
 IL2CPP_EXTERN_C String_t* _stringLiteral0ECE6C5D02C1FFB717A2CBF4DBDD51CEC07C461F;
@@ -305,6 +304,7 @@ IL2CPP_EXTERN_C String_t* _stringLiteral0F09EA0117BC1157897614F229A7D81647ED4054
 IL2CPP_EXTERN_C String_t* _stringLiteral0F63AFE805DEBDEC910A16D5C9FE6C77C19680D6;
 IL2CPP_EXTERN_C String_t* _stringLiteral0F6CF57DBDDE5E648DD504BF54B514F93847206D;
 IL2CPP_EXTERN_C String_t* _stringLiteral119F93822BB557412514A461A89E03957A2719CD;
+IL2CPP_EXTERN_C String_t* _stringLiteral130EC93EB635EB3D84CAC7245975DCFFFCE5035D;
 IL2CPP_EXTERN_C String_t* _stringLiteral153EB14E1BDF80C078693C8F7512D965489A3B93;
 IL2CPP_EXTERN_C String_t* _stringLiteral161F418B68C39DA1D5762A50ACC03FA5DA0F9A20;
 IL2CPP_EXTERN_C String_t* _stringLiteral165DAC5C0BBD1267CAA0204686AAB8BF64C70AD4;
@@ -15828,32 +15828,33 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void TutorialUi_Select_mEB26C1C38AA897BAE7AB4
 	{
 		__this->___imageSet = (SpriteU5BU5D_tCEE379E10CAD9DBFA770B331480592548ED0EA1B*)NULL;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___imageSet), (void*)(SpriteU5BU5D_tCEE379E10CAD9DBFA770B331480592548ED0EA1B*)NULL);
+		__this->___imageIndex = 0;
 		int32_t L_0 = ___0_i;
 		if ((((int32_t)L_0) == ((int32_t)1)))
 		{
-			goto IL_0034;
+			goto IL_003b;
 		}
 	}
 	{
 		int32_t L_1 = ___0_i;
 		if ((((int32_t)L_1) == ((int32_t)2)))
 		{
-			goto IL_0034;
+			goto IL_003b;
 		}
 	}
 	{
 		int32_t L_2 = ___0_i;
 		if ((((int32_t)L_2) == ((int32_t)3)))
 		{
-			goto IL_0034;
+			goto IL_003b;
 		}
 	}
 	{
 		V_0 = 0;
-		goto IL_0029;
+		goto IL_0030;
 	}
 
-IL_0017:
+IL_001e:
 	{
 		GameObjectU5BU5D_tFF67550DFCE87096D7A3734EA15B75896B2722CF* L_3 = __this->___lobbyChildrens;
 		int32_t L_4 = V_0;
@@ -15866,59 +15867,59 @@ IL_0017:
 		V_0 = ((int32_t)il2cpp_codegen_add(L_7, 1));
 	}
 
-IL_0029:
+IL_0030:
 	{
 		int32_t L_8 = V_0;
 		GameObjectU5BU5D_tFF67550DFCE87096D7A3734EA15B75896B2722CF* L_9 = __this->___lobbyChildrens;
 		NullCheck(L_9);
 		if ((((int32_t)L_8) < ((int32_t)((int32_t)(((RuntimeArray*)L_9)->max_length)))))
 		{
-			goto IL_0017;
+			goto IL_001e;
 		}
 	}
 
-IL_0034:
+IL_003b:
 	{
 		int32_t L_10 = ___0_i;
 		if ((((int32_t)L_10) == ((int32_t)4)))
 		{
-			goto IL_0069;
+			goto IL_0070;
 		}
 	}
 	{
 		int32_t L_11 = ___0_i;
 		if ((((int32_t)L_11) == ((int32_t)5)))
 		{
-			goto IL_0069;
+			goto IL_0070;
 		}
 	}
 	{
 		int32_t L_12 = ___0_i;
 		if ((((int32_t)L_12) == ((int32_t)6)))
 		{
-			goto IL_0069;
+			goto IL_0070;
 		}
 	}
 	{
 		int32_t L_13 = ___0_i;
 		if ((((int32_t)L_13) == ((int32_t)7)))
 		{
-			goto IL_0069;
+			goto IL_0070;
 		}
 	}
 	{
 		int32_t L_14 = ___0_i;
 		if ((((int32_t)L_14) == ((int32_t)8)))
 		{
-			goto IL_0069;
+			goto IL_0070;
 		}
 	}
 	{
 		V_1 = 0;
-		goto IL_005e;
+		goto IL_0065;
 	}
 
-IL_004c:
+IL_0053:
 	{
 		GameObjectU5BU5D_tFF67550DFCE87096D7A3734EA15B75896B2722CF* L_15 = __this->___inGameChildrens;
 		int32_t L_16 = V_1;
@@ -15931,69 +15932,69 @@ IL_004c:
 		V_1 = ((int32_t)il2cpp_codegen_add(L_19, 1));
 	}
 
-IL_005e:
+IL_0065:
 	{
 		int32_t L_20 = V_1;
 		GameObjectU5BU5D_tFF67550DFCE87096D7A3734EA15B75896B2722CF* L_21 = __this->___inGameChildrens;
 		NullCheck(L_21);
 		if ((((int32_t)L_20) < ((int32_t)((int32_t)(((RuntimeArray*)L_21)->max_length)))))
 		{
-			goto IL_004c;
+			goto IL_0053;
 		}
 	}
 
-IL_0069:
+IL_0070:
 	{
 		int32_t L_22 = ___0_i;
 		switch (L_22)
 		{
 			case 0:
 			{
-				goto IL_009c;
+				goto IL_00a3;
 			}
 			case 1:
 			{
-				goto IL_00b9;
+				goto IL_00c0;
 			}
 			case 2:
 			{
-				goto IL_00f7;
+				goto IL_00fe;
 			}
 			case 3:
 			{
-				goto IL_0114;
+				goto IL_011b;
 			}
 			case 4:
 			{
-				goto IL_0131;
+				goto IL_0138;
 			}
 			case 5:
 			{
-				goto IL_016f;
+				goto IL_0176;
 			}
 			case 6:
 			{
-				goto IL_0189;
+				goto IL_0190;
 			}
 			case 7:
 			{
-				goto IL_01a3;
+				goto IL_01aa;
 			}
 			case 8:
 			{
-				goto IL_01bd;
+				goto IL_01c4;
 			}
 			case 9:
 			{
-				goto IL_01d7;
+				goto IL_01de;
 			}
 		}
 	}
 	{
-		goto IL_01ef;
+		goto IL_01f6;
 	}
 
-IL_009c:
+IL_00a3:
 	{
 		SpriteU5BU5D_tCEE379E10CAD9DBFA770B331480592548ED0EA1B* L_23 = __this->___title;
 		__this->___imageSet = L_23;
@@ -16001,10 +16002,10 @@ IL_009c:
 		StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248* L_24 = __this->___titleTexts;
 		__this->___descriptions = L_24;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___descriptions), (void*)L_24);
-		goto IL_01ef;
+		goto IL_01f6;
 	}
 
-IL_00b9:
+IL_00c0:
 	{
 		SpriteU5BU5D_tCEE379E10CAD9DBFA770B331480592548ED0EA1B* L_25 = __this->___lobby;
 		__this->___imageSet = L_25;
@@ -16013,10 +16014,10 @@ IL_00b9:
 		__this->___descriptions = L_26;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___descriptions), (void*)L_26);
 		V_2 = 0;
-		goto IL_00e7;
+		goto IL_00ee;
 	}
 
-IL_00d5:
+IL_00dc:
 	{
 		GameObjectU5BU5D_tFF67550DFCE87096D7A3734EA15B75896B2722CF* L_27 = __this->___lobbyChildrens;
 		int32_t L_28 = V_2;
@@ -16029,21 +16030,21 @@ IL_00d5:
 		V_2 = ((int32_t)il2cpp_codegen_add(L_31, 1));
 	}
 
-IL_00e7:
+IL_00ee:
 	{
 		int32_t L_32 = V_2;
 		GameObjectU5BU5D_tFF67550DFCE87096D7A3734EA15B75896B2722CF* L_33 = __this->___lobbyChildrens;
 		NullCheck(L_33);
 		if ((((int32_t)L_32) < ((int32_t)((int32_t)(((RuntimeArray*)L_33)->max_length)))))
 		{
-			goto IL_00d5;
+			goto IL_00dc;
 		}
 	}
 	{
-		goto IL_01ef;
+		goto IL_01f6;
 	}
 
-IL_00f7:
+IL_00fe:
 	{
 		SpriteU5BU5D_tCEE379E10CAD9DBFA770B331480592548ED0EA1B* L_34 = __this->___upgrade;
 		__this->___imageSet = L_34;
@@ -16051,10 +16052,10 @@ IL_00f7:
 		StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248* L_35 = __this->___upgradeTexts;
 		__this->___descriptions = L_35;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___descriptions), (void*)L_35);
-		goto IL_01ef;
+		goto IL_01f6;
 	}
 
-IL_0114:
+IL_011b:
 	{
 		SpriteU5BU5D_tCEE379E10CAD9DBFA770B331480592548ED0EA1B* L_36 = __this->___artifact;
 		__this->___imageSet = L_36;
@@ -16062,10 +16063,10 @@ IL_0114:
 		StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248* L_37 = __this->___artifactTexts;
 		__this->___descriptions = L_37;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___descriptions), (void*)L_37);
-		goto IL_01ef;
+		goto IL_01f6;
 	}
 
-IL_0131:
+IL_0138:
 	{
 		SpriteU5BU5D_tCEE379E10CAD9DBFA770B331480592548ED0EA1B* L_38 = __this->___inGame;
 		__this->___imageSet = L_38;
@@ -16074,10 +16075,10 @@ IL_0131:
 		__this->___descriptions = L_39;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___descriptions), (void*)L_39);
 		V_3 = 0;
-		goto IL_015f;
+		goto IL_0166;
 	}
 
-IL_014d:
+IL_0154:
 	{
 		GameObjectU5BU5D_tFF67550DFCE87096D7A3734EA15B75896B2722CF* L_40 = __this->___inGameChildrens;
 		int32_t L_41 = V_3;
@@ -16090,21 +16091,21 @@ IL_014d:
 		V_3 = ((int32_t)il2cpp_codegen_add(L_44, 1));
 	}
 
-IL_015f:
+IL_0166:
 	{
 		int32_t L_45 = V_3;
 		GameObjectU5BU5D_tFF67550DFCE87096D7A3734EA15B75896B2722CF* L_46 = __this->___inGameChildrens;
 		NullCheck(L_46);
 		if ((((int32_t)L_45) < ((int32_t)((int32_t)(((RuntimeArray*)L_46)->max_length)))))
 		{
-			goto IL_014d;
+			goto IL_0154;
 		}
 	}
 	{
-		goto IL_01ef;
+		goto IL_01f6;
 	}
 
-IL_016f:
+IL_0176:
 	{
 		SpriteU5BU5D_tCEE379E10CAD9DBFA770B331480592548ED0EA1B* L_47 = __this->___levelUp;
 		__this->___imageSet = L_47;
@@ -16112,10 +16113,10 @@ IL_016f:
 		StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248* L_48 = __this->___levelUpTexts;
 		__this->___descriptions = L_48;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___descriptions), (void*)L_48);
-		goto IL_01ef;
+		goto IL_01f6;
 	}
 
-IL_0189:
+IL_0190:
 	{
 		SpriteU5BU5D_tCEE379E10CAD9DBFA770B331480592548ED0EA1B* L_49 = __this->___statInventory;
 		__this->___imageSet = L_49;
@@ -16123,10 +16124,10 @@ IL_0189:
 		StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248* L_50 = __this->___statInventoryTexts;
 		__this->___descriptions = L_50;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___descriptions), (void*)L_50);
-		goto IL_01ef;
+		goto IL_01f6;
 	}
 
-IL_01a3:
+IL_01aa:
 	{
 		SpriteU5BU5D_tCEE379E10CAD9DBFA770B331480592548ED0EA1B* L_51 = __this->___attribute;
 		__this->___imageSet = L_51;
@@ -16134,10 +16135,10 @@ IL_01a3:
 		StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248* L_52 = __this->___attributeTexts;
 		__this->___descriptions = L_52;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___descriptions), (void*)L_52);
-		goto IL_01ef;
+		goto IL_01f6;
 	}
 
-IL_01bd:
+IL_01c4:
 	{
 		SpriteU5BU5D_tCEE379E10CAD9DBFA770B331480592548ED0EA1B* L_53 = __this->___gameResult;
 		__this->___imageSet = L_53;
@@ -16145,10 +16146,10 @@ IL_01bd:
 		StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248* L_54 = __this->___gameResultTexts;
 		__this->___descriptions = L_54;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___descriptions), (void*)L_54);
-		goto IL_01ef;
+		goto IL_01f6;
 	}
 
-IL_01d7:
+IL_01de:
 	{
 		SpriteU5BU5D_tCEE379E10CAD9DBFA770B331480592548ED0EA1B* L_55 = __this->___setting;
 		__this->___imageSet = L_55;
@@ -16158,7 +16159,7 @@ IL_01d7:
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___descriptions), (void*)L_56);
 	}
 
-IL_01ef:
+IL_01f6:
 	{
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_57 = __this->___window;
 		NullCheck(L_57);
@@ -16206,14 +16207,14 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void TutorialUi_ImageChange_mED39EE763F6196FC
 		NullCheck(L_3);
 		if ((((int32_t)((int32_t)(((RuntimeArray*)L_3)->max_length))) <= ((int32_t)1)))
 		{
-			goto IL_0123;
+			goto IL_00a1;
 		}
 	}
 	{
 		bool L_4 = ___0_isRight;
 		if (!L_4)
 		{
-			goto IL_009b;
+			goto IL_004c;
 		}
 	}
 	{
@@ -16224,111 +16225,58 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void TutorialUi_ImageChange_mED39EE763F6196FC
 		NullCheck(L_7);
 		if ((!(((uint32_t)L_6) == ((uint32_t)((int32_t)(((RuntimeArray*)L_7)->max_length))))))
 		{
-			goto IL_006f;
+			goto IL_0076;
 		}
 	}
 	{
-		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_8 = V_0;
-		SpriteU5BU5D_tCEE379E10CAD9DBFA770B331480592548ED0EA1B* L_9 = __this->___imageSet;
-		NullCheck(L_9);
-		int32_t L_10 = 0;
-		Sprite_tAFF74BC83CD68037494CB0B4F28CBDF8971CAB99* L_11 = (L_9)->GetAt(static_cast<il2cpp_array_size_t>(L_10));
-		NullCheck(L_8);
-		Image_set_sprite_mC0C248340BA27AAEE56855A3FAFA0D8CA12956DE(L_8, L_11, NULL);
-		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_12 = __this->___description;
-		StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248* L_13 = __this->___descriptions;
-		NullCheck(L_13);
-		int32_t L_14 = 0;
-		String_t* L_15 = (L_13)->GetAt(static_cast<il2cpp_array_size_t>(L_14));
-		NullCheck(L_12);
-		VirtualActionInvoker1< String_t* >::Invoke(75, L_12, L_15);
 		__this->___imageIndex = 0;
-		return;
+		goto IL_0076;
 	}
 
-IL_006f:
+IL_004c:
 	{
-		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_16 = V_0;
-		SpriteU5BU5D_tCEE379E10CAD9DBFA770B331480592548ED0EA1B* L_17 = __this->___imageSet;
-		int32_t L_18 = __this->___imageIndex;
+		bool L_8 = ___0_isRight;
+		if (L_8)
+		{
+			goto IL_0076;
+		}
+	}
+	{
+		int32_t L_9 = __this->___imageIndex;
+		__this->___imageIndex = ((int32_t)il2cpp_codegen_subtract(L_9, 1));
+		int32_t L_10 = __this->___imageIndex;
+		if ((((int32_t)L_10) >= ((int32_t)0)))
+		{
+			goto IL_0076;
+		}
+	}
+	{
+		SpriteU5BU5D_tCEE379E10CAD9DBFA770B331480592548ED0EA1B* L_11 = __this->___imageSet;
+		NullCheck(L_11);
+		__this->___imageIndex = ((int32_t)il2cpp_codegen_subtract(((int32_t)(((RuntimeArray*)L_11)->max_length)), 1));
+	}
+
+IL_0076:
+	{
+		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_12 = V_0;
+		SpriteU5BU5D_tCEE379E10CAD9DBFA770B331480592548ED0EA1B* L_13 = __this->___imageSet;
+		int32_t L_14 = __this->___imageIndex;
+		NullCheck(L_13);
+		int32_t L_15 = L_14;
+		Sprite_tAFF74BC83CD68037494CB0B4F28CBDF8971CAB99* L_16 = (L_13)->GetAt(static_cast<il2cpp_array_size_t>(L_15));
+		NullCheck(L_12);
+		Image_set_sprite_mC0C248340BA27AAEE56855A3FAFA0D8CA12956DE(L_12, L_16, NULL);
+		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_17 = __this->___description;
+		StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248* L_18 = __this->___descriptions;
+		int32_t L_19 = __this->___imageIndex;
+		NullCheck(L_18);
+		int32_t L_20 = L_19;
+		String_t* L_21 = (L_18)->GetAt(static_cast<il2cpp_array_size_t>(L_20));
 		NullCheck(L_17);
-		int32_t L_19 = L_18;
-		Sprite_tAFF74BC83CD68037494CB0B4F28CBDF8971CAB99* L_20 = (L_17)->GetAt(static_cast<il2cpp_array_size_t>(L_19));
-		NullCheck(L_16);
-		Image_set_sprite_mC0C248340BA27AAEE56855A3FAFA0D8CA12956DE(L_16, L_20, NULL);
-		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_21 = __this->___description;
-		StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248* L_22 = __this->___descriptions;
-		int32_t L_23 = __this->___imageIndex;
-		NullCheck(L_22);
-		int32_t L_24 = L_23;
-		String_t* L_25 = (L_22)->GetAt(static_cast<il2cpp_array_size_t>(L_24));
-		NullCheck(L_21);
-		VirtualActionInvoker1< String_t* >::Invoke(75, L_21, L_25);
-		return;
+		VirtualActionInvoker1< String_t* >::Invoke(75, L_17, L_21);
 	}
 
-IL_009b:
-	{
-		bool L_26 = ___0_isRight;
-		if (L_26)
-		{
-			goto IL_0123;
-		}
-	}
-	{
-		int32_t L_27 = __this->___imageIndex;
-		__this->___imageIndex = ((int32_t)il2cpp_codegen_subtract(L_27, 1));
-		int32_t L_28 = __this->___imageIndex;
-		if ((((int32_t)L_28) >= ((int32_t)0)))
-		{
-			goto IL_00f8;
-		}
-	}
-	{
-		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_29 = V_0;
-		SpriteU5BU5D_tCEE379E10CAD9DBFA770B331480592548ED0EA1B* L_30 = __this->___imageSet;
-		SpriteU5BU5D_tCEE379E10CAD9DBFA770B331480592548ED0EA1B* L_31 = __this->___imageSet;
-		NullCheck(L_31);
-		NullCheck(L_30);
-		int32_t L_32 = ((int32_t)il2cpp_codegen_subtract(((int32_t)(((RuntimeArray*)L_31)->max_length)), 1));
-		Sprite_tAFF74BC83CD68037494CB0B4F28CBDF8971CAB99* L_33 = (L_30)->GetAt(static_cast<il2cpp_array_size_t>(L_32));
-		NullCheck(L_29);
-		Image_set_sprite_mC0C248340BA27AAEE56855A3FAFA0D8CA12956DE(L_29, L_33, NULL);
-		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_34 = __this->___description;
-		StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248* L_35 = __this->___descriptions;
-		int32_t L_36 = __this->___imageIndex;
-		NullCheck(L_35);
-		int32_t L_37 = L_36;
-		String_t* L_38 = (L_35)->GetAt(static_cast<il2cpp_array_size_t>(L_37));
-		NullCheck(L_34);
-		VirtualActionInvoker1< String_t* >::Invoke(75, L_34, L_38);
-		SpriteU5BU5D_tCEE379E10CAD9DBFA770B331480592548ED0EA1B* L_39 = __this->___imageSet;
-		NullCheck(L_39);
-		__this->___imageIndex = ((int32_t)il2cpp_codegen_subtract(((int32_t)(((RuntimeArray*)L_39)->max_length)), 1));
-		return;
-	}
-
-IL_00f8:
-	{
-		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_40 = V_0;
-		SpriteU5BU5D_tCEE379E10CAD9DBFA770B331480592548ED0EA1B* L_41 = __this->___imageSet;
-		int32_t L_42 = __this->___imageIndex;
-		NullCheck(L_41);
-		int32_t L_43 = L_42;
-		Sprite_tAFF74BC83CD68037494CB0B4F28CBDF8971CAB99* L_44 = (L_41)->GetAt(static_cast<il2cpp_array_size_t>(L_43));
-		NullCheck(L_40);
-		Image_set_sprite_mC0C248340BA27AAEE56855A3FAFA0D8CA12956DE(L_40, L_44, NULL);
-		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_45 = __this->___description;
-		StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248* L_46 = __this->___descriptions;
-		int32_t L_47 = __this->___imageIndex;
-		NullCheck(L_46);
-		int32_t L_48 = L_47;
-		String_t* L_49 = (L_46)->GetAt(static_cast<il2cpp_array_size_t>(L_48));
-		NullCheck(L_45);
-		VirtualActionInvoker1< String_t* >::Invoke(75, L_45, L_49);
-	}
-
-IL_0123:
+IL_00a1:
 	{
 		return;
 	}
@@ -16360,9 +16308,9 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void TutorialUi_SetText_m8A90A6EE4F7AD4F8BB4B
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248_il2cpp_TypeInfo_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteral04B73273AD657D6AB57C85620A4F273F85167CEC);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteral06A3F9D811124928B6625248772812860417C254);
-		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteral0C45A73BECD6F7D925D7409F0DC2819685BC0AE1);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteral0C7CA13BCCFE2B622E8C7A5180C8473A50F08C4D);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteral0F63AFE805DEBDEC910A16D5C9FE6C77C19680D6);
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteral130EC93EB635EB3D84CAC7245975DCFFFCE5035D);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteral27D9FAD78E38D4EBB6E5F5BA550335B99031D1B0);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteral30A5554156F097266D281CDC0C7148999E9C7A43);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteral376E2A7588B4DF44F4F96F094FAD8B5E2E3DEA7A);
@@ -16438,7 +16386,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void TutorialUi_SetText_m8A90A6EE4F7AD4F8BB4B
 		(L_13)->SetAt(static_cast<il2cpp_array_size_t>(3), (String_t*)_stringLiteralBD0080AC36FA69A92D1AFEC7642EB4575625C7F3);
 		StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248* L_14 = __this->___lobbyTexts;
 		NullCheck(L_14);
-		(L_14)->SetAt(static_cast<il2cpp_array_size_t>(0), (String_t*)_stringLiteral0C45A73BECD6F7D925D7409F0DC2819685BC0AE1);
+		(L_14)->SetAt(static_cast<il2cpp_array_size_t>(0), (String_t*)_stringLiteral130EC93EB635EB3D84CAC7245975DCFFFCE5035D);
 		StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248* L_15 = __this->___upgradeTexts;
 		NullCheck(L_15);
 		(L_15)->SetAt(static_cast<il2cpp_array_size_t>(0), (String_t*)_stringLiteral0F63AFE805DEBDEC910A16D5C9FE6C77C19680D6);
