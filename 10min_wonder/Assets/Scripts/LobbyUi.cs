@@ -324,4 +324,9 @@ public class LobbyUi : MonoBehaviour
         }
         AudioManager.instance.PlaySfx(AudioManager.Sfx.Select);
     }
+
+    public void TutorialOpen()
+    {
+        SceneManager.LoadScene("Tutorial");
+    }
 }

@@ -87,11 +87,17 @@ public class SlotSelect : MonoBehaviour
             GameManager.instance.nowPlayer.dynamicJoy = false;
 
             GameManager.instance.SavePlayerData();
+            GameManager.instance.LoadPlayerData();
+            GameManager.instance.LoadItemBase();
+            SceneManager.LoadScene("Tutorial");
         }
-        GameManager.instance.LoadPlayerData();
-        GameManager.instance.LoadItemBase();
-        SceneManager.LoadScene(1);
-        AudioManager.instance.PlaySfx(AudioManager.Sfx.Select);
+        else
+        {
+            GameManager.instance.LoadPlayerData();
+            GameManager.instance.LoadItemBase();
+            SceneManager.LoadScene("Lobby");
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.Select);
+        }
     }
 
     public void DeleteUiOpen(int number)

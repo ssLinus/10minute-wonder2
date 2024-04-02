@@ -168,6 +168,7 @@ public class GameManager : MonoBehaviour
 
     public void GameStart()
     {
+        LoadPlayerData();
         SceneManager.LoadScene("InGame");
     }
 

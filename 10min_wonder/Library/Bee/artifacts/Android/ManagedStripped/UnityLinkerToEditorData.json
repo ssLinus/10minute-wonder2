@@ -86,7 +86,8 @@
             "scenes": [
               "Assets/Scenes/InGame.unity",
               "Assets/Scenes/Lobby.unity",
-              "Assets/Scenes/Title.unity"
+              "Assets/Scenes/Title.unity",
+              "Assets/Scenes/Tutorial.unity"
             ],
             "dependencyType": 0,
             "icon": null
@@ -118,7 +119,8 @@
             "scenes": [
               "Assets/Scenes/InGame.unity",
               "Assets/Scenes/Lobby.unity",
-              "Assets/Scenes/Title.unity"
+              "Assets/Scenes/Title.unity",
+              "Assets/Scenes/Tutorial.unity"
             ],
             "dependencyType": 0,
             "icon": null
@@ -127,7 +129,8 @@
             "name": "AudioLowPassFilter",
             "scenes": [
               "Assets/Scenes/Lobby.unity",
-              "Assets/Scenes/Title.unity"
+              "Assets/Scenes/Title.unity",
+              "Assets/Scenes/Tutorial.unity"
             ],
             "dependencyType": 0,
             "icon": null
@@ -149,7 +152,8 @@
             "scenes": [
               "Assets/Scenes/InGame.unity",
               "Assets/Scenes/Lobby.unity",
-              "Assets/Scenes/Title.unity"
+              "Assets/Scenes/Title.unity",
+              "Assets/Scenes/Tutorial.unity"
             ],
             "dependencyType": 0,
             "icon": null
@@ -190,7 +194,8 @@
             "scenes": [
               "Assets/Scenes/InGame.unity",
               "Assets/Scenes/Lobby.unity",
-              "Assets/Scenes/Title.unity"
+              "Assets/Scenes/Title.unity",
+              "Assets/Scenes/Tutorial.unity"
             ],
             "dependencyType": 0,
             "icon": null
@@ -230,7 +235,8 @@
             "scenes": [
               "Assets/Scenes/InGame.unity",
               "Assets/Scenes/Lobby.unity",
-              "Assets/Scenes/Title.unity"
+              "Assets/Scenes/Title.unity",
+              "Assets/Scenes/Tutorial.unity"
             ],
             "dependencyType": 1,
             "icon": null
@@ -246,7 +252,8 @@
             "scenes": [
               "Assets/Scenes/InGame.unity",
               "Assets/Scenes/Lobby.unity",
-              "Assets/Scenes/Title.unity"
+              "Assets/Scenes/Title.unity",
+              "Assets/Scenes/Tutorial.unity"
             ],
             "dependencyType": 0,
             "icon": null
@@ -274,7 +281,8 @@
             "scenes": [
               "Assets/Scenes/InGame.unity",
               "Assets/Scenes/Lobby.unity",
-              "Assets/Scenes/Title.unity"
+              "Assets/Scenes/Title.unity",
+              "Assets/Scenes/Tutorial.unity"
             ],
             "dependencyType": 1,
             "icon": null
@@ -302,7 +310,8 @@
             "scenes": [
               "Assets/Scenes/InGame.unity",
               "Assets/Scenes/Lobby.unity",
-              "Assets/Scenes/Title.unity"
+              "Assets/Scenes/Title.unity",
+              "Assets/Scenes/Tutorial.unity"
             ],
             "dependencyType": 0,
             "icon": null
@@ -318,7 +327,8 @@
             "scenes": [
               "Assets/Scenes/InGame.unity",
               "Assets/Scenes/Lobby.unity",
-              "Assets/Scenes/Title.unity"
+              "Assets/Scenes/Title.unity",
+              "Assets/Scenes/Tutorial.unity"
             ],
             "dependencyType": 0,
             "icon": null
@@ -348,7 +358,8 @@
             "scenes": [
               "Assets/Scenes/InGame.unity",
               "Assets/Scenes/Lobby.unity",
-              "Assets/Scenes/Title.unity"
+              "Assets/Scenes/Title.unity",
+              "Assets/Scenes/Tutorial.unity"
             ],
             "dependencyType": 0,
             "icon": null
@@ -364,7 +375,8 @@
             "scenes": [
               "Assets/Scenes/InGame.unity",
               "Assets/Scenes/Lobby.unity",
-              "Assets/Scenes/Title.unity"
+              "Assets/Scenes/Title.unity",
+              "Assets/Scenes/Tutorial.unity"
             ],
             "dependencyType": 1,
             "icon": null
@@ -374,7 +386,8 @@
             "scenes": [
               "Assets/Scenes/InGame.unity",
               "Assets/Scenes/Lobby.unity",
-              "Assets/Scenes/Title.unity"
+              "Assets/Scenes/Title.unity",
+              "Assets/Scenes/Tutorial.unity"
             ],
             "dependencyType": 1,
             "icon": null
@@ -408,7 +421,8 @@
             "scenes": [
               "Assets/Scenes/InGame.unity",
               "Assets/Scenes/Lobby.unity",
-              "Assets/Scenes/Title.unity"
+              "Assets/Scenes/Title.unity",
+              "Assets/Scenes/Tutorial.unity"
             ],
             "dependencyType": 0,
             "icon": null
@@ -424,7 +438,8 @@
             "scenes": [
               "Assets/Scenes/InGame.unity",
               "Assets/Scenes/Lobby.unity",
-              "Assets/Scenes/Title.unity"
+              "Assets/Scenes/Title.unity",
+              "Assets/Scenes/Tutorial.unity"
             ],
             "dependencyType": 0,
             "icon": null
@@ -458,7 +473,8 @@
             "scenes": [
               "Assets/Scenes/InGame.unity",
               "Assets/Scenes/Lobby.unity",
-              "Assets/Scenes/Title.unity"
+              "Assets/Scenes/Title.unity",
+              "Assets/Scenes/Tutorial.unity"
             ],
             "dependencyType": 0,
             "icon": null
@@ -480,7 +496,8 @@
             "scenes": [
               "Assets/Scenes/InGame.unity",
               "Assets/Scenes/Lobby.unity",
-              "Assets/Scenes/Title.unity"
+              "Assets/Scenes/Title.unity",
+              "Assets/Scenes/Tutorial.unity"
             ],
             "dependencyType": 0,
             "icon": null
@@ -516,7 +533,8 @@
             "scenes": [
               "Assets/Scenes/InGame.unity",
               "Assets/Scenes/Lobby.unity",
-              "Assets/Scenes/Title.unity"
+              "Assets/Scenes/Title.unity",
+              "Assets/Scenes/Tutorial.unity"
             ],
             "dependencyType": 0,
             "icon": null
@@ -526,7 +544,8 @@
             "scenes": [
               "Assets/Scenes/InGame.unity",
               "Assets/Scenes/Lobby.unity",
-              "Assets/Scenes/Title.unity"
+              "Assets/Scenes/Title.unity",
+              "Assets/Scenes/Tutorial.unity"
             ],
             "dependencyType": 0,
             "icon": null
@@ -696,7 +715,8 @@
             "scenes": [
               "Assets/Scenes/InGame.unity",
               "Assets/Scenes/Lobby.unity",
-              "Assets/Scenes/Title.unity"
+              "Assets/Scenes/Title.unity",
+              "Assets/Scenes/Tutorial.unity"
             ],
             "dependencyType": 0,
             "icon": null
@@ -1076,7 +1096,8 @@
             "scenes": [
               "Assets/Scenes/InGame.unity",
               "Assets/Scenes/Lobby.unity",
-              "Assets/Scenes/Title.unity"
+              "Assets/Scenes/Title.unity",
+              "Assets/Scenes/Tutorial.unity"
             ],
             "dependencyType": 0,
             "icon": null
@@ -1129,7 +1150,8 @@
             "scenes": [
               "Assets/Scenes/InGame.unity",
               "Assets/Scenes/Lobby.unity",
-              "Assets/Scenes/Title.unity"
+              "Assets/Scenes/Title.unity",
+              "Assets/Scenes/Tutorial.unity"
             ],
             "dependencyType": 0,
             "icon": null
@@ -1147,7 +1169,8 @@
             "scenes": [
               "Assets/Scenes/InGame.unity",
               "Assets/Scenes/Lobby.unity",
-              "Assets/Scenes/Title.unity"
+              "Assets/Scenes/Title.unity",
+              "Assets/Scenes/Tutorial.unity"
             ],
             "dependencyType": 0,
             "icon": null
@@ -1162,7 +1185,8 @@
             "scenes": [
               "Assets/Scenes/InGame.unity",
               "Assets/Scenes/Lobby.unity",
-              "Assets/Scenes/Title.unity"
+              "Assets/Scenes/Title.unity",
+              "Assets/Scenes/Tutorial.unity"
             ],
             "dependencyType": 0,
             "icon": null
@@ -1178,7 +1202,8 @@
             "scenes": [
               "Assets/Scenes/InGame.unity",
               "Assets/Scenes/Lobby.unity",
-              "Assets/Scenes/Title.unity"
+              "Assets/Scenes/Title.unity",
+              "Assets/Scenes/Tutorial.unity"
             ],
             "dependencyType": 0,
             "icon": null

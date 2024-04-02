@@ -349,6 +349,7 @@
 "Assets/Scripts/LobbyUi.cs"
 "Assets/Scripts/Setting.cs"
 "Assets/Scripts/SlotSelect.cs"
+"Assets/Scripts/TutorialUi.cs"
 -langversion:9.0
 
 /deterministic
