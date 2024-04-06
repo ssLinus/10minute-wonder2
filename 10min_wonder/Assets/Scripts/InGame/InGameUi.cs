@@ -114,16 +114,16 @@ public class InGameUi : MonoBehaviour
 
     public void PlayerStat()
     {
-        playerStatsText[0].text = GameManager.instance.player.playerMaxHp.ToString();
-        playerStatsText[1].text = GameManager.instance.player.playerSpeed.ToString();
-        playerStatsText[2].text = GameManager.instance.attackDmg.ToString();
-        playerStatsText[3].text = GameManager.instance.player.bulletSpawner.attackSpeed.ToString();
-        playerStatsText[4].text = GameManager.instance.player.bulletSpawner.collider2D.radius.ToString();
-        playerStatsText[5].text = GameManager.instance.bulletSpeed.ToString();
-        playerStatsText[6].text = GameManager.instance.bulletLifeTime.ToString();
-        playerStatsText[7].text = GameManager.instance.bulletPen.ToString();
-        playerStatsText[8].text = GameManager.instance.player.looting.collider2D.radius.ToString();
-        playerStatsText[9].text = GameManager.instance.expMultipler.ToString();
+        playerStatsText[0].text = GameManager.instance.player.playerMaxHp.ToString("00");
+        playerStatsText[1].text = GameManager.instance.player.playerSpeed.ToString("0.0");
+        playerStatsText[2].text = GameManager.instance.attackDmg.ToString("0.0");
+        playerStatsText[3].text = GameManager.instance.player.bulletSpawner.attackSpeed.ToString("0.0");
+        playerStatsText[4].text = GameManager.instance.player.bulletSpawner.collider2D.radius.ToString("0.0");
+        playerStatsText[5].text = GameManager.instance.bulletSpeed.ToString("0.0");
+        playerStatsText[6].text = GameManager.instance.bulletLifeTime.ToString("0.0");
+        playerStatsText[7].text = GameManager.instance.bulletPen.ToString("0");
+        playerStatsText[8].text = GameManager.instance.player.looting.collider2D.radius.ToString("0.0");
+        playerStatsText[9].text = GameManager.instance.expMultipler.ToString("0.0");
 
         attributesText[0].text = "È­¿° " + GameManager.instance.fire.ToString();
         attributesText[1].text = "Àü±â " + GameManager.instance.electric.ToString();

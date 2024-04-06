@@ -75,7 +75,7 @@ public class MonsterSpawner : MonoBehaviour
         Vector3 randomDirection = Random.insideUnitCircle.normalized * spawnDistance;
         Vector3 spawnPosition = playerTransform.position + randomDirection;
 
-        float minutes = Time.time / 60.0f;  // 게임 시작부터 현재까지의 시간(분 단위)
+        float minutes = GameManager.GetElapsedTime() / 60.0f;  // 게임 시작부터 현재까지의 시간(분 단위)
 
         // 현재 시간대를 찾습니다.
         int timeIndex = 0;

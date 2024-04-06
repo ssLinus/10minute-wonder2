@@ -39,6 +39,9 @@ public class TutorialUi : MonoBehaviour
 
     public Button[] buttons;
 
+    public GameObject rightBtn;
+    public GameObject leftBtn;
+
     public void Start()
     {
         SetText();
@@ -122,6 +125,17 @@ public class TutorialUi : MonoBehaviour
                 break;
         }
 
+        if (imageSet.Length > 1)
+        {
+            rightBtn.SetActive(true);
+            leftBtn.SetActive(false);
+        }
+        else
+        {
+            rightBtn.SetActive(false);
+            leftBtn.SetActive(false);
+        }
+
         Image image = window.GetComponent<Image>();
         image.sprite = imageSet[0];
         description.text = descriptions[0];
@@ -135,28 +149,27 @@ public class TutorialUi : MonoBehaviour
         Image image = window.GetComponent<Image>();
         AudioManager.instance.PlaySfx(AudioManager.Sfx.Select);
 
-        if (imageSet.Length > 1)
+        rightBtn.SetActive(true);
+        leftBtn.SetActive(true);
+
+        if (imageSet.Length <= 1)
+            return;
+
+        if (isRight && imageIndex < imageSet.Length - 1)
         {
-            if (isRight)
-            {
-                imageIndex++;
-                if (imageIndex == imageSet.Length)
-                {
-                    imageIndex = 0;
-                }
-            }
-            else if (!isRight)
-            {
-                imageIndex--;
-                if (imageIndex < 0)
-                {
-                    imageIndex = imageSet.Length - 1;
-                }
-            }
-            image.sprite = imageSet[imageIndex];
-            description.text = descriptions[imageIndex];
+            imageIndex++;
+            rightBtn.SetActive(imageIndex < imageSet.Length - 1);
         }
+        else if (!isRight && imageIndex > 0)
+        {
+            imageIndex--;
+            leftBtn.SetActive(imageIndex > 0);
+        }
+
+        image.sprite = imageSet[imageIndex];
+        description.text = descriptions[imageIndex];
     }
+
 
     public void TutorialOut()
     {

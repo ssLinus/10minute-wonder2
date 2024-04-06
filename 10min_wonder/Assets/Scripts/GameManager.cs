@@ -122,6 +122,8 @@ public class GameManager : MonoBehaviour
 
     public int monsterKill;
 
+    private static float startTime;
+
     public void Awake()
     {
         // Singleton Pattern
@@ -152,14 +154,6 @@ public class GameManager : MonoBehaviour
         File.WriteAllText(path + nowSlot.ToString(), data);
     }
 
-    public void LoadPlayerData()
-    {
-        string data = File.ReadAllText(path + nowSlot.ToString());
-        nowPlayer = JsonUtility.FromJson<PlayerData>(data);
-        SetPlayerStat();
-        SetJoystick();
-    }
-
     public void DataClear()
     {
         nowSlot = -1;
@@ -169,7 +163,26 @@ public class GameManager : MonoBehaviour
     public void GameStart()
     {
         LoadPlayerData();
+        LoadItemBase();
+        MyItem.Clear();
+        ResetTime();
         SceneManager.LoadScene("InGame");
+    }
+
+    public void LoadPlayerData()
+    {
+        string data = File.ReadAllText(path + nowSlot.ToString());
+        nowPlayer = JsonUtility.FromJson<PlayerData>(data);
+        SetJoystick();
+        SetPlayerStat();
+    }
+
+    public void SetJoystick()
+    {
+        isJoy = nowPlayer.isJoy;
+        fixedJoy = nowPlayer.fixedJoy;
+        floatingJoy = nowPlayer.floatingJoy;
+        dynamicJoy = nowPlayer.dynamicJoy;
     }
 
     public void SetPlayerStat()
@@ -187,14 +200,58 @@ public class GameManager : MonoBehaviour
         highScore = nowPlayer.highScore;
         upgradeSteps = nowPlayer.upgradeSteps;
         artifactUnlock = nowPlayer.artifactUnlock;
+        fire = 0;
+        electric = 0;
+        ice = 0;
+        poison = 0;
+        setTime = 600;
+        monsterKill = 0;
     }
 
-    public void SetJoystick()
+    public static void ResetTime()
     {
-        isJoy = nowPlayer.isJoy;
-        fixedJoy = nowPlayer.fixedJoy;
-        floatingJoy = nowPlayer.floatingJoy;
-        dynamicJoy = nowPlayer.dynamicJoy;
+        startTime = Time.time; // 게임 시작 시간을 저장합니다.
+    }
+
+    public static float GetElapsedTime()
+    {
+        return Time.time - startTime; // 현재 시간과 시작 시간의 차이를 반환하여 경과된 시간을 계산합니다.
+    }
+
+    public void LoadItemBase()
+    {
+        string filePath;
+#if UNITY_ANDROID && !UNITY_EDITOR
+    filePath = Path.Combine(Application.streamingAssetsPath, "ItemList.json");
+#else
+        filePath = Path.Combine("file://", Application.streamingAssetsPath, "ItemList.json");
+#endif
+
+        StartCoroutine(LoadJsonFromPath(filePath));
+    }
+
+    IEnumerator LoadJsonFromPath(string path)
+    {
+        UnityWebRequest www = UnityWebRequest.Get(path);
+
+        yield return www.SendWebRequest();
+
+        if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError)
+        {
+            Debug.LogError("Error: " + www.error);
+        }
+        else
+        {
+            string jsonText = www.downloadHandler.text;
+            itemDate = JsonMapper.ToObject(jsonText);
+            ItemListClear();
+        }
+    }
+
+    public void ItemListClear()
+    {
+        itemList.Clear();
+        ParsingJsonItem(itemDate, itemList);
     }
 
     void ParsingJsonItem(JsonData name, List<Item> listItem)
@@ -242,41 +299,5 @@ public class GameManager : MonoBehaviour
                 tempFire_, tempElectric_, tempIce_, tempPoison_, tempGrade);
             listItem.Add(tempItem);
         }
-    }
-
-    public void LoadItemBase()
-    {
-        string filePath;
-#if UNITY_ANDROID && !UNITY_EDITOR
-    filePath = Path.Combine(Application.streamingAssetsPath, "ItemList.json");
-#else
-        filePath = Path.Combine("file://", Application.streamingAssetsPath, "ItemList.json");
-#endif
-
-        StartCoroutine(LoadJsonFromPath(filePath));
-    }
-
-    IEnumerator LoadJsonFromPath(string path)
-    {
-        UnityWebRequest www = UnityWebRequest.Get(path);
-
-        yield return www.SendWebRequest();
-
-        if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError)
-        {
-            Debug.LogError("Error: " + www.error);
-        }
-        else
-        {
-            string jsonText = www.downloadHandler.text;
-            itemDate = JsonMapper.ToObject(jsonText);
-            ItemListClear();
-        }
-    }
-
-    public void ItemListClear()
-    {
-        itemList.Clear();
-        ParsingJsonItem(itemDate, itemList);
     }
 }

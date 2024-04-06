@@ -149,7 +149,7 @@ public class LobbyUi : MonoBehaviour
             GameManager.instance.nowPlayer.coin -= cost;
             UpgradeOpen();
         }
-        else if (GameManager.instance.nowPlayer.upgradeSteps[index] == 2)
+        else if (GameManager.instance.nowPlayer.upgradeSteps[index] == 3)
         {
             // 최대단계
             upgradeStepIssueUi.SetActive(true);
